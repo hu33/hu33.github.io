@@ -1,0 +1,1046 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('我的名字（用数字表示）') !== ''){
+                alert('哦哟，错了呢~');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="前端,笔记,JavaScript,性能," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="这一章主要从管理浏览器中的js代码来进行阐述优化点。
+优化点1：将脚本放在底部讲道理，按我们的理解，将js文件和css文件一起放在head中好像没什么毛病，先加载它们，有助于页面渲染和正确交互呀。
+可是！可是坑爹的是，脚本是会阻塞页面渲染的啊，浏览器需要等到它们全部下载并执行完成后，才继续页面渲染。所以把脚本放页面头部会导致明显的延迟，表现为显示空白页面，用户无法浏览页面，也无法与页面进行交互。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《高性能JavaScript》- 加载并执行">
+<meta property="og:url" content="http://yoursite.com/2017/09/13/《高性能JavaScript》- 加载并执行/index.html">
+<meta property="og:site_name" content="小胡不说八道">
+<meta property="og:description" content="这一章主要从管理浏览器中的js代码来进行阐述优化点。
+优化点1：将脚本放在底部讲道理，按我们的理解，将js文件和css文件一起放在head中好像没什么毛病，先加载它们，有助于页面渲染和正确交互呀。
+可是！可是坑爹的是，脚本是会阻塞页面渲染的啊，浏览器需要等到它们全部下载并执行完成后，才继续页面渲染。所以把脚本放页面头部会导致明显的延迟，表现为显示空白页面，用户无法浏览页面，也无法与页面进行交互。">
+<meta property="og:image" content="https://hu33.github.io/images/高性能JavaScript/1-1.jpg">
+<meta property="og:updated_time" content="2019-01-10T14:38:35.840Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《高性能JavaScript》- 加载并执行">
+<meta name="twitter:description" content="这一章主要从管理浏览器中的js代码来进行阐述优化点。
+优化点1：将脚本放在底部讲道理，按我们的理解，将js文件和css文件一起放在head中好像没什么毛病，先加载它们，有助于页面渲染和正确交互呀。
+可是！可是坑爹的是，脚本是会阻塞页面渲染的啊，浏览器需要等到它们全部下载并执行完成后，才继续页面渲染。所以把脚本放页面头部会导致明显的延迟，表现为显示空白页面，用户无法浏览页面，也无法与页面进行交互。">
+<meta name="twitter:image" content="https://hu33.github.io/images/高性能JavaScript/1-1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/13/《高性能JavaScript》- 加载并执行/"/>
+
+
+
+
+
+  <title>《高性能JavaScript》- 加载并执行 | 小胡不说八道</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c6131154619de361905a60cc04fcbd77";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+	<a href="https://github.com/hu33" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小胡不说八道</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            小时光
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/13/《高性能JavaScript》- 加载并执行/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hu33">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小胡不说八道">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《高性能JavaScript》- 加载并执行</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-13T19:22:56+08:00">
+                2017-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/09/13/《高性能JavaScript》- 加载并执行/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/09/13/《高性能JavaScript》- 加载并执行/" class="leancloud_visitors" data-flag-title="《高性能JavaScript》- 加载并执行">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这一章主要从管理浏览器中的js代码来进行阐述优化点。</p>
+<h3 id="优化点1：将脚本放在底部"><a href="#优化点1：将脚本放在底部" class="headerlink" title="优化点1：将脚本放在底部"></a>优化点1：将脚本放在底部</h3><p>讲道理，按我们的理解，将js文件和css文件一起放在head中好像没什么毛病，先加载它们，有助于页面渲染和正确交互呀。</p>
+<p>可是！可是坑爹的是，脚本是会阻塞页面渲染的啊，浏览器需要等到它们全部下载并执行完成后，才继续页面渲染。所以把脚本放页面头部会导致明显的延迟，表现为显示空白页面，用户无法浏览页面，也无法与页面进行交互。</p>
+<a id="more"></a>
+<p>更坑爹的是，有些浏览器下载js文件是串行的，也就是说每个文件必须等到前一个文件下载并执行完成后才会开始下载，在这些个文件逐个下载过程中，浏览器上的页面就是一片白茫茫啊~~现在很多浏览器都允许并行下载js文件了，但是仍然会阻塞其他资源的下载，比如图片。尽管脚本的下载过程不会相互影响了，但是页面还是得等所有的js代码下载并执行完才能继续。所以呀，新的浏览器只是治标不治本啊。</p>
+<p>恩，综上所述，咱要把所有的<code>&lt;script&gt;</code>标签放到<code>&lt;body&gt;</code>标签的底部，来尽量减少对整个页面下载的影响。</p>
+<h3 id="优化点2：合并脚本"><a href="#优化点2：合并脚本" class="headerlink" title="优化点2：合并脚本"></a>优化点2：合并脚本</h3><p>这个当然是为了减少http请求带来的性能开销咯。下载1个100k的文件会比下载4个25k的文件要快的呀。</p>
+<p>可以使用离线的打包工具或者类似Yahoo! combo handler的实时在线服务实现。</p>
+<h3 id="优化点3：无阻塞脚本"><a href="#优化点3：无阻塞脚本" class="headerlink" title="优化点3：无阻塞脚本"></a>优化点3：无阻塞脚本</h3><p>上回讲到，合并脚本可以减少http请求数，提高性能。可是问题来了，合并完的脚本可能很大啊，那我浏览器得等这么大一个脚本下载并执行完再进行后面的操作嘛？</p>
+<p>当然，我们也是有办法解决的。咱实现无阻塞脚本不就好了？咱可以等页面加载完再加载js代码呀，专业点讲，就是在<code>window</code>对象的<code>load</code>事件触发后再下载脚本。实现方法有如下几种：</p>
+<h4 id="延迟的脚本"><a href="#延迟的脚本" class="headerlink" title="延迟的脚本"></a>延迟的脚本</h4><p>主角：<code>defer</code></p>
+<p>技能：允许并行下载（包括其他资源哦），但不会执行，直到DOM加载完成（<code>onload</code>事件被触发前）</p>
+<p>可以看个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Script Defer Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    alert(<span class="string">'defer'</span>);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    alert(<span class="string">'script'</span>);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     alert(<span class="string">'load'</span>); </div><div class="line">    &#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>猜猜弹出顺序是啥？恩，<code>script</code>、<code>defer</code>、<code>load</code>。</p>
+<p><em>注：h5规范里讲了，defer属性仅当src属性声明时才生效~~</em></p>
+<p>BTW，<code>async</code>也是允许并行下载的，但是它跟<code>defer</code>不同的在于它是下载完了就直接执行了，没有<code>defer</code>那么好的耐心，还等<code>dom</code>完成加载后才执行。</p>
+<p><img src="https://hu33.github.io/images/高性能JavaScript/1-1.jpg" alt=""></p>
+<h4 id="动态脚本元素"><a href="#动态脚本元素" class="headerlink" title="动态脚本元素"></a>动态脚本元素</h4><p>原理：使用DOM操作创建一个<code>&lt;script&gt;</code>元素，这个元素中加载某个js文件，然后将该<code>&lt;scirpt&gt;</code>元素添加到页面中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">script.type = <span class="string">"text/javascript"</span>;</div><div class="line">script.src = <span class="string">"file.js"</span>;</div><div class="line"><span class="built_in">document</span>.head.append(script);</div></pre></td></tr></table></figure>
+<p>技能：无论何时启动下载，文件的下载和执行都不回阻塞页面其他进程。</p>
+<p>这种方式还有个特点：返回的代码一般会立即执行（是不是想到了JSONP，哈哈哈）。但是我可能需要它下载完成且准备就绪的时候才执行啊，这个时候，<code>&lt;script&gt;</code>的<code>onload</code>事件就派上用场了~~封装一个<code>loadScript</code>方法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScript</span>(<span class="params">url, callback</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">    script.type = <span class="string">"text/javascript"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (script.readyState) &#123; <span class="comment">//还不是为了兼容IE</span></div><div class="line">        <span class="keyword">if</span> (script.onreadystatechange) &#123;</div><div class="line">            <span class="keyword">if</span> (script.readyState === <span class="string">'loaded'</span> || script.readyState === <span class="string">'completed'</span>) &#123;</div><div class="line">                script.onreadystatechange = <span class="literal">null</span>;</div><div class="line">                callback();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            callback();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    script.src = url;</div><div class="line">    <span class="built_in">document</span>.getElementByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(script);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果需要按顺序下载执行代码的话，可以进行嵌套使用<code>loadScript()</code>方法。当然如果多个文件的下载顺序很重要，更好的做法还是把它们按正确的顺序合并成一个文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">loadScript(<span class="string">'file1.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  loadScript(<span class="string">'file2.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    loadScript(<span class="string">'file3.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      alert(<span class="string">'all files are loaded~~'</span>)</div><div class="line">    &#125;)</div><div class="line">  &#125;)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="XMLHttpRequest脚本注入"><a href="#XMLHttpRequest脚本注入" class="headerlink" title="XMLHttpRequest脚本注入"></a>XMLHttpRequest脚本注入</h4><p>原理：创建一个<code>xhr</code>对象，用它下载js文件，然后通过创建动态<code>&lt;script&gt;</code>元素将代码注入页面中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'file1.js'</span>, <span class="literal">true</span>);  <span class="comment">//第三个参数表是否异步</span></div><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (xhr.readystate === <span class="number">4</span>) &#123;</div><div class="line">        <span class="keyword">if</span>(xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span> || xhr.status === <span class="number">304</span>) &#123;</div><div class="line">            <span class="keyword">var</span> script = <span class="built_in">document</span>.craeteElement(<span class="string">'script'</span>);</div><div class="line">            script.type = <span class="string">"text/javascript"</span>;</div><div class="line">            script.text = xhr.responseText;</div><div class="line">            <span class="built_in">document</span>.body.appendChild(script);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">xhr.send(<span class="literal">null</span>);</div></pre></td></tr></table></figure>
+<p>优点：js代码下载后不会自动执行，你可以把脚本的执行推迟到准备好的时候。<em>（为什么啊？？？书上说代码返回在script标签外，所以不自动执行…没看懂啊…）</em></p>
+<p>局限：不能跨域请求js文件，也就不能从CDN下载咯。</p>
+<h4 id="推荐的无阻塞模式"><a href="#推荐的无阻塞模式" class="headerlink" title="推荐的无阻塞模式"></a>推荐的无阻塞模式</h4><p>先添加动态加载所需的代码，然后加载初始化页面所需的剩下的代码。</p>
+<p>有几个延迟加载工具：</p>
+<ul>
+<li><code>LazyLoad</code>类库，其实就是<code>loadScript()</code>的增强版</li>
+<li><code>LABjs</code>，它的优点是管理依赖关系的能力</li>
+</ul>
+
+      
+    </div>
+
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2017/09/13/《高性能JavaScript》- 加载并执行/">《高性能JavaScript》- 加载并执行</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 hu33 的个人博客">hu33</a></p>
+  <p><span>发布时间:</span>2017年09月13日 - 19:09</p>
+  <p><span>最后更新:</span>2019年01月10日 - 22:01</p>
+  <p><span>原始链接:</span><a href="/2017/09/13/《高性能JavaScript》- 加载并执行/" title="《高性能JavaScript》- 加载并执行">http://yoursite.com/2017/09/13/《高性能JavaScript》- 加载并执行/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2017/09/13/《高性能JavaScript》- 加载并执行/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+	  $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	    });
+    });  
+</script>
+
+      
+    </div>
+	
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+	<div>
+      
+        <div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">------------- THE END <i class="fa fa-paw"></i> THANKS FOR READING -------------</div>
+
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+          
+            <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/性能/" rel="tag"><i class="fa fa-tag"></i> 性能</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/31/网易秋招面试/" rel="next" title="网易秋招面试">
+                <i class="fa fa-chevron-left"></i> 网易秋招面试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/14/《高性能JavaScript》- 数据存取/" rel="prev" title="《高性能JavaScript》- 数据存取">
+                《高性能JavaScript》- 数据存取 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="hu33" />
+          <p class="site-author-name" itemprop="name">hu33</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+		 
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="mailto:shirleyhu33@foxmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  E-Mail
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hu33" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/169141509" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-gratipay"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.steven7.top/" title="Steven" target="_blank">Steven</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hellozjf.com/" title="周靖峰" target="_blank">周靖峰</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+        
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=250 height=70 src="//music.163.com/outchain/player?type=2&id=530986903&auto=1&height=66"></iframe>
+        
+		
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#优化点1：将脚本放在底部"><span class="nav-number">1.</span> <span class="nav-text">优化点1：将脚本放在底部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化点2：合并脚本"><span class="nav-number">2.</span> <span class="nav-text">优化点2：合并脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化点3：无阻塞脚本"><span class="nav-number">3.</span> <span class="nav-text">优化点3：无阻塞脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#延迟的脚本"><span class="nav-number">3.1.</span> <span class="nav-text">延迟的脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态脚本元素"><span class="nav-number">3.2.</span> <span class="nav-text">动态脚本元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMLHttpRequest脚本注入"><span class="nav-number">3.3.</span> <span class="nav-text">XMLHttpRequest脚本注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#推荐的无阻塞模式"><span class="nav-number">3.4.</span> <span class="nav-text">推荐的无阻塞模式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hu33</span>
+  
+  <div class="theme-info">
+    <div class="powered-by"></div>
+    <span class="post-count">全站共58.7k字</span>
+  </div>
+  
+</div>
+
+
+
+<p>Let life be beautiful like summer flowers and death like autumn leaves.</p>    <!--文字-->
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "ecaf9e8b569f49d488e024e876e541aa",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("cbIfOEEvymSg0LfkG1tARn9s-gzGzoHsz", "dLPWqpPMm737ULiCiEYYniIU");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</body>
+</html>

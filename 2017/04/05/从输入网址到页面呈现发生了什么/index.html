@@ -1,0 +1,1097 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('我的名字（用数字表示）') !== ''){
+                alert('哦哟，错了呢~');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本文转自该博客
+
+从输入网址到页面呈现发生了什么？这是前端面试官很喜欢问的一个问题，我就被问了好几次，但是每次答的都比较笼统，十句话就讲完了。但实际上，这个问题涉及的知识面很广，要细细说的话可以说一个小时不止了。刚好看到有篇博文写的挺详细的，就摘过来了，自己再敲一遍加深点印象。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从输入网址到页面呈现发生了什么">
+<meta property="og:url" content="http://yoursite.com/2017/04/05/从输入网址到页面呈现发生了什么/index.html">
+<meta property="og:site_name" content="小胡不说八道">
+<meta property="og:description" content="本文转自该博客
+
+从输入网址到页面呈现发生了什么？这是前端面试官很喜欢问的一个问题，我就被问了好几次，但是每次答的都比较笼统，十句话就讲完了。但实际上，这个问题涉及的知识面很广，要细细说的话可以说一个小时不止了。刚好看到有篇博文写的挺详细的，就摘过来了，自己再敲一遍加深点印象。">
+<meta property="og:image" content="https://hu33.github.io/images/从输入网址到页面呈现发生了什么/1.png">
+<meta property="og:image" content="https://hu33.github.io/images/从输入网址到页面呈现发生了什么/2.png">
+<meta property="og:image" content="https://hu33.github.io/images/从输入网址到页面呈现发生了什么/3.png">
+<meta property="og:updated_time" content="2019-01-10T14:22:56.942Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从输入网址到页面呈现发生了什么">
+<meta name="twitter:description" content="本文转自该博客
+
+从输入网址到页面呈现发生了什么？这是前端面试官很喜欢问的一个问题，我就被问了好几次，但是每次答的都比较笼统，十句话就讲完了。但实际上，这个问题涉及的知识面很广，要细细说的话可以说一个小时不止了。刚好看到有篇博文写的挺详细的，就摘过来了，自己再敲一遍加深点印象。">
+<meta name="twitter:image" content="https://hu33.github.io/images/从输入网址到页面呈现发生了什么/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/05/从输入网址到页面呈现发生了什么/"/>
+
+
+
+
+
+  <title>从输入网址到页面呈现发生了什么 | 小胡不说八道</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c6131154619de361905a60cc04fcbd77";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+	<a href="https://github.com/hu33" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小胡不说八道</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            小时光
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/05/从输入网址到页面呈现发生了什么/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hu33">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小胡不说八道">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从输入网址到页面呈现发生了什么</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-05T10:47:13+08:00">
+                2017-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/04/05/从输入网址到页面呈现发生了什么/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/04/05/从输入网址到页面呈现发生了什么/" class="leancloud_visitors" data-flag-title="从输入网址到页面呈现发生了什么">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文转自<a href="http://www.cnblogs.com/jesse131/p/6215961.html" target="_blank" rel="external">该博客</a></p>
+</blockquote>
+<p>从输入网址到页面呈现发生了什么？这是前端面试官很喜欢问的一个问题，我就被问了好几次，但是每次答的都比较笼统，十句话就讲完了。但实际上，这个问题涉及的知识面很广，要细细说的话可以说一个小时不止了。刚好看到有篇博文写的挺详细的，就摘过来了，自己再敲一遍加深点印象。</p>
+<a id="more"></a>
+<h2 id="前话"><a href="#前话" class="headerlink" title="前话"></a>前话</h2><p>在前端开发中我们常需要考虑首屏加载时间，为了尽可能减少首屏加载时间我们最好弄清楚从输入网址到页面最终呈现的过程中都发生了哪些事情，然后才能具体问题具体分析，从而达到提升网页性能的目的。</p>
+<p>总的来说，从输入网址到页面呈现这个过程大致可分为两个部分：</p>
+<ul>
+<li>网络通信</li>
+<li>页面渲染</li>
+</ul>
+<h2 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h2><h3 id="输入网址"><a href="#输入网址" class="headerlink" title="输入网址"></a>输入网址</h3><p>当我们在浏览器的地址栏输入网址例如(<code>http://www.baidu.com</code>)，<code>http://</code>代表使用超文本传输协议，<code>www.baidu.com</code>代表服务器地址，<code>baidu.com</code>代表域名。一个完整的URL包括协议、服务器地址(主机)、端口、路径。</p>
+<h3 id="负责域名查询与解析的DNS服务"><a href="#负责域名查询与解析的DNS服务" class="headerlink" title="负责域名查询与解析的DNS服务"></a>负责域名查询与解析的DNS服务</h3><p>用户通常使用主机名或域名来访问某网站，而不是直接通关IP来访问，因为字母数字配合的表示形式更符合人类的记忆习惯，但是计算机可不理解这些名称。所以DNS服务应运而生。DNS协议通过提供域名查找IP地址，或逆向从IP地址反查域名的服务。</p>
+<p>DNS查询过程如下：</p>
+<ol>
+<li>操作系统先检查本地的hosts文件是否有这个网址映射关系，如果有，就先调用这个IP地址映射，完成域名解析。</li>
+<li>如果hosts里没有这个域名的映射，则查找本地DNS解析器缓存，是否有这个网址映射关系，如果有，直接返回，完成域名解析。</li>
+<li>如果hosts与本地DNS解析器缓存都没有相应的网址映射关系，首先会找TCP/IP参数中设置的首选DNS服务器。在此我们叫它本地DNS服务器。此服务器收到查询时，如果要查询的域名，包含在本地配置区域资源中，则返回解析结果给客户机，完成域名解析。（此解析具有权威性）</li>
+<li>如果要查询的域名，不由本地DNS服务器区域解析，但该服务器已缓存了此网址映射关系，则调用这个IP地址映射，完成域名解析。（此解析不具有权威性）</li>
+<li>如果本地DNS服务器本地区域文件与缓存解析都失效，则根据本地DNS服务器的设置进行查询。如果未用转发模式，本地DNS就把请求发至13台根DNS，根DNS服务器收到请求后会判断这个域名（.com）是来谁来授权管理，并会返回一个负责该顶级域名服务器的一个IP。本地DNS服务器收到IP信息后，将会联系负责.com域的这台服务器。这台负责.com域的服务器收到请求后，如果自己无法解析，它就会找一个管理.com域的下一级DNS服务器地址（baidu.com）给本地DNS服务器。当本地DNS服务器收到这个地址后，就会找baidu.com域服务器，重复上面的动作进行查询，直至找到www.baidu.com主机。</li>
+<li>如果用的是转发模式，此DNS服务器就会把请求转发至上一级DNS服务器，由上一级服务器进行解析，上一级服务器如果不能解析，或找根DNS把请求转至上上级，以此循环。不管是本地DNS服务器用转发，还是根提示，最后都是把结果返回给本地DNS服务器，由此DNS服务器再返回给客户机。</li>
+</ol>
+<p>从客户机到本地DNS服务器是属于递归查询，而DNS服务器之间的就是交互查询（迭代查询）。</p>
+<h3 id="应用层-客户端发送http请求报文"><a href="#应用层-客户端发送http请求报文" class="headerlink" title="应用层  客户端发送http请求报文"></a>应用层  客户端发送http请求报文</h3><p>http报文包括：</p>
+<ul>
+<li>报文首部（请求行+各种首部字段+其他）</li>
+<li>空行</li>
+<li>报文主体（应被发送的数据）通常不一定要有报文主体</li>
+</ul>
+<p>下面对百度首页请求报文首部进行分析：<br><strong>请求行</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">请求方法GET 请求URI /   HTTP协议版本 <span class="number">1.1</span></div><div class="line">GET / HTTP/<span class="number">1.1</span></div></pre></td></tr></table></figure>
+<p><strong>首部字段</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">请求资源所在服务器</div><div class="line">Host: www.baidu.com</div><div class="line">连接方式：持久连接     HTTP/1.1之前版本默认非持久连接</div><div class="line">Connection: keep-alive</div><div class="line">报文指令：要求所有中间服务器不返回缓存资源</div><div class="line">Pragma: no-cache</div><div class="line">控制缓存的行为：缓存前必须先确认其有效性，防止从缓存中返回过期的资源</div><div class="line">Cache-Control: no-cache</div><div class="line">用户代理可处理的媒体类型</div><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8   q表示权重从而区分优先级</div><div class="line">http客户端浏览器信息</div><div class="line">User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36</div><div class="line">可接受的内容编码类型</div><div class="line">Accept-Encoding: gzip, deflate, sdch</div><div class="line">可接受的语言</div><div class="line">Accept-Language: zh-CN,zh;q=0.8</div><div class="line">相关信息或标记</div><div class="line">Cookie: BAIDUID=3C67AA3EF6B3347D3AA986CE489268C4:FG=1; BIDUPSID=3C67AA3EF6B3347D3AA986CE489268C4;</div></pre></td></tr></table></figure>
+<h3 id="传输层-确保传输报文可靠性的TCP协议"><a href="#传输层-确保传输报文可靠性的TCP协议" class="headerlink" title="传输层  确保传输报文可靠性的TCP协议"></a>传输层  确保传输报文可靠性的TCP协议</h3><p>位于传输层的TCP协议为传输报文提供可靠的字节流服务。为了方便传输，将大块的数据分割成以报文段为单位的数据包进行管理，并为它们编号，方便服务器接收时能准确地还原报文信息。TCP协议通过“三次握手”等方法保证传输的安全可靠。</p>
+<p>“三次握手”的过程是，发送端先发送一个带有SYN（synchronize）标志的数据包给接收端，在一定的延迟时间内等待接收的回复。接收端收到数据包后，传回一个带有SYN/ACK（acknowledgement）标志的数据包以传达确认信息。接收方收到后再发送一个带有ACK标志的数据包给接收端以示握手成功。在这个过程中，如果发送端在规定延迟时间内没有收到回复则默认接收方没有收到请求，而再次发送，直到收到回复为止。</p>
+<p><img src="https://hu33.github.io/images/从输入网址到页面呈现发生了什么/1.png" alt=""></p>
+<h3 id="网络层-负责传输的IP协议"><a href="#网络层-负责传输的IP协议" class="headerlink" title="网络层  负责传输的IP协议"></a>网络层  负责传输的IP协议</h3><p>IP协议的作用是把TCP分割好的各种数据包传送给接收方。而要保证确实能传到接收方还需要接收方的MAC地址，也就是物理地址。IP地址和MAC地址是一一对应的关系，一个网络设备的IP地址可以更换，但是MAC地址一般是固定不变的。ARP协议可以将IP地址解析成对应的MAC地址。当通信的双方不在一个局部网时，需要多次中转才能到达最终的目标，在中转的过程中需要通过下一个中转站的MAC地址来搜索下一个中转目标。具体过程如下图：</p>
+<p><img src="https://hu33.github.io/images/从输入网址到页面呈现发生了什么/2.png" alt=""></p>
+<h3 id="链路层-传输数据的硬件部分"><a href="#链路层-传输数据的硬件部分" class="headerlink" title="链路层   传输数据的硬件部分"></a>链路层   传输数据的硬件部分</h3><p>在网络层找到对方的MAC地址后，就将数据发送到数据链路层传输。至此请求报文已发出，客户端发送请求的阶段结束。</p>
+<h3 id="服务器接收报文"><a href="#服务器接收报文" class="headerlink" title="服务器接收报文"></a>服务器接收报文</h3><p>接收端服务器在链路层接收到数据后，删除该层的首部信息并向网络层传递，网络层将接收的数据向传输层传递，在传输层会将传输的数据按序号从组请求报文并传送给应用层。当数据传输到应用层才能算真正接收到由客户端发送过来的http请求。</p>
+<h3 id="应用层-服务器发送http相应报文"><a href="#应用层-服务器发送http相应报文" class="headerlink" title="应用层  服务器发送http相应报文"></a>应用层  服务器发送http相应报文</h3><p>下面对百度首页响应报文首部进行分析：</p>
+<p><strong>状态行</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">协议版本 状态码 状态码原因短语</div><div class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK</div></pre></td></tr></table></figure>
+<p><strong>首部字段</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">当前服务器上安装的HTTP服务器程序信息</div><div class="line">bfe:Baidu Front End。百度人自己写的反向代理及防攻击接入层</div><div class="line">Server: bfe/<span class="number">1.0</span><span class="number">.8</span><span class="number">.18</span></div><div class="line">响应日期时间</div><div class="line"><span class="built_in">Date</span>: Thu, <span class="number">08</span> Dec <span class="number">2016</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">19</span> GMT</div><div class="line">说明报文实体的媒体类型</div><div class="line">Content-Type: text/html; charset=utf<span class="number">-8</span></div><div class="line">传输编码方式：分块编码</div><div class="line">Transfer-Encoding: chunked</div><div class="line">链接方式：持久链接  http/<span class="number">1.1</span>之后这个已经没必要了</div><div class="line">Connection: keep-alive</div><div class="line">只接受对持相同自然语言的请求返回缓存</div><div class="line">Vary: Accept-Encoding</div><div class="line">缓存控制：仅向特定用户返回响应</div><div class="line">Cache-Control: private</div><div class="line">Cxy_all: baidu+<span class="number">43</span>a6e396a3ed26dc7d1de13c6af79e49</div><div class="line">缓存过期时间</div><div class="line">Expires: Thu, <span class="number">08</span> Dec <span class="number">2016</span> <span class="number">14</span>:<span class="number">47</span>:<span class="number">38</span> GMT</div><div class="line">X-Powered-By: HPHP</div><div class="line">X-UA-Compatible: IE=Edge,chrome=<span class="number">1</span></div><div class="line">Strict-Transport-Security: max-age=<span class="number">172800</span></div><div class="line">BDPAGETYPE: <span class="number">1</span></div><div class="line">BDQID: <span class="number">0xc9d964a600018bb8</span></div><div class="line">BDUSERID: <span class="number">0</span></div><div class="line">设置cookie</div><div class="line"><span class="built_in">Set</span>-Cookie: H_PS_PSSID=<span class="number">1451</span>_21116_17001_21408_21417_21554_20929; path=<span class="regexp">/;</span></div></pre></td></tr></table></figure>
+<p>响应报文的传输方式与请求报文相同，简单点说就是原路返回。</p>
+<p> <strong>网络通信流程图</strong></p>
+<p><img src="https://hu33.github.io/images/从输入网址到页面呈现发生了什么/3.png" alt=""></p>
+<h3 id="在网络通信阶段对前端优化建议"><a href="#在网络通信阶段对前端优化建议" class="headerlink" title="在网络通信阶段对前端优化建议"></a>在网络通信阶段对前端优化建议</h3><ol>
+<li><p>减少http请求数</p>
+<ul>
+<li>合并资源，如合并JavaScript文件、CSS文件、利用CSS Spite合并图片等</li>
+<li>内联图片，data url节省了http请求，但是如果这个图像在网页多个地方显示会加大网页的内容，延长下载时间。</li>
+</ul>
+</li>
+<li><p>域名体现解析，在页面中不同域名的链接需指定预取域名：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dns-prefetch"</span> <span class="attr">href</span>=<span class="string">"http://this-is-a.com"</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>避免重定向（重定向会增加http请求的次数）</p>
+</li>
+<li><p>cookie优化，cookie越多会导致请求头部越大</p>
+</li>
+<li><p>启用GZIP压缩（Accept-Encoding:g-zip）</p>
+</li>
+<li><p>使用CDN加速，减小服务器压力</p>
+</li>
+<li><p>合理利用http缓存，通过设置expires等</p>
+</li>
+</ol>
+<h2 id="页面渲染"><a href="#页面渲染" class="headerlink" title="页面渲染"></a>页面渲染</h2><p>客户端在接收到HTML代码后，接下来就是要进行页面渲染了。</p>
+<h3 id="解析HTML以构建DOM树"><a href="#解析HTML以构建DOM树" class="headerlink" title="解析HTML以构建DOM树"></a>解析HTML以构建DOM树</h3><p>解析一个文档即将其转换为具有一定意义的结构（编码可以理解和使用的东西）。解析的结果通常是表达文档结构的节点树，称为解析树或语法树。</p>
+<p>解析是以文档所遵循的语法规则（编写文档所用的语言或格式）为基础的。所有可以解析的格式都必须对应确定的语法（由词汇和语法规则构成）。这称为与上下文无关的语法。</p>
+<p>解析的过程可以分成两个子过程：词法分析和语法分析：</p>
+<ul>
+<li>词法分析是将输入内容分割成大量标记的过程。标记是语言中的词汇，即构成内容的单位。在人类语言中，它相当于语言字典中的单词。</li>
+<li>语法分析是应用语言的语法规则的过程。</li>
+</ul>
+<p>解析器通常将解析工作分给以下两个组件来处理：</p>
+<ul>
+<li>词法分析器（标记生成器），负责将输入内容分解成一个个有效标记；</li>
+<li>而解析器负责根据语言的语法规则分析文档的结构，从而构建解析树。</li>
+</ul>
+<p>由于不能使用常规的解析技术，浏览器就创建了自定义的解析器来解析HTML。此解析算法由两个阶段组成：标记化和树构建。</p>
+<p>解析器的输出“解析树”是由DOM元素和属性节点构成的树结构。DOM是HTML文档的对象表示，同时也是外部内容（如JavaScript）与HTML元素之间的接口。解析树的根节点是“Document”对象。</p>
+<p>当解析到link标签时会请求相应的CSS文件，并将其CSS规则解析为StyleSheet对象，CSS文件中的其他外链资源如背静图片等只有等到其规则与DOM树某节点相匹配时才会加载。</p>
+<p>当解析遇到img标签时会根据路径向服务器相应的资源文件夹中请求图片资源，但并不会等待图片资源下载完再去解析接下来的HTML，而是并发执行即图片资源仍在下载，HTML解析也在进行。如果没有定义图片的height和width属性，那么浏览器为了显示每一个加载的图像，它需要先下载图像，然后解析出图像的高度和宽度，并在显示串口留出相应的屏幕空间，这样就会导致浏览器不断地重新计算/调整页面的布局，这可能会延迟文档的显示，并导致页面重绘。</p>
+<p>当解析遇到script标签时，将启动JavaScript引擎，这时将阻塞DOM树的构建。因为JavaScript执行过程中，JavaScript很可能会对DOM树进行读写操作。直到JavaScript执行完毕（此时执行的是全局对象初始创建和全局上下文中代码的执行），DOM树才会恢复构建。</p>
+<h3 id="构建render树"><a href="#构建render树" class="headerlink" title="构建render树"></a>构建render树</h3><p>为了更好地用户体验效果，浏览器会在构建DOM树的同时，也在构建render树。呈现树的每一个节点即为与其相对于的DOM节点的CSS框，框的类型与DOM节点的display属性有关，block元素生成block框，inline元素生成inline框。</p>
+<p>每一个呈现树节点都有与之相对应的DOM节点，但DOM节点不一定有与之相对应的呈现树节点。比如display属性为none的DOM节点，而且呈现树节点在呈现树中的位置与他们在DOM树中的位置不一定相同，比如float与绝对定位元素。</p>
+<p>在构建render树的时候需要为DOM树匹配CSS规则，在这个阶段由于匹配规则是从右往左匹配的，所以css的编写规则很重要。不好的CSS选择器写法会影响到页面渲染的效率。</p>
+<h3 id="布局render树"><a href="#布局render树" class="headerlink" title="布局render树"></a>布局render树</h3><p>在创建render树时，并不包含位置和大小信息。计算这些值的过程称为布局或重排。布局是一个递归的过程，它从根元素开始，然后递归遍历部分或所有的框架层次结构，为每一个需要计算的呈现器计算几何信息。</p>
+<p>布局通常具有以下模式：</p>
+<ol>
+<li>父呈现器确定自己的宽度</li>
+<li>父呈现器依次处理子呈现器：<ul>
+<li>放置子呈现器（设置x,y坐标）</li>
+<li>如果有必要，调用子呈现器的布局，这会计算子呈现器的高度</li>
+</ul>
+</li>
+<li>父呈现器根据子呈现器的累加高度以及边距和补白的高度来设置自身高度，此值也可供父呈现器的父呈现器使用</li>
+<li>将其<a href="http://blog.csdn.net/greenqingqingws/article/details/38111747" target="_blank" rel="external">dirty</a>位设置为false</li>
+</ol>
+<h3 id="绘制render树"><a href="#绘制render树" class="headerlink" title="绘制render树"></a>绘制render树</h3><p>在绘制阶段，系统会遍历render树，并调用呈现器的“paint”方法，将呈现器的内容显示在屏幕上。绘制工作是使用用户界面基础组件完成的。和布局一样，绘制也分为全局（绘制整个呈现树）和增量两种。在增量绘制中，部分呈现器发生了更改，但是不会影响整个树。更改后的呈现器将在其屏幕上对应的矩形区域设为无效，这导致OS将其视为一块dirty区域，并申城“paint”事件。</p>
+<p>绘制顺序：</p>
+<ol>
+<li>背景颜色</li>
+<li>背景图片</li>
+<li>边框</li>
+<li>子代</li>
+<li>轮廓</li>
+</ol>
+<h3 id="页面变化造成的影响"><a href="#页面变化造成的影响" class="headerlink" title="页面变化造成的影响"></a>页面变化造成的影响</h3><p>在发生变化时，浏览器会尽可能做出最小的响应。因此，元素的颜色改变后，只会对该元素进行重绘。元素的位置改变后，只会对该元素及其子元素（可能还有同级元素）进行布局和重绘。</p>
+<p>添加DOM节点后，会对该结点进行布局和重绘。一些重大变化（例如增大“HTML”元素的字体）会导致缓存无效，使得整个呈现树都会进行重新布局和绘制。</p>
+<h3 id="在页面渲染阶段对前端优化建议"><a href="#在页面渲染阶段对前端优化建议" class="headerlink" title="在页面渲染阶段对前端优化建议"></a>在页面渲染阶段对前端优化建议</h3><ul>
+<li>建议将CSS文件放在页首，以便构建DOM树；将JavaScript文件尽量放在页面下方，放置阻塞构建DOM树；而JavaScript的onload事件里，不要写太多影响首屏渲染的、操作DOM树的JavaScript代码。</li>
+<li>精简JavaScript和CSS代码，并进行代码压缩，使得css和js资源下载得更快</li>
+<li>编写高效的CSS代码</li>
+<li>重要的图片或者想让用户优先看到的图片使用img标签，次要的图片使用background引入</li>
+</ul>
+
+      
+    </div>
+
+	<div>
+      
+        
+      
+    </div>
+	
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+	<div>
+      
+        <div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">------------- THE END <i class="fa fa-paw"></i> THANKS FOR READING -------------</div>
+
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/14/VirtualBox扩展虚拟机Ubuntu的硬盘容量/" rel="next" title="VirtualBox扩展虚拟机Ubuntu的硬盘容量">
+                <i class="fa fa-chevron-left"></i> VirtualBox扩展虚拟机Ubuntu的硬盘容量
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/23/ES6新特性笔记（二）/" rel="prev" title="ES6新特性--笔记（二）">
+                ES6新特性--笔记（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="hu33" />
+          <p class="site-author-name" itemprop="name">hu33</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+		 
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="mailto:shirleyhu33@foxmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  E-Mail
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hu33" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/169141509" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-gratipay"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.steven7.top/" title="Steven" target="_blank">Steven</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hellozjf.com/" title="周靖峰" target="_blank">周靖峰</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+        
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=250 height=70 src="//music.163.com/outchain/player?type=2&id=530986903&auto=1&height=66"></iframe>
+        
+		
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前话"><span class="nav-number">1.</span> <span class="nav-text">前话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络通信"><span class="nav-number">2.</span> <span class="nav-text">网络通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入网址"><span class="nav-number">2.1.</span> <span class="nav-text">输入网址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负责域名查询与解析的DNS服务"><span class="nav-number">2.2.</span> <span class="nav-text">负责域名查询与解析的DNS服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用层-客户端发送http请求报文"><span class="nav-number">2.3.</span> <span class="nav-text">应用层  客户端发送http请求报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输层-确保传输报文可靠性的TCP协议"><span class="nav-number">2.4.</span> <span class="nav-text">传输层  确保传输报文可靠性的TCP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络层-负责传输的IP协议"><span class="nav-number">2.5.</span> <span class="nav-text">网络层  负责传输的IP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链路层-传输数据的硬件部分"><span class="nav-number">2.6.</span> <span class="nav-text">链路层   传输数据的硬件部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器接收报文"><span class="nav-number">2.7.</span> <span class="nav-text">服务器接收报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用层-服务器发送http相应报文"><span class="nav-number">2.8.</span> <span class="nav-text">应用层  服务器发送http相应报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在网络通信阶段对前端优化建议"><span class="nav-number">2.9.</span> <span class="nav-text">在网络通信阶段对前端优化建议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面渲染"><span class="nav-number">3.</span> <span class="nav-text">页面渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解析HTML以构建DOM树"><span class="nav-number">3.1.</span> <span class="nav-text">解析HTML以构建DOM树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建render树"><span class="nav-number">3.2.</span> <span class="nav-text">构建render树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布局render树"><span class="nav-number">3.3.</span> <span class="nav-text">布局render树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绘制render树"><span class="nav-number">3.4.</span> <span class="nav-text">绘制render树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面变化造成的影响"><span class="nav-number">3.5.</span> <span class="nav-text">页面变化造成的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在页面渲染阶段对前端优化建议"><span class="nav-number">3.6.</span> <span class="nav-text">在页面渲染阶段对前端优化建议</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hu33</span>
+  
+  <div class="theme-info">
+    <div class="powered-by"></div>
+    <span class="post-count">全站共58.7k字</span>
+  </div>
+  
+</div>
+
+
+
+<p>Let life be beautiful like summer flowers and death like autumn leaves.</p>    <!--文字-->
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "ecaf9e8b569f49d488e024e876e541aa",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("cbIfOEEvymSg0LfkG1tARn9s-gzGzoHsz", "dLPWqpPMm737ULiCiEYYniIU");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</body>
+</html>

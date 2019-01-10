@@ -1,0 +1,1027 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('我的名字（用数字表示）') !== ''){
+                alert('哦哟，错了呢~');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="自古安全性和方便性相互对立，十位数的密码提高了安全性，但是也增加了记忆的不方便性。同样，同源策略提升了Web前端的安全性，但牺牲了Web拓展上的灵活性。由于现在项目大多比较大，如果将所有资源设在同一台服务器上，早就崩掉了。所以，为了兼顾安全和方便，现代浏览器选择了一个平衡点，在遵循同源策略的基础上，选择性地为同源策略“开放了后门”。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跨域">
+<meta property="og:url" content="http://yoursite.com/2017/03/07/跨域/index.html">
+<meta property="og:site_name" content="小胡不说八道">
+<meta property="og:description" content="自古安全性和方便性相互对立，十位数的密码提高了安全性，但是也增加了记忆的不方便性。同样，同源策略提升了Web前端的安全性，但牺牲了Web拓展上的灵活性。由于现在项目大多比较大，如果将所有资源设在同一台服务器上，早就崩掉了。所以，为了兼顾安全和方便，现代浏览器选择了一个平衡点，在遵循同源策略的基础上，选择性地为同源策略“开放了后门”。">
+<meta property="og:image" content="https://hu33.github.io/images/跨域/1.png">
+<meta property="og:image" content="https://hu33.github.io/images/跨域/2.png">
+<meta property="og:updated_time" content="2019-01-10T14:25:14.608Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跨域">
+<meta name="twitter:description" content="自古安全性和方便性相互对立，十位数的密码提高了安全性，但是也增加了记忆的不方便性。同样，同源策略提升了Web前端的安全性，但牺牲了Web拓展上的灵活性。由于现在项目大多比较大，如果将所有资源设在同一台服务器上，早就崩掉了。所以，为了兼顾安全和方便，现代浏览器选择了一个平衡点，在遵循同源策略的基础上，选择性地为同源策略“开放了后门”。">
+<meta name="twitter:image" content="https://hu33.github.io/images/跨域/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/07/跨域/"/>
+
+
+
+
+
+  <title>跨域 | 小胡不说八道</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c6131154619de361905a60cc04fcbd77";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+	<a href="https://github.com/hu33" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小胡不说八道</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            小时光
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/07/跨域/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hu33">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小胡不说八道">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">跨域</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T20:37:31+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/03/07/跨域/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/03/07/跨域/" class="leancloud_visitors" data-flag-title="跨域">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>自古安全性和方便性相互对立，十位数的密码提高了安全性，但是也增加了记忆的不方便性。同样，同源策略提升了Web前端的安全性，但牺牲了Web拓展上的灵活性。由于现在项目大多比较大，如果将所有资源设在同一台服务器上，早就崩掉了。<strong>所以，为了兼顾安全和方便，现代浏览器选择了一个平衡点，在遵循同源策略的基础上，选择性地为同源策略“开放了后门”。</strong></p>
+<a id="more"></a>
+<h2 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h2><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><p>同源策略是客户端脚本（尤其是Javascript）的重要的安全度量标准。它最早出自Netscape Navigator2.0，其目的是防止某个文档或脚本从多个不同源装载。</p>
+<p>这里的同源指的是：<strong>同协议</strong>，<strong>同域名</strong>和<strong>同端口</strong>。</p>
+<p><img src="https://hu33.github.io/images/跨域/1.png" alt=""></p>
+<h4 id="精髓："><a href="#精髓：" class="headerlink" title="精髓："></a>精髓：</h4><p>它认为自任何站点装载的信赖内容是不安全的。当被浏览器半信半疑的脚本运行在沙箱时，它们应该只被允许访问来自同一站点的资源，而不是那些来自其它站点可能怀有恶意的资源。</p>
+<h4 id="为什么要有同源限制？"><a href="#为什么要有同源限制？" class="headerlink" title="为什么要有同源限制？"></a>为什么要有同源限制？</h4><p>比如一个黑客程序，他利用IFrame把真正的银行登录页面嵌到他的页面上，当你使用真实的用户名，密码登录时，他的页面就可以通过Javascript读取到你的表单中input中的内容，这样用户名，密码就轻松到手了。</p>
+<h2 id="跨域方式"><a href="#跨域方式" class="headerlink" title="跨域方式"></a>跨域方式</h2><h4 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h4><p>jsonp = json + padding<br>其实对于常用性来说，jsonp应该是使用最经常的一种跨域方式了，他不受浏览器兼容性的限制。但是他也有他的局限性，只能发送 GET 请求，需要服务端和前端规定好，写法丑陋。<br>它的原理在于浏览器请求 script 资源不受同源策略限制，并且请求到 script 资源后立即执行。<br>主要做法是这样的：</p>
+<ul>
+<li>在浏览器端：<br>首先全局注册一个callback回调函数，记住这个函数名字（比如：resolveJson），这个函数接受一个参数，参数是期望的到的服务端返回数据，函数的具体内容是处理这个数据。<br>然后动态生成一个 script 标签，src 为：请求资源的地址＋获取函数的字段名＋回调函数名称，这里的获取函数的字段名是要和服务端约定好的，是为了让服务端拿到回调函数名称。（如：<code>www.qiute.com?callbackName=resolveJson</code>）。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolveJosn</span>(<span class="params">result</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(result.name);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> jsonpScript= <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</div><div class="line">jsonpScript.type = <span class="string">"text/javascript"</span>;</div><div class="line">jsonpScript.src = <span class="string">"https://www.qiute.com?callbackName=resolveJson"</span>;</div><div class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>].appendChild(jsonpScript);</div></pre></td></tr></table></figure>
+<ul>
+<li><p>服务端</p>
+<p>在接受到浏览器端 script 的请求之后，从url的query的callbackName获取到回调函数的名字，例子中是<code>resolveJson</code>。</p>
+<p>然后动态生成一段javascript片段去给这个函数传入参数执行这个函数。比如：</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">resolveJson(&#123;<span class="attr">name</span>: <span class="string">'qiutc'</span>&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li><p>执行</p>
+<p>服务端返回这个 script 之后，浏览器端获取到 script 资源，然后会立即执行这个 javascript，也就是上面那个片段。这样就能根据之前写好的回调函数处理这些数据了。</p>
+</li>
+</ul>
+<p><strong>为什么script标签引入的文件不受同源策略的限制？</strong></p>
+<p>因为script标签引入的文件内容是不能够被客户端的js获取到的，不会影响到被引用文件的安全，所以没必要使script标签引入的文件遵循浏览器的同源策略。而通过ajax加载的文件内容是能够被客户端js获取到的，所以ajax必须遵循同源策略，否则被引入文件的内容会泄漏或者存在其他风险。</p>
+<p><strong>JSONP的缺点</strong>：</p>
+<ul>
+<li>它只支持GET请求而不支持POST等其它类型的HTTP请求（虽然采用post+动态生成iframe是可以达到post跨域的目的，但这样做是一个比较极端的方式，不建议采用）。一般get请求能完成所有功能。比如如果需要给其他域服务器传送参数可以在请求后挂参数（注意不要挂隐私数据），即</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://www.google.com/getUsers.php?flag=do&amp;time=1"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>JSONP易于实现，但是也会存在一些安全隐患，如果第三方的脚本随意地执行，那么它就可以篡改页面内容，截获敏感数据。但是在受信任的双方传递数据，JSONP是非常合适的选择。可以看出来JSONP跨域一般用于获取其他域的数据。</li>
+</ul>
+<p>一般能够用JSONP实现跨域就用JSONP实现，这也是前端用的最多的跨域方法。</p>
+<h3 id="document-domain"><a href="#document-domain" class="headerlink" title="document.domain"></a>document.domain</h3><p>一个页面框架（iframe／frame）之间（父子或同辈），是能够获取到彼此的window对象的，但是这个 window 不能拿到方法和属性.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 当前页面域名 https://blog.qiutc.me/a.html</div><div class="line">&lt;script&gt;</div><div class="line">function onLoad() &#123;</div><div class="line">	var iframe =document.getElementById('iframe');</div><div class="line">	var iframeWindow = iframe.contentWindow; // 这里可以获取 iframe 里面 window 对象，但是几乎没用</div><div class="line">	var doc = iframeWindow.document; // 获取不到</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;iframe src="https://www.qiutc.me/b.html" onload="onLoad()"&lt;/iframe&gt;</div></pre></td></tr></table></figure>
+<p>这个时候，<code>document.domain</code> 就可以派上用场了，我们只要把 <code>https://blog.qiutc.me/a.html</code> 和 <code>https://www.qiutc.me/b.html</code> 这两个页面的 <code>document.domain</code> 都设成相同的域名就可以了。<br><strong>前提条件：</strong>这两个域名必须属于同一个基础域名!而且所用的协议，端口都要一致。<br>但要<strong>注意</strong>的是，<code>document.domain</code> 的设置是有限制的，我们只能把 <code>document.domain</code> 设置成自身或更高一级的父域，且主域必须相同。例如：<code>a.b.example.com</code> 中某个文档的 <code>document.domain</code> 可以设成<code>a.b.example.com</code>、<code>b.example.com</code>、<code>example.com</code>中的任意一个，但是不可以设成 <code>c.a.b.example.com</code>,因为这是当前域的子域，也不可以设成<code>baidu.com</code>,因为主域已经不相同了。<br>这样我们就可以通过js访问到iframe中的各种属性和对象了。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 主页面：https://blog.qiutc.me/a.html</div><div class="line">&lt;script&gt;</div><div class="line">document.domain = 'qiutc.me';</div><div class="line">function onLoad() &#123;</div><div class="line">	var iframe =document.getElementById('iframe');</div><div class="line">	var iframeWindow = iframe.contentWindow; // 这里可以获取 iframe 里面 window 对象并且能得到方法和属性</div><div class="line">	var doc = iframeWindow.document; // 获取到</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;iframe src="https://www.qiutc.me/b.html" onload="onLoad()"&lt;/iframe&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// iframe 里面的页面</div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="built_in">document</span>.domain = <span class="string">'qiutc.me'</span>;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="window-name"><a href="#window-name" class="headerlink" title="window.name"></a>window.name</h3><p>window对象有个name属性，该属性有个特征：即在一个窗口(window)的生命周期内，窗口载入的所有的页面都是共享一个 <code>window.name</code> 的，每个页面对 <code>window.name</code> 都有读写的权限，<code>window.name</code> 是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而进行重置。<br>比如有一个<code>www.qiutc.me/a.html</code>页面，需要通过a.html页面里的js来获取另一个位于不同域上的页面<code>www.qiutc.com/data.html</code>里的数据。<br>data.html页面里的代码很简单，就是给当前的window.name设置一个a.html页面想要得到的数据值。data.html里的代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="built_in">window</span>.name = <span class="string">'我是被期望得到的数据'</span>;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>那么在 <code>a.html</code> 页面中，我们怎么把 <code>data.html</code> 页面载入进来呢？显然我们不能直接在 <code>a.html</code> 页面中通过改变 <code>window.location</code> 来载入data.html页面（这简直扯蛋）因为我们想要即使 <code>a.html</code>页面不跳转也能得到 <code>data.html</code> 里的数据。</p>
+<p>答案就是在 <code>a.html</code> 页面中使用一个隐藏的 <code>iframe</code> 来充当一个中间人角色，由 <code>iframe</code> 去获取 <code>data.html</code> 的数据，然后 <code>a.html</code> 再去得到 <code>iframe</code> 获取到的数据。</p>
+<p>充当中间人的 <code>iframe</code> 想要获取到<code>data.html</code>的通过<code>window.name</code>设置的数据，只需要把这个<code>iframe</code>的src设为<code>www.qiutc.com/data.html</code>就行了。然后<code>a.html</code>想要得到<code>iframe</code>所获取到的数据，也就是想要得到<code>iframe</code>的<code>window.name</code>的值，还必须把这个<code>iframe</code>的<code>src</code>设成跟<code>a.html</code>页面同一个域才行，不然根据前面讲的同源策略，<code>a.html</code>是不能访问到<code>iframe</code>里<code>的window.name</code>属性的。这就是整个跨域过程。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">// a.html</div><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">  &lt;meta charset="UTF-8"&gt;</div><div class="line">  &lt;title&gt;Document&lt;/title&gt;</div><div class="line">  &lt;script&gt;</div><div class="line">	function getData() &#123;</div><div class="line">		var iframe =document.getElementById('iframe');</div><div class="line">		iframe.onload = function() &#123;</div><div class="line">			var data = iframe.contentWindow.name; // 得到</div><div class="line">		&#125;</div><div class="line">		iframe.src = 'b.html';  // 这里b和a同源</div><div class="line">	&#125;</div><div class="line">  &lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">  &lt;iframe src="https://www.qiutc.com/data.html" style="display:none" onload="getData()"&lt;/iframe&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h3 id="window-postMessage"><a href="#window-postMessage" class="headerlink" title="window.postMessage"></a>window.postMessage</h3><p><code>window.postMessage(message, targetOrigin)</code> 方法是html5新引进的特性，可以使用它来向其它的window对象发送消息，无论这个window对象是属于同源或不同源。兼容性：</p>
+<p><img src="https://hu33.github.io/images/跨域/2.png" alt=""></p>
+<p>调用postMessage方法的window对象是指要接收消息的那一个window对象，该方法的第一个参数message为要发送的消息，类型只能为字符串；第二个参数targetOrigin用来限定接收消息的那个window对象所在的域，如果不想限定域，可以使用通配符 * 。</p>
+<p>需要接收消息的window对象，可是通过监听自身的message事件来获取传过来的消息，消息内容储存在该事件对象的data属性中。</p>
+<p>上面所说的向其他window对象发送消息，其实就是指一个页面有几个框架的那种情况，因为每一个框架都有一个window对象。在讨论第种方法的时候，我们说过，不同域的框架间是可以获取到对方的window对象的，虽然没什么用，但是有一个方法是可用的－<code>window.postMessage</code>。下面看一个简单的示例，有两个页面：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 主页面  blog.qiutc.com</div><div class="line">&lt;script&gt;</div><div class="line">function onLoad() &#123;</div><div class="line">	var iframe =document.getElementById('iframe');</div><div class="line">	var iframeWindow = iframe.contentWindow;</div><div class="line">	iframeWindow.postMessage("I'm message from main page.");</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;iframe src="https://www.qiutc.me/b.html" onload="onLoad()"&lt;/iframe&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// b 页面</div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="built_in">window</span>.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">	e = e || event;</div><div class="line">	<span class="built_in">console</span>.log(e.data);</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><p>web sockets是一种浏览器的API，它的目标是在一个单独的持久连接上提供全双工、双向通信。(同源策略对web sockets不适用)</p>
+<p>web sockets原理：在JS创建了web socket之后，会有一个HTTP请求发送到浏览器以发起连接。取得服务器响应后，建立的连接会使用HTTP升级从HTTP协议交换为web sockt协议。</p>
+<p>只有在支持web socket协议的服务器上才能正常工作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> socket = <span class="keyword">new</span> WebSockt(<span class="string">'ws://www.baidu.com'</span>);<span class="comment">//http-&gt;ws; https-&gt;wss</span></div><div class="line">socket.send(<span class="string">'hello WebSockt'</span>);</div><div class="line">socket.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> data = event.data;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+	<div>
+      
+        
+      
+    </div>
+	
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+	<div>
+      
+        <div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">------------- THE END <i class="fa fa-paw"></i> THANKS FOR READING -------------</div>
+
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/22/你是一个循规蹈矩的女孩/" rel="next" title="你是一个循规蹈矩的女孩">
+                <i class="fa fa-chevron-left"></i> 你是一个循规蹈矩的女孩
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/08/web缓存/" rel="prev" title="web缓存">
+                web缓存 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="hu33" />
+          <p class="site-author-name" itemprop="name">hu33</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+		 
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="mailto:shirleyhu33@foxmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  E-Mail
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hu33" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/169141509" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-gratipay"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.steven7.top/" title="Steven" target="_blank">Steven</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hellozjf.com/" title="周靖峰" target="_blank">周靖峰</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+        
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=250 height=70 src="//music.163.com/outchain/player?type=2&id=530986903&auto=1&height=66"></iframe>
+        
+		
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#同源策略"><span class="nav-number">1.</span> <span class="nav-text">同源策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念："><span class="nav-number">1.0.1.</span> <span class="nav-text">概念：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#精髓："><span class="nav-number">1.0.2.</span> <span class="nav-text">精髓：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要有同源限制？"><span class="nav-number">1.0.3.</span> <span class="nav-text">为什么要有同源限制？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域方式"><span class="nav-number">2.</span> <span class="nav-text">跨域方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jsonp"><span class="nav-number">2.0.1.</span> <span class="nav-text">jsonp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#document-domain"><span class="nav-number">2.1.</span> <span class="nav-text">document.domain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window-name"><span class="nav-number">2.2.</span> <span class="nav-text">window.name</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window-postMessage"><span class="nav-number">2.3.</span> <span class="nav-text">window.postMessage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket"><span class="nav-number">2.4.</span> <span class="nav-text">WebSocket</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hu33</span>
+  
+  <div class="theme-info">
+    <div class="powered-by"></div>
+    <span class="post-count">全站共58.7k字</span>
+  </div>
+  
+</div>
+
+
+
+<p>Let life be beautiful like summer flowers and death like autumn leaves.</p>    <!--文字-->
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "ecaf9e8b569f49d488e024e876e541aa",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("cbIfOEEvymSg0LfkG1tARn9s-gzGzoHsz", "dLPWqpPMm737ULiCiEYYniIU");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</body>
+</html>
