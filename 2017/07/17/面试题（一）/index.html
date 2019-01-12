@@ -114,7 +114,7 @@
 若为引用类型，就返回这个引用类型的对象，替换掉instance">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试题（一）">
-<meta property="og:url" content="http://yoursite.com/2017/07/17/面试题（一）/index.html">
+<meta property="og:url" content="http://hu33.tech/2017/07/17/面试题（一）/index.html">
 <meta property="og:site_name" content="小胡不说八道">
 <meta property="og:description" content="new操作符做了哪些事new操作符接收一个函数F和参数：new F(arguments…)，它做了简单的三个步骤：
 
@@ -160,7 +160,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/17/面试题（一）/"/>
+  <link rel="canonical" href="http://hu33.tech/2017/07/17/面试题（一）/"/>
 
 
 
@@ -221,7 +221,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">Go easy on the soul.</p>
       
   </div>
 
@@ -353,10 +353,10 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/17/面试题（一）/">
+    <link itemprop="mainEntityOfPage" href="http://hu33.tech/2017/07/17/面试题（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hu33">
+      <meta itemprop="name" content="不说八道的小胡">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -503,7 +503,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alert(aobj <span class="keyword">instanceof</span> A) ----------------&gt; <span class="literal">true</span>;</div><div class="line">alert(aobj <span class="keyword">instanceof</span> B) ----------------&gt; <span class="literal">true</span>;</div></pre></td></tr></table></figure>
 <p>要解决这个问题，一般是将对象的constructor手动指向自己：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">aobj.constructor = A; <span class="comment">//将自己的类赋值给对象的constructor属性</span></div><div class="line">alert(aobj.constructor === A) -----------&gt; <span class="literal">true</span>;</div><div class="line">alert(aobj.constructor === B) -----------&gt; <span class="literal">false</span>; <span class="comment">//基类不会报true了;</span></div></pre></td></tr></table></figure>
-<p>所以一般继承的严格写法应该是寄生组合继承（<a href="http://hu33.tech/2017/03/11/JavaScript%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF/" target="_blank" rel="external">不懂就看这里</a>）</p>
+<p>所以一般继承的严格写法应该是寄生组合继承（<a href="http://hu33.tech/2017/03/11/JavaScript%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF/">不懂就看这里</a>）</p>
 </li>
 <li><p><strong>prototype（通用但繁琐）</strong></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">alert(Object.prototype.toString.call(a) === ‘[object String]') -------&gt; true;</div><div class="line">alert(Object.prototype.toString.call(b) === ‘[object Number]') -------&gt; true;</div><div class="line">alert(Object.prototype.toString.call(c) === ‘[object Array]') -------&gt; true;</div><div class="line">alert(Object.prototype.toString.call(d) === ‘[object Date]') -------&gt; true;</div><div class="line">alert(Object.prototype.toString.call(e) === ‘[object Function]') -------&gt; true;</div><div class="line">alert(Object.prototype.toString.call(f) === ‘[object Function]') -------&gt; true;</div></pre></td></tr></table></figure>
@@ -689,8 +689,8 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
-               alt="hu33" />
-          <p class="site-author-name" itemprop="name">hu33</p>
+               alt="不说八道的小胡" />
+          <p class="site-author-name" itemprop="name">不说八道的小胡</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
           
@@ -834,7 +834,7 @@
   <span class="with-love">
     <i class="fa fa-snowflake-o"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">hu33</span>
+  <span class="author" itemprop="copyrightHolder">不说八道的小胡</span>
   
   <div class="theme-info">
     <div class="powered-by"></div>
