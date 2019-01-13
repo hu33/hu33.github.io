@@ -122,7 +122,7 @@
 <meta property="og:site_name" content="小胡不说八道">
 <meta property="og:description" content="JavaScript虽然也是面向对象语言，但是跟Java和c之类的语言不太一样，她没有类的概念（ES6里有了），所以在ES6之前，也没有类继承的概念。但是我们需要复用啊，所以就只能实现各种各样的模拟类继承，主要都是依靠原型链来实现的。
 在《JavaScript高级程序设计》中有讲到几种继承方式：原型链、借用构造函数、组合继承、原型链继承、寄生式继承、寄生组合式继承等。下面就讲几种用的比较多的继承方">
-<meta property="og:updated_time" content="2019-01-10T14:24:14.329Z">
+<meta property="og:updated_time" content="2019-01-13T12:28:36.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中的继承">
 <meta name="twitter:description" content="JavaScript虽然也是面向对象语言，但是跟Java和c之类的语言不太一样，她没有类的概念（ES6里有了），所以在ES6之前，也没有类继承的概念。但是我们需要复用啊，所以就只能实现各种各样的模拟类继承，主要都是依靠原型链来实现的。
@@ -455,7 +455,7 @@
       
 
       
-        <p>JavaScript虽然也是面向对象语言，但是跟Java和c之类的语言不太一样，她没有类的概念（ES6里有了），所以在ES6之前，也没有类继承的概念。但是我们需要复用啊，所以就只能实现各种各样的模拟类继承，主要都是依靠原型链来实现的。</p>
+        <p><code>JavaScript</code>虽然也是面向对象语言，但是跟Java和c之类的语言不太一样，她没有类的概念（<code>ES6</code>里有了），所以在<code>ES6</code>之前，也没有类继承的概念。但是我们需要复用啊，所以就只能实现各种各样的模拟类继承，主要都是依靠原型链来实现的。</p>
 <p>在《JavaScript高级程序设计》中有讲到几种继承方式：原型链、借用构造函数、组合继承、原型链继承、寄生式继承、寄生组合式继承等。下面就讲几种用的比较多的继承方式。</p>
 <a id="more"></a>
 <h2 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h2><p>基本思想：利用原型让一个引用类型继承另一个引用类型的属性和方法。</p>
@@ -475,15 +475,15 @@
 <li>来自原型对象的引用属性是所有实例共享的</li>
 <li>创建子类实例时，无法向父类构造函数传参</li>
 </ul>
-<h2 id="借用构造函数继承"><a href="#借用构造函数继承" class="headerlink" title="借用构造函数继承"></a>借用构造函数继承</h2><p>基本思想：在子类型构造函数中调用超类构造函数，通过使用call()和apply()方法可以在新建对象上执行构造函数。</p>
+<h2 id="借用构造函数继承"><a href="#借用构造函数继承" class="headerlink" title="借用构造函数继承"></a>借用构造函数继承</h2><p>基本思想：在子类型构造函数中调用超类构造函数，通过使用<code>call()</code>和<code>apply()</code>方法可以在新建对象上执行构造函数。</p>
 <p>核心：使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">    <span class="keyword">this</span>.age = age;</div><div class="line">&#125;</div><div class="line">Person.prototype.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'hello, my name is '</span> + <span class="keyword">this</span>.name);</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Man</span>(<span class="params">name, age</span>) </span>&#123;</div><div class="line">    Person.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//Man.prototype = new Person('pursue');</span></div><div class="line"><span class="keyword">var</span> man1 = <span class="keyword">new</span> Man(<span class="string">'joe'</span>);</div><div class="line"><span class="keyword">var</span> man2 = <span class="keyword">new</span> Man(<span class="string">'david'</span>);</div><div class="line"><span class="built_in">console</span>.log(man1.name === man2.name);<span class="comment">//false</span></div><div class="line">man1.say(); <span class="comment">//say is not a function</span></div></pre></td></tr></table></figure>
-<p>这里子类的在构造函数里利用了apply去调用父类的构造函数，从而达到继承父类属性的效果，比直接利用原型链要好的多，至少每个实例都有自己那一份资源，但是这种办法只能继承父类的实例属性，因而找不到say方法，为了继承父类所有的属性和方法，则就要修改原型链，从而引入了组合继承方式。</p>
+<p>这里子类的在构造函数里利用了<code>apply</code>去调用父类的构造函数，从而达到继承父类属性的效果，比直接利用原型链要好的多，至少每个实例都有自己那一份资源，但是这种办法只能继承父类的实例属性，因而找不到<code>say</code>方法，为了继承父类所有的属性和方法，则就要修改原型链，从而引入了组合继承方式。</p>
 <p>特点：</p>
 <ul>
 <li>解决了1中，子类实例共享父类引用属性的问题</li>
 <li>创建子类实例时，可以向父类传递参数</li>
-<li>可以实现多继承（call多个父类对象）</li>
+<li>可以实现多继承（<code>call</code>多个父类对象）</li>
 </ul>
 <p>缺点：</p>
 <ul>
@@ -512,7 +512,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">    <span class="keyword">this</span>.age = age;</div><div class="line">&#125;</div><div class="line">Person.prototype.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'hello, my name is '</span> + <span class="keyword">this</span>.name);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Man</span>(<span class="params">name, age</span>) </span>&#123;</div><div class="line">    Person.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</div><div class="line">&#125;</div><div class="line">Man.prototype = <span class="built_in">Object</span>.create(Person.prototype);<span class="comment">//a.</span></div><div class="line">Man.prototype.constructor = Man;<span class="comment">//b.</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> man1 = <span class="keyword">new</span> Man(<span class="string">'pursue'</span>);</div><div class="line"><span class="keyword">var</span> man2 = <span class="keyword">new</span> Man(<span class="string">'joe'</span>);</div><div class="line"><span class="built_in">console</span>.log(man1.say == man2.say);</div><div class="line"><span class="built_in">console</span>.log(man1.name == man2.name);</div></pre></td></tr></table></figure>
 <p>其实寄生组合继承和上面的组合继承区别仅在于构造子类原型对象的方式上（<code>a.和b.</code>），这里用到了<code>Object.creat(obj)</code>方法，该方法会对传入的obj对象进行浅拷贝。</p>
 <p>因此，<code>a.</code>会将子类的原型对象与父类的原型对象进行很好的连接，而并不像一般的组合继承那样直接对子类的原型进行复制（如<code>Man.prototype = new Person();</code>）,这样只是很暴力的在对属性进行覆盖。而寄生组合继承方式则对实例属性和原型属性分别进行了继承，在实现上更加合理。</p>
-<p>注：代码b.并不会改变instanceof的结果，但是对于需要用到construcor的场景，这么做更加严谨。</p>
+<p>注：代码b.并不会改变<code>instanceof</code>的结果，但是对于需要用到<code>construcor</code>的场景，这么做更加严谨。</p>
 <p>特点：</p>
 <ul>
 <li>堪称完美</li>

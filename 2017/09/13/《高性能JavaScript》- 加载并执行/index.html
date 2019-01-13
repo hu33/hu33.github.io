@@ -98,7 +98,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="前端,笔记,JavaScript,性能," />
+  <meta name="keywords" content="笔记,前端,JavaScript,性能," />
 
 
 
@@ -125,7 +125,7 @@
 优化点1：将脚本放在底部讲道理，按我们的理解，将js文件和css文件一起放在head中好像没什么毛病，先加载它们，有助于页面渲染和正确交互呀。
 可是！可是坑爹的是，脚本是会阻塞页面渲染的啊，浏览器需要等到它们全部下载并执行完成后，才继续页面渲染。所以把脚本放页面头部会导致明显的延迟，表现为显示空白页面，用户无法浏览页面，也无法与页面进行交互。">
 <meta property="og:image" content="https://hu33.github.io/images/高性能JavaScript/1-1.jpg">
-<meta property="og:updated_time" content="2019-01-10T14:38:35.840Z">
+<meta property="og:updated_time" content="2019-01-13T08:22:34.996Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《高性能JavaScript》- 加载并执行">
 <meta name="twitter:description" content="这一章主要从管理浏览器中的js代码来进行阐述优化点。
@@ -475,7 +475,7 @@
 <p>可以看个例子：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Script Defer Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    alert(<span class="string">'defer'</span>);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    alert(<span class="string">'script'</span>);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     alert(<span class="string">'load'</span>); </div><div class="line">    &#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>猜猜弹出顺序是啥？恩，<code>script</code>、<code>defer</code>、<code>load</code>。</p>
-<p><em>注：h5规范里讲了，defer属性仅当src属性声明时才生效~~</em></p>
+<p><em>注：h5规范里讲了，<code>defer</code>属性仅当<code>src</code>属性声明时才生效~~</em></p>
 <p>BTW，<code>async</code>也是允许并行下载的，但是它跟<code>defer</code>不同的在于它是下载完了就直接执行了，没有<code>defer</code>那么好的耐心，还等<code>dom</code>完成加载后才执行。</p>
 <p><img src="https://hu33.github.io/images/高性能JavaScript/1-1.jpg" alt=""></p>
 <h4 id="动态脚本元素"><a href="#动态脚本元素" class="headerlink" title="动态脚本元素"></a>动态脚本元素</h4><p>原理：使用DOM操作创建一个<code>&lt;script&gt;</code>元素，这个元素中加载某个js文件，然后将该<code>&lt;scirpt&gt;</code>元素添加到页面中。</p>
@@ -542,7 +542,7 @@
   <p><span>本文标题:</span><a href="/2017/09/13/《高性能JavaScript》- 加载并执行/">《高性能JavaScript》- 加载并执行</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 不说八道的小胡 的个人博客">不说八道的小胡</a></p>
   <p><span>发布时间:</span>2017年09月13日 - 19:09</p>
-  <p><span>最后更新:</span>2019年01月10日 - 22:01</p>
+  <p><span>最后更新:</span>2019年01月13日 - 16:01</p>
   <p><span>原始链接:</span><a href="/2017/09/13/《高性能JavaScript》- 加载并执行/" title="《高性能JavaScript》- 加载并执行">http://hu33.tech/2017/09/13/《高性能JavaScript》- 加载并执行/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://hu33.tech/2017/09/13/《高性能JavaScript》- 加载并执行/"  aria-label="复制成功！"></i></span>
   </p>
@@ -569,9 +569,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
-          
             <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          
+            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
           
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           

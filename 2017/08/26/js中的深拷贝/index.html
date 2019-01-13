@@ -122,7 +122,7 @@
 <meta property="og:site_name" content="小胡不说八道">
 <meta property="og:description" content="深拷贝这个坑我一定要来填上了，毕竟绊了我好几次。。。
 先交代一下这次填坑的背景，简单说来就是使用Object.assign来拷贝对象，结果这玩意儿有陷阱啊~害得我项目中setState没有被触发，子组件死活不更新，不render，找了半天问题才发现原来坑在这个地方。">
-<meta property="og:updated_time" content="2019-01-10T14:14:39.992Z">
+<meta property="og:updated_time" content="2019-01-13T13:19:00.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js中的深拷贝">
 <meta name="twitter:description" content="深拷贝这个坑我一定要来填上了，毕竟绊了我好几次。。。
@@ -458,12 +458,12 @@
         <p>深拷贝这个坑我一定要来填上了，毕竟绊了我好几次。。。</p>
 <p>先交代一下这次填坑的背景，简单说来就是使用<code>Object.assign</code>来拷贝对象，结果这玩意儿有陷阱啊~害得我项目中<code>setState</code>没有被触发，子组件死活不更新，不<code>render</code>，找了半天问题才发现原来坑在这个地方。</p>
 <a id="more"></a>
-<h3 id="Object-assign-的陷阱"><a href="#Object-assign-的陷阱" class="headerlink" title="Object.assign()的陷阱"></a>Object.assign()的陷阱</h3><p>平常我们写React处理state时，希望数据是immutable，这样处理起来更容易更方便。一般我们喜欢用<code>Object.assign()</code>来复制对象，我一直以为<code>Object.assign()</code>是深复制，会连子节点一起复制。今天项目中的bug让我认识到，我真是错看了它啊~</p>
+<h3 id="Object-assign-的陷阱"><a href="#Object-assign-的陷阱" class="headerlink" title="Object.assign()的陷阱"></a>Object.assign()的陷阱</h3><p>平常我们写React处理<code>state</code>时，希望数据是immutable，这样处理起来更容易更方便。一般我们喜欢用<code>Object.assign()</code>来复制对象，我一直以为<code>Object.assign()</code>是深复制，会连子节点一起复制。今天项目中的bug让我认识到，我真是错看了它啊~</p>
 <p><code>Object.assign()</code>其实是浅层拷贝，只会对非嵌套的对象进行拷贝，但是如果对象中有嵌套的话，它就只会对被嵌套的对象做引用拷贝了。</p>
 <p>可以看一下Polyfill对<code>Object.assign</code>的实现源码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Object</span>.assign != <span class="string">'function'</span>) &#123;</div><div class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">Object</span>.assign = <span class="function"><span class="keyword">function</span> (<span class="params">target</span>) </span>&#123;</div><div class="line"><span class="meta">	  'use strict'</span>;</div><div class="line">	   <span class="keyword">if</span> (target === <span class="literal">undefined</span> || target === <span class="literal">null</span>) &#123;</div><div class="line">	     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Cannot convert undefined or null to object'</span>);</div><div class="line">	   &#125;</div><div class="line">	</div><div class="line">	   <span class="keyword">var</span> output = <span class="built_in">Object</span>(target);</div><div class="line">	   <span class="keyword">for</span> (<span class="keyword">var</span> index = <span class="number">1</span>; index &lt; <span class="built_in">arguments</span>.length; index++) &#123;</div><div class="line">	     <span class="keyword">var</span> source = <span class="built_in">arguments</span>[index];</div><div class="line">	     <span class="keyword">if</span> (source !== <span class="literal">undefined</span> &amp;&amp; source !== <span class="literal">null</span>) &#123;</div><div class="line">	       <span class="keyword">for</span> (<span class="keyword">var</span> nextKey <span class="keyword">in</span> source) &#123;</div><div class="line">	         <span class="keyword">if</span> (source.hasOwnProperty(nextKey)) &#123;</div><div class="line">	           output[nextKey] = source[nextKey];</div><div class="line">	         &#125;</div><div class="line">	       &#125;</div><div class="line">	     &#125;</div><div class="line">	   &#125;</div><div class="line">	   <span class="keyword">return</span> output;</div><div class="line">	  &#125;;</div><div class="line">  &#125;)();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>好的吧，其实<code>Object.assign</code>只是这样设计的，并不能说是它的陷阱，当一回标题党。。。</p>
-<h3 id="js中的深拷贝"><a href="#js中的深拷贝" class="headerlink" title="js中的深拷贝"></a>js中的深拷贝</h3><p>虽然有些时候用Object.assign()也够了，但是一旦对象嵌套，用Object.assign()就很可能出现问题，那就要实现深拷贝了。</p>
+<h3 id="js中的深拷贝"><a href="#js中的深拷贝" class="headerlink" title="js中的深拷贝"></a>js中的深拷贝</h3><p>虽然有些时候用<code>Object.assign()</code>也够了，但是一旦对象嵌套，用<code>Object.assign()</code>就很可能出现问题，那就要实现深拷贝了。</p>
 <p>js深拷贝有两种方式：</p>
 <ol>
 <li><p>一种是用JSON对象，简单粗暴</p>
@@ -533,7 +533,7 @@
   <p><span>本文标题:</span><a href="/2017/08/26/js中的深拷贝/">js中的深拷贝</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 不说八道的小胡 的个人博客">不说八道的小胡</a></p>
   <p><span>发布时间:</span>2017年08月26日 - 18:08</p>
-  <p><span>最后更新:</span>2019年01月10日 - 22:01</p>
+  <p><span>最后更新:</span>2019年01月13日 - 21:01</p>
   <p><span>原始链接:</span><a href="/2017/08/26/js中的深拷贝/" title="js中的深拷贝">http://hu33.tech/2017/08/26/js中的深拷贝/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://hu33.tech/2017/08/26/js中的深拷贝/"  aria-label="复制成功！"></i></span>
   </p>

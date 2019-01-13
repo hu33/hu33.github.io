@@ -98,7 +98,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="前端,笔记,ES6," />
+  <meta name="keywords" content="笔记,前端,ES6," />
 
 
 
@@ -122,7 +122,7 @@ Symbol">
 <meta property="og:site_name" content="小胡不说八道">
 <meta property="og:description" content="本文完全参考 阮一峰的博客（ECMAScript 6 入门），只是简单的做个笔记。
 Symbol">
-<meta property="og:updated_time" content="2019-01-10T14:20:26.203Z">
+<meta property="og:updated_time" content="2019-01-13T12:45:45.503Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6新特性--笔记（三）">
 <meta name="twitter:description" content="本文完全参考 阮一峰的博客（ECMAScript 6 入门），只是简单的做个笔记。
@@ -610,13 +610,14 @@ Symbol">
 <li><code>has(target, propKey)</code>：拦截<code>propKey in proxy</code>的操作</li>
 <li><code>deleteProperty(target, propKey)</code>：拦截<code>delete proxy[propKey]</code>的操作</li>
 <li><code>ownKeys(target)</code>：拦截<code>Object.getOwnPropertyNames(proxy)</code>、<code>Object.getOwnPropertySymbols(proxy)</code>、<code>Object.keys(proxy)</code>，返回目标对象所有自身的属性的属性名</li>
-<li><code>apply(target, object, args)</code>：拦截Proxy实例作为函数调用的操作</li>
-<li><code>construct(target, args)</code>：拦截Proxy实例作为构造函数调用的操作</li>
+<li><code>apply(target, object, args)</code>：拦截<code>Proxy</code>实例作为函数调用的操作</li>
+<li><code>construct(target, args)</code>：拦截<code>Proxy</code>实例作为构造函数调用的操作</li>
 </ul>
 <h3 id="this问题"><a href="#this问题" class="headerlink" title="this问题"></a>this问题</h3><ul>
-<li><p>在Proxy代理的情况下，目标对象内部的<code>this</code>关键字会指向Proxy代理</p>
+<li><p>在<code>Proxy</code>代理的情况下，目标对象内部的<code>this</code>关键字会指向<code>Proxy</code>代理</p>
 </li>
-<li><p>有些原生对象的内部属性，只有通过正确的<code>this</code>才能拿到，所以Proxy无法代理这些原生对象的属性（可以通过<code>this</code>绑定原始对象来解决）</p>
+<li><p>有些原生对象的内部属性，只有通过正确的<code>this</code>才能拿到，所以<code>Proxy</code>无法代理这些原生对象的属性（可以通过<code>this</code>绑定原始对象来解决）</p>
+<p>​</p>
 <p>​</p>
 </li>
 </ul>
@@ -665,9 +666,9 @@ Symbol">
       
         <div class="post-tags">
           
-            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
-          
             <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          
+            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
           
             <a href="/tags/ES6/" rel="tag"><i class="fa fa-tag"></i> ES6</a>
           

@@ -98,7 +98,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="前端,笔记,JavaScript,性能," />
+  <meta name="keywords" content="笔记,前端,JavaScript,性能," />
 
 
 
@@ -122,7 +122,7 @@
 <meta property="og:site_name" content="小胡不说八道">
 <meta property="og:description" content="众所周知，用JS进行DOM操作那是灰常的昂贵，毕竟人家web应用的性能瓶颈之一啊，但也是有不少优化的法子的~~本章大致从三个方向阐述了DOM编程的优化方法。
 尽量减少访问和修改DOM次数浏览器中通常是独立实现DOM和JavaScript的，这样可以允许其他技术和语言也能共享使用DOM和渲染函数，但这也意味着JS想去访问DOM，是要花费一定代价的，访问和修改的次数越高，代价就越高，代码运行速度就越慢">
-<meta property="og:updated_time" content="2019-01-10T14:35:06.993Z">
+<meta property="og:updated_time" content="2019-01-13T08:30:01.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《高性能JavaScript》- DOM编程">
 <meta name="twitter:description" content="众所周知，用JS进行DOM操作那是灰常的昂贵，毕竟人家web应用的性能瓶颈之一啊，但也是有不少优化的法子的~~本章大致从三个方向阐述了DOM编程的优化方法。
@@ -455,8 +455,8 @@
       
 
       
-        <p>众所周知，用JS进行DOM操作那是灰常的昂贵，毕竟人家web应用的性能瓶颈之一啊，但也是有不少优化的法子的~~本章大致从三个方向阐述了DOM编程的优化方法。</p>
-<h3 id="尽量减少访问和修改DOM次数"><a href="#尽量减少访问和修改DOM次数" class="headerlink" title="尽量减少访问和修改DOM次数"></a>尽量减少访问和修改DOM次数</h3><p>浏览器中通常是独立实现DOM和JavaScript的，这样可以允许其他技术和语言也能共享使用DOM和渲染函数，但这也意味着JS想去访问DOM，是要花费一定代价的，访问和修改的次数越高，代价就越高，代码运行速度就越慢。</p>
+        <p>众所周知，用JS进行<code>DOM</code>操作那是灰常的昂贵，毕竟人家web应用的性能瓶颈之一啊，但也是有不少优化的法子的~~本章大致从三个方向阐述了<code>DOM</code>编程的优化方法。</p>
+<h3 id="尽量减少访问和修改DOM次数"><a href="#尽量减少访问和修改DOM次数" class="headerlink" title="尽量减少访问和修改DOM次数"></a>尽量减少访问和修改DOM次数</h3><p>浏览器中通常是独立实现<code>DOM</code>和<code>JavaScript</code>的，这样可以允许其他技术和语言也能共享使用<code>DOM</code>和渲染函数，但这也意味着JS想去访问<code>DOM</code>，是要花费一定代价的，访问和修改的次数越高，代价就越高，代码运行速度就越慢。</p>
 <a id="more"></a>
 <h4 id="优化点1-使用DOM更新页面内容时，克隆已有元素，而不是创建新元素"><a href="#优化点1-使用DOM更新页面内容时，克隆已有元素，而不是创建新元素" class="headerlink" title="优化点1  使用DOM更新页面内容时，克隆已有元素，而不是创建新元素"></a>优化点1  使用DOM更新页面内容时，克隆已有元素，而不是创建新元素</h4><p>在大多数浏览器中，节点克隆都更有效率，虽然效果不是特别明显~~所以对于一些需要多次重复创建的元素，可以先创建第一个，然后重复拷贝操作。也就是用<code>element.cloneNode()</code>代替<code>document.createElement()</code>。</p>
 <h4 id="优化点2-遍历HTML集合时，把集合存在局部变量中，并把length缓存在循环外部，用局部变量代替这些需要多次读取的元素"><a href="#优化点2-遍历HTML集合时，把集合存在局部变量中，并把length缓存在循环外部，用局部变量代替这些需要多次读取的元素" class="headerlink" title="优化点2  遍历HTML集合时，把集合存在局部变量中，并把length缓存在循环外部，用局部变量代替这些需要多次读取的元素"></a>优化点2  遍历HTML集合时，把集合存在局部变量中，并把length缓存在循环外部，用局部变量代替这些需要多次读取的元素</h4><p>看个例子就造了：</p>
@@ -472,15 +472,15 @@
 </ul>
 <h4 id="优化点4-使用querySelectorAll-查询DOM"><a href="#优化点4-使用querySelectorAll-查询DOM" class="headerlink" title="优化点4  使用querySelectorAll()查询DOM"></a>优化点4  使用<code>querySelectorAll()</code>查询DOM</h4><p>当咱需要得到特定的DOM元素列表时，需要使用<code>getElementById()</code>和<code>getElementByTagName()</code>进行组合调用，而且还得手动遍历筛选，好不麻烦且效率低下~~</p>
 <p>后来~~<code>querySelectorAll()</code>就横空出世了，只要传入相应的CSS选择器字符串，就能得到咱需要的元素了，而且还是浏览器原生API，比起用JS和DOM操作来遍历查找元素不要快太多啊~~</p>
-<p>而且，<code>querySelectorAll()</code>返回的是一个NodeList，是一个快照而不是动态集合，所以还避免了HTML集合会导致的性能问题。</p>
-<h3 id="尽量避免重绘和重排"><a href="#尽量避免重绘和重排" class="headerlink" title="尽量避免重绘和重排"></a>尽量避免重绘和重排</h3><p>浏览器下载完页面中所有的组件后会解析并生成两个内部数据结构–DOM树和Render树，DOM树都知道是表示页面结果，Render树则是表示DOM节点如何显示。Render树中的节点就是一个“盒”，一旦DOM树和Render树构建完成，浏览器就开始绘制元素了。</p>
-<p>当DOM的变化影响了元素的几何属性（宽和高），浏览器就需要重新计算元素的几何属性，其他元素的几何属性和位置也会因此受到影响。浏览器会使渲染树中受到影响的元素的部分失效，并重新构建Render树，这就是传说中的重排。重排之后，浏览器会重新绘制受影响的部分，这就是重绘。</p>
+<p>而且，<code>querySelectorAll()</code>返回的是一个<code>NodeList</code>，是一个快照而不是动态集合，所以还避免了HTML集合会导致的性能问题。</p>
+<h3 id="尽量避免重绘和重排"><a href="#尽量避免重绘和重排" class="headerlink" title="尽量避免重绘和重排"></a>尽量避免重绘和重排</h3><p>浏览器下载完页面中所有的组件后会解析并生成两个内部数据结构–<code>DOM</code>树和<code>Render</code>树，<code>DOM</code>树都知道是表示页面结果，<code>Render</code>树则是表示<code>DOM</code>节点如何显示。<code>Render</code>树中的节点就是一个“盒”，一旦<code>DOM</code>树和<code>Render</code>树构建完成，浏览器就开始绘制元素了。</p>
+<p>当<code>DOM</code>的变化影响了元素的几何属性（宽和高），浏览器就需要重新计算元素的几何属性，其他元素的几何属性和位置也会因此受到影响。浏览器会使渲染树中受到影响的元素的部分失效，并重新构建<code>Render</code>树，这就是传说中的重排。重排之后，浏览器会重新绘制受影响的部分，这就是重绘。</p>
 <p>易得：重绘和重排都是代价很昂贵的操作，所以要尽量避免避免啊~</p>
 <h4 id="优化点5-合并多次对DOM和样式的修改，然后一次处理"><a href="#优化点5-合并多次对DOM和样式的修改，然后一次处理" class="headerlink" title="优化点5  合并多次对DOM和样式的修改，然后一次处理"></a>优化点5  合并多次对DOM和样式的修改，然后一次处理</h4><ul>
-<li>改变样式：可以用CSSText属性做批量修改</li>
-<li>批量修改DOM：可以让DOM脱离文档流，修改完再带回文档中，具体有三种方式：<ol>
+<li>改变样式：可以用<code>CSSText</code>属性做批量修改</li>
+<li>批量修改<code>DOM</code>：可以让<code>DOM</code>脱离文档流，修改完再带回文档中，具体有三种方式：<ol>
 <li>隐藏元素（<code>display：none</code>），修改后再重新显示</li>
-<li>使用文档片段在当前DOM之外构建一个子树，再把它拷贝回文档</li>
+<li>使用文档片段在当前<code>DOM</code>之外构建一个子树，再把它拷贝回文档</li>
 <li>将原始元素拷贝到一个脱离文档流的节点中，修改该副本节点，完成后再替换原始元素</li>
 </ol>
 </li>
@@ -536,9 +536,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
-          
             <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          
+            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
           
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           

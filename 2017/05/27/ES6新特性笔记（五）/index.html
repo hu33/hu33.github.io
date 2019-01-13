@@ -98,7 +98,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="前端,笔记,ES6," />
+  <meta name="keywords" content="笔记,前端,ES6," />
 
 
 
@@ -122,7 +122,7 @@ Generator函数的语法">
 <meta property="og:site_name" content="小胡不说八道">
 <meta property="og:description" content="本文完全参考 阮一峰的博客（ECMAScript 6 入门），只是简单的做个笔记。
 Generator函数的语法">
-<meta property="og:updated_time" content="2019-01-10T14:20:07.103Z">
+<meta property="og:updated_time" content="2019-01-13T12:48:17.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6新特性--笔记（五）">
 <meta name="twitter:description" content="本文完全参考 阮一峰的博客（ECMAScript 6 入门），只是简单的做个笔记。
@@ -461,12 +461,12 @@ Generator函数的语法">
 <p>执行Generator函数会返回一个普通函数，Generator函数除了状态机，还是一个遍历器对象生成函数。</p>
 </blockquote>
 <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
-<li>形式上，Generator函数是一个普通函数，但是function关键字与函数名之间有一个<code>*</code>，且函数体内部使用<code>yield</code>表达式，定义不同的内部状态</li>
-<li>Generator函数的调用方法与普通函数一样，但是调用后并不执行，返回的也不是函数运行结果，二是一个指向内部状态的指针对象</li>
-<li>调用Generator函数，返回一个遍历器对象，代表Generator函数的内部指针，之后每次调用<code>next</code>方法就会返回一个对象，包括<code>value</code>和<code>done</code>两个属性，<code>value</code>是<code>yield</code>表达式后面的表达式的值，<code>done</code>表示是否遍历结束</li>
+<li>形式上，<code>Generator</code>函数是一个普通函数，但是<code>function</code>关键字与函数名之间有一个<code>*</code>，且函数体内部使用<code>yield</code>表达式，定义不同的内部状态</li>
+<li><code>Generator</code>函数的调用方法与普通函数一样，但是调用后并不执行，返回的也不是函数运行结果，二是一个指向内部状态的指针对象</li>
+<li>调用<code>Generator</code>函数，返回一个遍历器对象，代表<code>Generator</code>函数的内部指针，之后每次调用<code>next</code>方法就会返回一个对象，包括<code>value</code>和<code>done</code>两个属性，<code>value</code>是<code>yield</code>表达式后面的表达式的值，<code>done</code>表示是否遍历结束</li>
 </ul>
 <h3 id="yield表达式"><a href="#yield表达式" class="headerlink" title="yield表达式"></a><code>yield</code>表达式</h3><ul>
-<li>Generator函数返回的遍历器对象，只有调用<code>next</code>方法才会遍历下一个内部状态，所有提供了一种可以暂时执行的函数，<code>yield</code>表达式就是暂停标志</li>
+<li><code>Generator</code>函数返回的遍历器对象，只有调用<code>next</code>方法才会遍历下一个内部状态，所有提供了一种可以暂时执行的函数，<code>yield</code>表达式就是暂停标志</li>
 <li><code>yield</code>表达式后面的表达式，只有当调用<code>next</code>方法、内部指针指向该语句时才会执行</li>
 <li><code>yield</code>与<code>return</code>的区别：<ol>
 <li>每次遇到<code>yield</code>，函数暂停执行，下一次再从该位置继续向后执行，而<code>return</code>语句不具备位置记忆的功能</li>
@@ -474,23 +474,23 @@ Generator函数的语法">
 <li>正常函数只能返回一个值，因为只能执行一次<code>return</code>，但是Generator函数可以返回一系列的值，因为可以有任意多个<code>yield</code></li>
 </ol>
 </li>
-<li>Generator函数可以不用<code>yield</code>表达式，这时就变成了一个单纯的暂缓执行函数</li>
-<li><code>yield</code>表达式只能用在Generator函数里，用在其他地方都会报错</li>
+<li><code>Generator</code>函数可以不用<code>yield</code>表达式，这时就变成了一个单纯的暂缓执行函数</li>
+<li><code>yield</code>表达式只能用在<code>Generator</code>函数里，用在其他地方都会报错</li>
 <li><code>yield</code>表达式如果用在另一个表达式中，必须放在圆括号里面</li>
-<li>由于Generator函数就是遍历器生成函数，因此可以把Generator赋给对象的<code>Symbol.iterator</code>属性，从而使得该对象具有<code>Iterator</code>接口</li>
+<li>由于<code>Generator</code>函数就是遍历器生成函数，因此可以把<code>Generator</code>赋给对象的<code>Symbol.iterator</code>属性，从而使得该对象具有<code>Iterator</code>接口</li>
 </ul>
 <h3 id="Generator-prototype-throw"><a href="#Generator-prototype-throw" class="headerlink" title="Generator.prototype.throw()"></a>Generator.prototype.throw()</h3><ul>
-<li>Generator函数返回的遍历器对象，都有一个<code>throw</code>方法，可以在函数体外抛出错误，然后再Generator函数体内捕获</li>
-<li>如果Generator函数内部没有部署<code>try...catch</code>代码块，那么<code>throw</code>方法抛出的错误将被外部<code>try...catch</code>代码块捕获</li>
+<li><code>Generator</code>函数返回的遍历器对象，都有一个<code>throw</code>方法，可以在函数体外抛出错误，然后再<code>Generator</code>函数体内捕获</li>
+<li>如果<code>Generator</code>函数内部没有部署<code>try...catch</code>代码块，那么<code>throw</code>方法抛出的错误将被外部<code>try...catch</code>代码块捕获</li>
 <li><code>throw</code>方法被捕获之后，会附带执行一次<code>next</code>方法</li>
-<li>如果Generator函数内部和外部都没有部署<code>try...catch</code>代码块，那么程序将报错，直接中断执行</li>
-<li>只要Generator函数内部部署了<code>try...catch</code>代码块，那么遍历的<code>throw</code>方法抛出的错误，不影响下一次遍历</li>
-<li>一旦Generator执行过程中抛出错误，且没有被内部捕获，就不会再执行下去了</li>
+<li>如果<code>Generator</code>函数内部和外部都没有部署<code>try...catch</code>代码块，那么程序将报错，直接中断执行</li>
+<li>只要<code>Generator</code>函数内部部署了<code>try...catch</code>代码块，那么遍历的<code>throw</code>方法抛出的错误，不影响下一次遍历</li>
+<li>一旦<code>Generator</code>执行过程中抛出错误，且没有被内部捕获，就不会再执行下去了</li>
 </ul>
 <h3 id="Generator函数的this"><a href="#Generator函数的this" class="headerlink" title="Generator函数的this"></a>Generator函数的this</h3><ul>
-<li><p>Generator函数返回的是遍历器对象，而不是<code>this</code>对象</p>
+<li><p><code>Generator</code>函数返回的是遍历器对象，而不是<code>this</code>对象</p>
 </li>
-<li><p>Generator函数不能跟<code>new</code>命令一起用，会报错，因为它不是构造函数</p>
+<li><p><code>Generator</code>函数不能跟<code>new</code>命令一起用，会报错，因为它不是构造函数</p>
 </li>
 <li><p>可以使用<code>call</code>绑定Generator函数内部的<code>this</code>来获取正常的<code>this</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = F.call(F.prototype)</div></pre></td></tr></table></figure>
@@ -498,26 +498,26 @@ Generator函数的语法">
 </ul>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
 <li><code>yield</code>表达式本身没有返回值，或者说总是返回<code>undefined</code>，<code>next</code>方法可以带一个参数，该参数就会被当做上一个<code>yield</code>表达式的返回值</li>
-<li><code>for...of</code>循环可以自动遍历Generator函数时生成的Iterator对象，且此时不再需要调用<code>next</code>方法</li>
-<li><code>Generator.prototype.return()</code>：可以返回给定的值，并终结遍历Generator函数</li>
-<li>如果<code>yield</code>表达式后面跟的是一个遍历器对象，需要在yield表达式后面加上<code>*</code>，表明它返回的是一个遍历器对象</li>
-<li>如果被代理的Generator函数有<code>return</code>语句，那么可以向代理它的Generator函数返回数据</li>
+<li><code>for...of</code>循环可以自动遍历<code>Generator</code>函数时生成的<code>Iterator</code>对象，且此时不再需要调用<code>next</code>方法</li>
+<li><code>Generator.prototype.return()</code>：可以返回给定的值，并终结遍历<code>Generator</code>函数</li>
+<li>如果<code>yield</code>表达式后面跟的是一个遍历器对象，需要在<code>yield</code>表达式后面加上<code>*</code>，表明它返回的是一个遍历器对象</li>
+<li>如果被代理的<code>Generator</code>函数有<code>return</code>语句，那么可以向代理它的<code>Generator</code>函数返回数据</li>
 </ul>
 <h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><ul>
 <li>异步操作的同步化表达：处理异步操作，改写回调函数</li>
 <li>控制流管理</li>
-<li>部署Iterator接口</li>
-<li>作为数据结构：可以看作是一个数组结构，因为Generator函数可以返回一系列值，意味着它可以对任意表达式提供类似数组的接口</li>
+<li>部署<code>Iterator</code>接口</li>
+<li>作为数据结构：可以看作是一个数组结构，因为<code>Generator</code>函数可以返回一系列值，意味着它可以对任意表达式提供类似数组的接口</li>
 </ul>
 <h2 id="async-函数"><a href="#async-函数" class="headerlink" title="async 函数"></a><a href="http://es6.ruanyifeng.com/#docs/async" target="_blank" rel="external">async 函数</a></h2><blockquote>
 <p>async函数就是Generator函数的语法糖。</p>
 </blockquote>
 <ul>
-<li><code>async</code>函数返回一个Promise对象，可以使用<code>then</code>方法添加回调函数。</li>
+<li><code>async</code>函数返回一个<code>Promise</code>对象，可以使用<code>then</code>方法添加回调函数。</li>
 <li><code>async</code>函数内部<code>return</code>语句返回的值，会成为<code>then</code>方法回调函数的参数</li>
-<li><code>async</code>函数返回的Promise对象，必须等到内部所有<code>await</code>命令后面的Promise对象执行完，才会发生状态改变，除非遇到<code>return</code>语句或抛出错误（也就是，只有<code>async</code>函数内部的异步操作执行完，才会执行<code>then</code>方法指定的回调函数）</li>
-<li>正常情况下，<code>await</code>命令后面是一个Promise对象，如果不是，会被转成一个立即<code>resolve</code>的Promise对象</li>
-<li>只要一个<code>await</code>语句后面的Promise变为<code>reject</code>，那么整个<code>async</code>函数都会中断执行</li>
+<li><code>async</code>函数返回的Promise对象，必须等到内部所有<code>await</code>命令后面的<code>Promise</code>对象执行完，才会发生状态改变，除非遇到<code>return</code>语句或抛出错误（也就是，只有<code>async</code>函数内部的异步操作执行完，才会执行<code>then</code>方法指定的回调函数）</li>
+<li>正常情况下，<code>await</code>命令后面是一个<code>Promise</code>对象，如果不是，会被转成一个立即<code>resolve</code>的<code>Promise</code>对象</li>
+<li>只要一个<code>await</code>语句后面的<code>Promise</code>变为<code>reject</code>，那么整个<code>async</code>函数都会中断执行</li>
 <li>防止出错的方法，将其放在<code>try...catch</code>代码块中</li>
 <li>多个<code>await</code>命令后面的异步操作，若不存在继发关系，最好让它们同时触发</li>
 <li><code>await</code>命令只能用在<code>async</code>函数中，若用在普通函数就会报错</li>
@@ -622,9 +622,9 @@ Generator函数的语法">
       
         <div class="post-tags">
           
-            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
-          
             <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          
+            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
           
             <a href="/tags/ES6/" rel="tag"><i class="fa fa-tag"></i> ES6</a>
           

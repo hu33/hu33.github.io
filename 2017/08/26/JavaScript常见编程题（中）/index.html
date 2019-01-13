@@ -134,7 +134,7 @@
 判断传入值是否为2的乘方  is2power
 使用递归实现二进制转换  decimalToBinary
 判断大括号是否闭合  isBala">
-<meta property="og:updated_time" content="2017-08-31T14:12:15.168Z">
+<meta property="og:updated_time" content="2019-01-13T13:19:44.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript常见编程题（中）">
 <meta name="twitter:description" content="判断字符串是否为回文串  isPalindrom
@@ -474,15 +474,15 @@
 
       
         <ol>
-<li>判断字符串是否为回文串  isPalindrom</li>
-<li>乱序同字母字符串  isAnagram</li>
-<li>统计一个字符串出现最多的字母  findMaxDuplicateChar</li>
-<li>计算二进制中1的个数  countBit</li>
-<li>随机生成指定长度的字符串  randomString</li>
-<li>判断传入值是否为2的乘方  is2power</li>
-<li>使用递归实现二进制转换  decimalToBinary</li>
-<li>判断大括号是否闭合  isBalanced</li>
-<li>生成斐波拉契数列   getFibonacci</li>
+<li>判断字符串是否为回文串  <code>isPalindrom</code></li>
+<li>乱序同字母字符串  <code>isAnagram</code></li>
+<li>统计一个字符串出现最多的字母  <code>findMaxDuplicateChar</code></li>
+<li>计算二进制中1的个数  <code>countBit</code></li>
+<li>随机生成指定长度的字符串  <code>randomString</code></li>
+<li>判断传入值是否为2的乘方  <code>is2power</code></li>
+<li>使用递归实现二进制转换  <code>decimalToBinary</code></li>
+<li>判断大括号是否闭合  <code>isBalanced</code></li>
+<li>生成斐波拉契数列   <code>getFibonacci</code></li>
 </ol>
 <a id="more"></a>
 <h4 id="判断字符串是否为回文串"><a href="#判断字符串是否为回文串" class="headerlink" title="判断字符串是否为回文串"></a>判断字符串是否为回文串</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//循环</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPalindrom</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> i, len;</div><div class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>, len = str.length; i &lt; len; i++) &#123;</div><div class="line">        <span class="keyword">if</span> (str.charAt(i) !== str.charAt(len-i<span class="number">-1</span>)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//借用数组的reverse()</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPalindrom</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> str.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>) === str;</div><div class="line">&#125;</div></pre></td></tr></table></figure>

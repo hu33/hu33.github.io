@@ -134,7 +134,7 @@
 找出整型数组中乘积最大的三个数
 找出出现奇数次的数  findOddTimesNum
 二分搜索递归">
-<meta property="og:updated_time" content="2017-08-28T15:11:53.109Z">
+<meta property="og:updated_time" content="2019-01-13T13:21:10.746Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript常见编程题（上）">
 <meta name="twitter:description" content="单个数组去重  unique
@@ -474,15 +474,15 @@
 
       
         <ol>
-<li>单个数组去重  unique</li>
-<li>两个数组并集、交集、差集  union、intersection、difference</li>
-<li>计算数组中元素乘积  productOfArrayExceptSelf</li>
-<li>找出数组中最大差值  getMaxProfit</li>
-<li>找出连续数组中的缺失数  findMissingNumber</li>
+<li>单个数组去重  <code>unique</code></li>
+<li>两个数组并集、交集、差集  <code>union</code>、<code>intersection</code>、<code>difference</code></li>
+<li>计算数组中元素乘积  <code>productOfArrayExceptSelf</code></li>
+<li>找出数组中最大差值  <code>getMaxProfit</code></li>
+<li>找出连续数组中的缺失数  <code>findMissingNumber</code></li>
 <li>找出整型数组中乘积最大的三个数</li>
-<li>找出出现奇数次的数  findOddTimesNum</li>
-<li>二分搜索递归实现  binarySearch</li>
-<li>实现一个洗牌算法  shuffle</li>
+<li>找出出现奇数次的数  <code>findOddTimesNum</code></li>
+<li>二分搜索递归实现  <code>binarySearch</code></li>
+<li>实现一个洗牌算法  <code>shuffle</code></li>
 </ol>
 <a id="more"></a>
 <h4 id="单个数组去重"><a href="#单个数组去重" class="headerlink" title="单个数组去重"></a>单个数组去重</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//ES6</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(arr));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//HashObject（会自动对传入的键执行toString()）</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">    <span class="keyword">const</span> result = [];</div><div class="line">    <span class="keyword">let</span> hashObj = &#123;&#125;;</div><div class="line">    <span class="keyword">let</span> i, len;</div><div class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>, len = arr.length; i &lt; len; i++) &#123;</div><div class="line">        <span class="keyword">if</span> (!hashObj[arr[i]]) &#123;</div><div class="line">            hashObj[arr[i]] = <span class="literal">true</span>;</div><div class="line">            result.push(arr[i]);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//遍历数组，使用indexOf看元素是否已在result数组中</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">    <span class="keyword">const</span> result = [];</div><div class="line">    <span class="keyword">let</span> i,len;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>, len = arr.length; i &lt; len; i++) &#123;</div><div class="line">        <span class="keyword">if</span> (result.indexOf(arr[i]) === <span class="number">-1</span>) &#123;</div><div class="line">            result.push(arr[i]);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//用filter过滤出index和lastIndex相等的元素</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">    <span class="keyword">const</span> result = arr.filter(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</div><div class="line">       <span class="keyword">return</span> index === arr.lastIndexOf(item); </div><div class="line">    &#125;);</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>

@@ -122,7 +122,7 @@
 <meta property="og:site_name" content="小胡不说八道">
 <meta property="og:description" content="项目地址  目前还是bug多多~
 本项目完全该教程，教程很详细很入门很通俗，本文是纯为面试准备的啦。">
-<meta property="og:updated_time" content="2019-01-10T14:38:18.579Z">
+<meta property="og:updated_time" content="2019-01-13T08:25:45.797Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Express+MongoDB搭建多人博客系统">
 <meta name="twitter:description" content="项目地址  目前还是bug多多~
@@ -464,13 +464,13 @@
 <li>MongoDB: 3.4</li>
 </ul>
 <h2 id="Express"><a href="#Express" class="headerlink" title="Express"></a>Express</h2><p>Express的基本使用方法可以查看其<a href="http://www.expressjs.com.cn/guide/routing.html" target="_blank" rel="external">使用指南</a>。</p>
-<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><p>本项目使用的是express.Router。</p>
-<p>创建一个routes的文件夹，将路由控制都写在该文件夹内，每个路由文件通过生成一个express.Router实例router并导出，通过app.use挂载到不同的路径。</p>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><p>本项目使用的是<code>express.Router</code>。</p>
+<p>创建一个<code>routes</code>的文件夹，将路由控制都写在该文件夹内，每个路由文件通过生成一个<code>express.Router</code>实例<code>router</code>并导出，通过<code>app.use</code>挂载到不同的路径。</p>
 <h3 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h3><p>本项目模板引擎使用的是ejs。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置模板目录</span></div><div class="line">app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'views'</span>));</div><div class="line"><span class="comment">//设置模板引擎为ejs</span></div><div class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);</div></pre></td></tr></table></figure>
-<p>通过调用res.render()渲染ejs模板，第一个参数是模板的名字，第二个参数传给模板的数据。</p>
+<p>通过调用<code>res.render()</code>渲染<code>ejs</code>模板，第一个参数是模板的名字，第二个参数传给模板的数据。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">res.render(<span class="string">'error'</span>,&#123;</div><div class="line">   <span class="attr">error</span>: err</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>res.render()的作用就是将模板和数据结合成HTML，同时响应头中的Content-Type：text/html，告诉浏览器返回的是HTML，不是文本，要按HTML展示。</p>
+<p><code>res.render()</code>的作用就是将模板和数据结合成HTML，同时响应头中的<code>Content-Type：text/html</code>，告诉浏览器返回的是HTML，不是文本，要按HTML展示。</p>
 <h3 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h3><ul>
 <li><p><strong>express-session：实现对会话的支持</strong></p>
 <p>由于HTTP协议是无状态协议，所以服务器需要记录用户的状态时，需要用某种机制来识别具体的用户，这个机制就是会话（<code>session</code>）。</p>
@@ -484,7 +484,7 @@
 </ol>
 </li>
 <li><p><strong>connect-mongo：将session存入到mongodb中</strong></p>
-<p>作用就是将connect的session持久化到mongodb中，配置见上面的session配置。</p>
+<p>作用就是将<code>connect</code>的<code>session</code>持久化到mongodb中，配置见上面的<code>session</code>配置。</p>
 </li>
 <li><p><strong>connect-flash：通知功能</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.use(flash());</div></pre></td></tr></table></figure>
@@ -499,16 +499,16 @@
 <p><code>config-lite</code>会根据环境变量（<code>NODE_ENV</code>）的不同从当前执行进程目录下的config目录加载不同的配置文件。如果不设置<code>NODE_ENV</code>，则读取默认的default配置文件，若指定了<code>NODE_ENV</code>，则会合并指定的配置文件和default配置文件作为配置。<code>config-lite</code>支持<code>.js</code>、<code>.json</code>、<code>.node</code>、<code>.yml</code>、<code>.yaml</code>后缀的文件。</p>
 <p>如果程序以 <code>NODE_ENV=test node app</code> 启动，则 <code>config-lite</code> 会依次降级查找 <code>config/test.js</code>、<code>config/test.json</code>、<code>config/test.node</code>、<code>config/test.yml</code>、<code>config/test.yaml</code> 并合并 default 配置; 如果程序以 <code>NODE_ENV=production node app</code> 启动，则 <code>config-lite</code> 会依次降级查找 <code>config/production.js</code>、<code>config/production.json</code>、<code>config/production.node</code>、<code>config/production.yml</code>、<code>config/production.yaml</code> 并合并 default 配置。</p>
 </li>
-<li><p>winston和express-winston：记录日志</p>
+<li><p><strong>winston和express-winston</strong>：记录日志</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//正常请求的日志</span></div><div class="line">app.use(expressWinston.logger(&#123;</div><div class="line">    <span class="attr">transports</span>: [</div><div class="line">        <span class="keyword">new</span> (winston.transports.Console)(&#123;</div><div class="line">            <span class="attr">json</span>: <span class="literal">true</span>,</div><div class="line">            <span class="attr">colorize</span>: <span class="literal">true</span></div><div class="line">        &#125;),</div><div class="line">        <span class="keyword">new</span> winston.transports.File(&#123;</div><div class="line">            <span class="attr">filename</span>: <span class="string">'logs/success.log'</span></div><div class="line">        &#125;)</div><div class="line">    ]</div><div class="line">&#125;));</div><div class="line"><span class="comment">//路由</span></div><div class="line">routes(app);</div><div class="line"><span class="comment">//错误请求的日志</span></div><div class="line">app.use(expressWinston.errorLogger(&#123;</div><div class="line">    <span class="attr">transports</span>: [</div><div class="line">        <span class="keyword">new</span> winston.transports.Console(&#123;</div><div class="line">            <span class="attr">json</span>: <span class="literal">true</span>,</div><div class="line">            <span class="attr">colorize</span>: <span class="literal">true</span></div><div class="line">        &#125;),</div><div class="line">        <span class="keyword">new</span> winston.transports.File(&#123;</div><div class="line">            <span class="attr">filename</span>: <span class="string">'logs/error.log'</span></div><div class="line">        &#125;)</div><div class="line">    ]</div><div class="line">&#125;));</div></pre></td></tr></table></figure>
-<p>将正常请求的日志打印到终端并写入logs/success.log，将错误请求的日志打印到终端并写入logs/error.log。</p>
-<p>注：记录正常请求日志的中间件要放到<code>routes(app)</code>之前，记录错误请求日志的中间件要放到routes(app)之后</p>
+<p>将正常请求的日志打印到终端并写入<code>logs/success.log</code>，将错误请求的日志打印到终端并写入<code>logs/error.log</code>。</p>
+<p>注：记录正常请求日志的中间件要放到<code>routes(app)</code>之前，记录错误请求日志的中间件要放到<code>routes(app)</code>之后</p>
 </li>
 </ul>
 <h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>目前只实现了最最基本的功能，即登录注册登出、查看文章发表文章修改文章删除文章、创建留言删除留言。以及会话、消息通知、权限控制。会话及消息通知用的第三方中间件，权限控制为自定义中间件。</p>
 <p>权限控制（主要是验证用户是否登录）：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="attr">checkLogin</span>: <span class="function"><span class="keyword">function</span> <span class="title">checkLogin</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(!req.session.user)&#123;</div><div class="line">            req.flash(<span class="string">'error'</span>,<span class="string">'未登录'</span>);</div><div class="line">            <span class="keyword">return</span> res.redirect(<span class="string">'/signin'</span>);</div><div class="line">        &#125;</div><div class="line">        next();</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">checkNotLogin</span>: <span class="function"><span class="keyword">function</span> <span class="title">checkNotLogin</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(req.session.user)&#123;</div><div class="line">            req.flash(<span class="string">'error'</span>,<span class="string">'已登录'</span>);</div><div class="line">            <span class="keyword">return</span> res.redirect(<span class="string">'back'</span>);   <span class="comment">//返回之前的页面</span></div><div class="line">        &#125;</div><div class="line">        next();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h2 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h2><h3 id="model"><a href="#model" class="headerlink" title="model"></a>model</h3><p>项目中目前只有三个model，分别为User、Post及Comment</p>
+<h2 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h2><h3 id="model"><a href="#model" class="headerlink" title="model"></a>model</h3><p>项目中目前只有三个<code>model</code>，分别为<code>User</code>、<code>Post</code>及<code>Comment</code></p>
 
       
     </div>
