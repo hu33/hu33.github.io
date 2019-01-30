@@ -98,7 +98,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="前端,笔记,JavaScript,性能," />
+  <meta name="keywords" content="人物," />
 
 
 
@@ -116,24 +116,16 @@
 
 
 
-<meta name="description" content="这一章主要从管理浏览器中的js代码来进行阐述优化点。
-优化点1：将脚本放在底部讲道理，按我们的理解，将js文件和css文件一起放在head中好像没什么毛病，先加载它们，有助于页面渲染和正确交互呀。
-可是！可是坑爹的是，脚本是会阻塞页面渲染的啊，浏览器需要等到它们全部下载并执行完成后，才继续页面渲染。所以把脚本放页面头部会导致明显的延迟，表现为显示空白页面，用户无法浏览页面，也无法与页面进行交互。">
+<meta name="description" content="我经常跟别人说，我组长在中科院，带着骄傲的口吻。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《高性能JavaScript》- 加载并执行">
-<meta property="og:url" content="http://hu33.tech/2017/09/13/《高性能JavaScript》- 加载并执行/index.html">
+<meta property="og:title" content="我的组长在中科院">
+<meta property="og:url" content="http://hu33.tech/2017/02/23/我的组长在中科院/index.html">
 <meta property="og:site_name" content="小胡不说八道">
-<meta property="og:description" content="这一章主要从管理浏览器中的js代码来进行阐述优化点。
-优化点1：将脚本放在底部讲道理，按我们的理解，将js文件和css文件一起放在head中好像没什么毛病，先加载它们，有助于页面渲染和正确交互呀。
-可是！可是坑爹的是，脚本是会阻塞页面渲染的啊，浏览器需要等到它们全部下载并执行完成后，才继续页面渲染。所以把脚本放页面头部会导致明显的延迟，表现为显示空白页面，用户无法浏览页面，也无法与页面进行交互。">
-<meta property="og:image" content="https://hu33.github.io/images/高性能JavaScript/1-1.jpg">
-<meta property="og:updated_time" content="2019-01-13T08:22:34.996Z">
+<meta property="og:description" content="我经常跟别人说，我组长在中科院，带着骄傲的口吻。">
+<meta property="og:updated_time" content="2019-01-30T14:09:47.322Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《高性能JavaScript》- 加载并执行">
-<meta name="twitter:description" content="这一章主要从管理浏览器中的js代码来进行阐述优化点。
-优化点1：将脚本放在底部讲道理，按我们的理解，将js文件和css文件一起放在head中好像没什么毛病，先加载它们，有助于页面渲染和正确交互呀。
-可是！可是坑爹的是，脚本是会阻塞页面渲染的啊，浏览器需要等到它们全部下载并执行完成后，才继续页面渲染。所以把脚本放页面头部会导致明显的延迟，表现为显示空白页面，用户无法浏览页面，也无法与页面进行交互。">
-<meta name="twitter:image" content="https://hu33.github.io/images/高性能JavaScript/1-1.jpg">
+<meta name="twitter:title" content="我的组长在中科院">
+<meta name="twitter:description" content="我经常跟别人说，我组长在中科院，带着骄傲的口吻。">
 
 
 
@@ -161,13 +153,13 @@
 
 
 
-  <link rel="canonical" href="http://hu33.tech/2017/09/13/《高性能JavaScript》- 加载并执行/"/>
+  <link rel="canonical" href="http://hu33.tech/2017/02/23/我的组长在中科院/"/>
 
 
 
 
 
-  <title>《高性能JavaScript》- 加载并执行 | 小胡不说八道</title>
+  <title>我的组长在中科院 | 小胡不说八道</title>
   
 
 
@@ -354,7 +346,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://hu33.tech/2017/09/13/《高性能JavaScript》- 加载并执行/">
+    <link itemprop="mainEntityOfPage" href="http://hu33.tech/2017/02/23/我的组长在中科院/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不说八道的小胡">
@@ -371,7 +363,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">《高性能JavaScript》- 加载并执行</h1>
+          <h1 class="post-title" itemprop="name headline">我的组长在中科院</h1>
         
 
         <div class="post-meta">
@@ -383,8 +375,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-13T19:22:56+08:00">
-                2017-09-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-23T09:37:18+08:00">
+                2017-02-23
               </time>
             
 
@@ -406,8 +398,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
                   </a>
                 </span>
 
@@ -424,7 +416,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/09/13/《高性能JavaScript》- 加载并执行/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/02/23/我的组长在中科院/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -433,7 +425,7 @@
 
           
           
-             <span id="/2017/09/13/《高性能JavaScript》- 加载并执行/" class="leancloud_visitors" data-flag-title="《高性能JavaScript》- 加载并执行">
+             <span id="/2017/02/23/我的组长在中科院/" class="leancloud_visitors" data-flag-title="我的组长在中科院">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -462,41 +454,119 @@
       
 
       
-        <p>这一章主要从管理浏览器中的js代码来进行阐述优化点。</p>
-<h3 id="优化点1：将脚本放在底部"><a href="#优化点1：将脚本放在底部" class="headerlink" title="优化点1：将脚本放在底部"></a>优化点1：将脚本放在底部</h3><p>讲道理，按我们的理解，将js文件和css文件一起放在head中好像没什么毛病，先加载它们，有助于页面渲染和正确交互呀。</p>
-<p>可是！可是坑爹的是，脚本是会阻塞页面渲染的啊，浏览器需要等到它们全部下载并执行完成后，才继续页面渲染。所以把脚本放页面头部会导致明显的延迟，表现为显示空白页面，用户无法浏览页面，也无法与页面进行交互。</p>
+        <p>我经常跟别人说，我组长在中科院，带着骄傲的口吻。</p>
 <a id="more"></a>
-<p>更坑爹的是，有些浏览器下载js文件是串行的，也就是说每个文件必须等到前一个文件下载并执行完成后才会开始下载，在这些个文件逐个下载过程中，浏览器上的页面就是一片白茫茫啊~~现在很多浏览器都允许并行下载js文件了，但是仍然会阻塞其他资源的下载，比如图片。尽管脚本的下载过程不会相互影响了，但是页面还是得等所有的js代码下载并执行完才能继续。所以呀，新的浏览器只是治标不治本啊。</p>
-<p>恩，综上所述，咱要把所有的<code>&lt;script&gt;</code>标签放到<code>&lt;body&gt;</code>标签的底部，来尽量减少对整个页面下载的影响。</p>
-<h3 id="优化点2：合并脚本"><a href="#优化点2：合并脚本" class="headerlink" title="优化点2：合并脚本"></a>优化点2：合并脚本</h3><p>这个当然是为了减少http请求带来的性能开销咯。下载1个100k的文件会比下载4个25k的文件要快的呀。</p>
-<p>可以使用离线的打包工具或者类似Yahoo! combo handler的实时在线服务实现。</p>
-<h3 id="优化点3：无阻塞脚本"><a href="#优化点3：无阻塞脚本" class="headerlink" title="优化点3：无阻塞脚本"></a>优化点3：无阻塞脚本</h3><p>上回讲到，合并脚本可以减少http请求数，提高性能。可是问题来了，合并完的脚本可能很大啊，那我浏览器得等这么大一个脚本下载并执行完再进行后面的操作嘛？</p>
-<p>当然，我们也是有办法解决的。咱实现无阻塞脚本不就好了？咱可以等页面加载完再加载js代码呀，专业点讲，就是在<code>window</code>对象的<code>load</code>事件触发后再下载脚本。实现方法有如下几种：</p>
-<h4 id="延迟的脚本"><a href="#延迟的脚本" class="headerlink" title="延迟的脚本"></a>延迟的脚本</h4><p>主角：<code>defer</code></p>
-<p>技能：允许并行下载（包括其他资源哦），但不会执行，直到DOM加载完成（<code>onload</code>事件被触发前）</p>
-<p>可以看个例子：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Script Defer Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    alert(<span class="string">'defer'</span>);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    alert(<span class="string">'script'</span>);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     alert(<span class="string">'load'</span>); </div><div class="line">    &#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>猜猜弹出顺序是啥？恩，<code>script</code>、<code>defer</code>、<code>load</code>。</p>
-<p><em>注：h5规范里讲了，<code>defer</code>属性仅当<code>src</code>属性声明时才生效~~</em></p>
-<p>BTW，<code>async</code>也是允许并行下载的，但是它跟<code>defer</code>不同的在于它是下载完了就直接执行了，没有<code>defer</code>那么好的耐心，还等<code>dom</code>完成加载后才执行。</p>
-<p><img src="https://hu33.github.io/images/高性能JavaScript/1-1.jpg" alt=""></p>
-<h4 id="动态脚本元素"><a href="#动态脚本元素" class="headerlink" title="动态脚本元素"></a>动态脚本元素</h4><p>原理：使用DOM操作创建一个<code>&lt;script&gt;</code>元素，这个元素中加载某个js文件，然后将该<code>&lt;scirpt&gt;</code>元素添加到页面中。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">script.type = <span class="string">"text/javascript"</span>;</div><div class="line">script.src = <span class="string">"file.js"</span>;</div><div class="line"><span class="built_in">document</span>.head.append(script);</div></pre></td></tr></table></figure>
-<p>技能：无论何时启动下载，文件的下载和执行都不回阻塞页面其他进程。</p>
-<p>这种方式还有个特点：返回的代码一般会立即执行（是不是想到了JSONP，哈哈哈）。但是我可能需要它下载完成且准备就绪的时候才执行啊，这个时候，<code>&lt;script&gt;</code>的<code>onload</code>事件就派上用场了~~封装一个<code>loadScript</code>方法如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScript</span>(<span class="params">url, callback</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">    script.type = <span class="string">"text/javascript"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (script.readyState) &#123; <span class="comment">//还不是为了兼容IE</span></div><div class="line">        <span class="keyword">if</span> (script.onreadystatechange) &#123;</div><div class="line">            <span class="keyword">if</span> (script.readyState === <span class="string">'loaded'</span> || script.readyState === <span class="string">'completed'</span>) &#123;</div><div class="line">                script.onreadystatechange = <span class="literal">null</span>;</div><div class="line">                callback();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            callback();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    script.src = url;</div><div class="line">    <span class="built_in">document</span>.getElementByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(script);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果需要按顺序下载执行代码的话，可以进行嵌套使用<code>loadScript()</code>方法。当然如果多个文件的下载顺序很重要，更好的做法还是把它们按正确的顺序合并成一个文件。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">loadScript(<span class="string">'file1.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  loadScript(<span class="string">'file2.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    loadScript(<span class="string">'file3.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      alert(<span class="string">'all files are loaded~~'</span>)</div><div class="line">    &#125;)</div><div class="line">  &#125;)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h4 id="XMLHttpRequest脚本注入"><a href="#XMLHttpRequest脚本注入" class="headerlink" title="XMLHttpRequest脚本注入"></a>XMLHttpRequest脚本注入</h4><p>原理：创建一个<code>xhr</code>对象，用它下载js文件，然后通过创建动态<code>&lt;script&gt;</code>元素将代码注入页面中。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'file1.js'</span>, <span class="literal">true</span>);  <span class="comment">//第三个参数表是否异步</span></div><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (xhr.readystate === <span class="number">4</span>) &#123;</div><div class="line">        <span class="keyword">if</span>(xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span> || xhr.status === <span class="number">304</span>) &#123;</div><div class="line">            <span class="keyword">var</span> script = <span class="built_in">document</span>.craeteElement(<span class="string">'script'</span>);</div><div class="line">            script.type = <span class="string">"text/javascript"</span>;</div><div class="line">            script.text = xhr.responseText;</div><div class="line">            <span class="built_in">document</span>.body.appendChild(script);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">xhr.send(<span class="literal">null</span>);</div></pre></td></tr></table></figure>
-<p>优点：js代码下载后不会自动执行，你可以把脚本的执行推迟到准备好的时候。<em>（为什么啊？？？书上说代码返回在script标签外，所以不自动执行…没看懂啊…）</em></p>
-<p>局限：不能跨域请求js文件，也就不能从CDN下载咯。</p>
-<h4 id="推荐的无阻塞模式"><a href="#推荐的无阻塞模式" class="headerlink" title="推荐的无阻塞模式"></a>推荐的无阻塞模式</h4><p>先添加动态加载所需的代码，然后加载初始化页面所需的剩下的代码。</p>
-<p>有几个延迟加载工具：</p>
-<ul>
-<li><code>LazyLoad</code>类库，其实就是<code>loadScript()</code>的增强版</li>
-<li><code>LABjs</code>，它的优点是管理依赖关系的能力</li>
-</ul>
+<h2 id="不愉快的初识"><a href="#不愉快的初识" class="headerlink" title="不愉快的初识"></a>不愉快的初识</h2><p><em>第一次跟这人打交道时，我真是打心底里觉得他讨厌。</em></p>
+<p>大二上学期，一博拉了几个人组了个小团队参加第三届“数字中南”软创比赛。第一次开会地点定在创南二楼，那个灯光昏黄沙发老旧而且还是在走廊上的临时会议室，但那时候的我们热情洋溢啊，激情无限啊。就是在那个地方，我们第一次相识。</p>
+<p>一博大概介绍了一下我们几个，几班的叫什么名字。他问我会PS吗，我说不太会。“那你得找个会PS的呀，找个什么都不会的来干嘛”，他冲一博说道。</p>
+<p>我靠，这人怎么这么讨厌啊，不会可以学呀，我又不是不愿意学，说得好像你就什么都会了？当然这只是心理活动，没敢说出口。</p>
+<p>“哎呀，不会很正常啊，现在边学边做还来得及，大家不都一开始啥都不会吗？”还是一博帮我圆的场。</p>
+<p>就这样，我们这个参赛小组算成立了，之后就是各种开会讨论各种熬夜赶文档各种修修改改，将近一个月后的比赛上，算是取得了还可以的成绩，二等奖。但是跟组长并没有熟络起来，只是相互认识了。</p>
+<h3 id="小片段1：你怎么都不理我"><a href="#小片段1：你怎么都不理我" class="headerlink" title="小片段1：你怎么都不理我"></a>小片段1：你怎么都不理我</h3><p>我走路容易发呆，然后会不自觉地低着头，所以经常看不到别人给我打招呼。</p>
+<p>有次快期末，我去世纪楼复习。在教学楼走廊上，他迎面朝我走来，向我招手问好，但是我并没有看到。走近之后，他又朝我挥了挥手，我还是没有看到。当他从我身边走过，我隐约觉得刚刚旁边过了个人，但是也没有往后看。然后突然我的书包被人拍了一下，我往后一看，他站在我身后，问我怎么都不理他。</p>
+<p>…….其实我真的只是没看到。</p>
+<h2 id="互损的相识"><a href="#互损的相识" class="headerlink" title="互损的相识"></a>互损的相识</h2><p><em>跟组长真正熟起来还是因为软创。</em></p>
+<p>我们院有个传统，大二下学期参加软创大赛，大三下学期参加服务外包大赛。而那一届的软创大赛正好由中南大学主办，由于有本场优势，大家组队报名格外积极。他们也是，大二上学期末，组长、一博、小易就已经商量好要一起组队，但是还缺一个做UI和前端的。他们仨一直在讨论找谁比较好，毕竟这个比赛对大家都很重要，都不愿意马虎随便。当时小易推荐了一个女生，组长推荐了我。</p>
+<p>寒假在家时，组长来问我要不要一起参加软创比赛。我当然想都没想就同意加入啦。然后我们芒果团队就这样横空出世啦。后来听小易说，由于我们俩之前没有合作过，他还是比较倾向于他推荐的那个女生，但是组长动之以理劝服了他。这个理当然是上次合作比赛时我体现出的努力认真负责严谨啦，哈哈哈哈哈哈哈~</p>
+<p>这个比赛战线拉得很长，从4月份的初赛到11月份的决赛，要历经大半年。也就是在半年内，我跟组长一下子熟络起来。</p>
+<p>以前的我，在生人面前讲话跟蚊子一样，长得也算秀气，总给人一种很文静的感觉。但是熟起来之后，我就会比较放得开了，大声说话大声笑，表情丰富动作搞笑。但是如论如何，我都说不出脏话。尽管大一时，我整个寝室的妹子们都是三句话离不开脏字，我被熏陶了整整一年也没能说出“我去”这类的词。很神奇，我跟他们混了才两个月，就彻底爆发了，从此淑女文静这类的词就跟我不沾边了。</p>
+<p>有次赶文档，我们四个人找了个有Wi-Fi的饭店，吃完饭后就开始分工工作。我当时的任务是负责P图，整个UI的设计图要做出来，放到文档中。小易在做PPT，时不时也需要我P几个图标。图片做到一半时大家又随时提修改意见，搞得我很混乱。突然，我一放鼠标，说了句妈蛋！说完后我看向他们，发现他们都以一种不可思议的眼神盯着我，可能是在想，刚刚那句“妈蛋”是从你嘴里出来的吗？从这以后，我就对脏话再也不忌口了，尤其是面对他们的时候。</p>
+<p>虽然创意有受到来自于部分同学和老师的质疑，但是我们听取多方意见后还是决定坚持自己的想法。幸运的是，我们的选择没有错，一路上我们破关斩将，先后以优异成绩通过了院里选拔，校内选拔，进入国家级复赛。进入了复赛也就意味着我们的创意被认同了，接下来就是将创意实现的问题了。其实我们几个人，除了一博，其他三个对安卓都是一窍不通，只能硬着头皮边学边做了。由于时间紧迫，暑假我们只能回家休息一个星期，其余时间都必须呆在学校里做这个项目。</p>
+<p>一般一博和小易在寝室学习，我和组长就呆在实验室。每隔几天开一次会，验收上次布置的开发任务，讨论过程中遇到的困难及解决方案。一开始我的任务是美工，主要是负责界面设计实现。尽管我到处上网搜别人的UI，参考那些美观好看的界面，自己做出来的总是那么入不了眼。尴尬的是，自己看久了，并不觉得丑，可能是看习惯了。但是拿给他们看的时候，从他们的表情中就能看出我设计的界面有多难看。一博和小易只是面露难色，组长就会直接骂人。</p>
+<p>组长说话很直接，从来不拐弯抹角拖泥带水。很多东西，好就是好，不好就是不好，他不会碍于跟你是同学或者是朋友就不好意思说。因为界面的事，我都被他骂哭过两次。一次是在寝室没日没夜做了三天，把最后成果发给他看的时候，他回了我几句话，“怎么这么难看啊，让你做个界面都做不出来，你活着还有什么意义？”比起愤怒，我更多的是委屈难过。不是因为他说的话，而是我认认真真做的东西，别人不认可，自己也不认可。那种不认可，才让我从心底里觉得自己无能没用。还有一次，是我们几个开会的时候。那次其实大家心情都挺压抑的，因为为这个比赛这个项目投入了这么多，准备了这么久，却不知道到底能不能完成。具体就不说了，反正是我被组长讲哭了。之后他们经常拿这个事儿来调侃组长，说他把我骂哭，哈哈哈哈。</p>
+<p>但是这个事情也并没有影响到大家的感情，反而是彼此之间更加近了。毕竟是希望你变得更好，才会对你提要求提意见啊。严格点要求高点反而才能让自己发现可以做得更好~所以之后在其它的界面设计与实现的过程中，很明显就得心应手多了。</p>
+<p>因为我和组长平常都在实验室，所以吃饭之类的也都是一块儿。我逮着机会就黑他气他，为了报两次眼泪之仇。那时候是夏天，长沙特别热，太阳特别毒，只是中午出去吃个饭也能晒成煤球。组长那时候有点胖，他说他要瘦成一道闪电，我说可是你已黑成一片乌云。</p>
+<p>到决赛的时候，大家都卯足了劲儿，力求各个细节都做到完美，连答辩结束的鞠躬我们都排练了好多次。决赛分两天，第一天是现场体验，各个院长们（评审专家）会到每个小组的展台体验项目成果。我们在空闲时间还到别的参赛小组的展台看了他们的成果，有让我们觉得很惊艳的，当然也有我们觉得比较low的，其实是说不出的感觉。但是好在我们几个都非常自信我们的东西是最棒的，至少心理上气势上不能输人，哈哈哈哈。第二天是正式答辩，封闭式的，在小易条理清楚激情澎湃的演讲和我们仨个人默契的演示后，我们看到了各位老师眼中透漏出的满意。一出了答辩室，我们就非常激动地跳了起来，不是因为我们觉得我们要得第一了，而是因为整个过程我们都没有出错，至少没有遗憾，这就够了。</p>
+<p>下午公布结果的时候，我们四个和导师坐在大展厅的第二排，我们看到大屏幕上我们的分数遥遥领先与第二名时，看到评审老师们将大多数的票投给了“手绘心语”时，每个人都哭了，眼泪夺眶而出，彼此之间没有一句话也没有一个眼神，那半分钟内，大家只是盯着屏幕流眼泪。这是我们最骄傲的一刻，大半年来的努力得到了最好的回报。</p>
+<p>那半年，是我最认真最专注地去做一件事的一段日子，可能对组长对一博对小易也都是这样。遇到困难时，我们一起想办法解决；受到质疑时，我们一同坚定选择；不管谁有了进步，大家都很开心地鼓励；时间空闲时，我们也会约好出去浪。我们的合作有过争吵，但是我们从来对事不对人，上一秒吵完，下一秒就能给对方抛一句，”走，吃饭去！”正是这个比赛，让原本不太熟悉的几个人，变得像亲人一样亲近。</p>
+<h3 id="小片段2：R和L不分"><a href="#小片段2：R和L不分" class="headerlink" title="小片段2：R和L不分"></a>小片段2：R和L不分</h3><p>组长是河北人，他R和L不分。</p>
+<p>我们确定了比赛创意后决定去长沙特殊教育学校调研，当时是4月的春天，穿的还不少。我们几个坐公交辗转到了学校附近的时候已是下午2点，那天特别热，温度高太阳毒，每个人都热得脸红扑扑的。</p>
+<p>过了个地下通道后，我听到组长说了句，“好乐好乐。”</p>
+<p>我一脸无语，“这有什么乐的，热都热死了。“</p>
+<p>“对啊，我就是说好乐啊。”</p>
+<p>”对啊，我就说有什么乐的呀。“</p>
+<p>“难道你不觉得乐吗？”</p>
+<p>“我就觉得热呀，虽然是挺激动，但是也不至于乐呀。”</p>
+<p>他急了，说他R和L不分，他就是说的热！</p>
+<p>哈哈哈哈哈，简直要把我们几个笑死了，只知道湖南人N和L不分，还不知道有R和L不分的。</p>
+<p>就因为R和L不分，他被我们嘲笑过无数次，尤其是在说“肉”的时候，总是会说成“漏”。</p>
+<p>他会说，我不吃猪“漏”。有次我教他，“r-ou-肉”。他学，“r-ou-漏”。哈哈哈，饭都差点喷出来了。</p>
+<p>我问他，你能发出rose的音吗？奇怪的是，他rose这个单词说得还蛮好的。</p>
+<p>“那肉就跟rose前面那个ro发音差不多，你试试。”</p>
+<p>“ro—-se，r—-lou”，我勒个去。简直被气死，rose明明发的好好的，一意识到要说“肉”了就变成“漏”了。</p>
+<p>我说他比较适合去学日语韩语，毕竟他们也是发不出r的音，哈哈哈。</p>
+<h3 id="小片段3：我不吃猪肉"><a href="#小片段3：我不吃猪肉" class="headerlink" title="小片段3：我不吃猪肉"></a>小片段3：我不吃猪肉</h3><p>组长很奇怪的，他不吃猪肉。</p>
+<p>我问他，你为什么不吃猪肉啊？你是回族人吗？还是有什么信仰？</p>
+<p>“不是啊，我只是单纯地不吃猪肉，如果我知道这是猪肉的话就不想吃了。”</p>
+<p>“那你要是不知道这是猪肉，你就会吃咯？”</p>
+<p>“对啊，所以有时候家里做猪肉都不会告诉我这是猪肉，会说这是牛肉。”</p>
+<p>“那你这就奇怪了，你又吃不出猪肉还嫌弃猪肉。”</p>
+<p>但是这有一个好处，我可以欺负他，让他自愿把肉让给我吃，哈哈哈。</p>
+<p>我们去吃米粉，他喜欢点排骨面，我喜欢点肉丝粉。等到他的餐上来了，我会告诉他，其实这个排骨上的肉是猪肉，名副其实的猪肉。一开始他会抗拒听我说，但是吃了一块之后就下不去口了，就只好排骨入我碗了，哈哈哈。藜爷经常说，这绝对是亲组员，这么坑组长的。</p>
+<h3 id="小片段4：生日快乐"><a href="#小片段4：生日快乐" class="headerlink" title="小片段4：生日快乐"></a>小片段4：生日快乐</h3><p>暑假有一周的假期，刚好可以陪我们过个生日，而组长生日在我妈前一天。</p>
+<p>“要不你去我家过生日吧，跟我妈一块儿过，可以尝尝我爸的厨艺。”</p>
+<p>回家后听我妈说我爸去市里陪外公做手术了，这两天还回不来，我就没喊组长来我家玩了，可怕的是，在家太悠闲忘了他的生日。</p>
+<p>那天下午他给我发了微信，说今天是他生日。我突然想起来，但是不好意思再说生日快乐，就回了句，我知道呀。</p>
+<p>过了很久，他又给我发了消息。你们竟然都忘了我的生日，我等你们给我说生日快乐都等了一天了，你们是我最重要的朋友，但是竟然连我生日都忘了，知道还不给我说生日快乐。他的话语中带着气愤，带着责备，而更多的是失望。那一刻，我突然意识到，原来我们是特别好的朋友。</p>
+<p>以前的我是个很慢热的人，也特别不愿意主动，很有自己的小世界，我的朋友们一般是比较有主动性的，因为如果她们不主动我可能就不会跟她们成好朋友了。那天我突然意识到，其实我们几个对彼此而言都是很重要的，彼此都在对方心里占据着不一般的地位，那种并肩作战的战友情，是一般同学比不上的。</p>
+<p>我很羞愧，给组长发了个红包，并附上了迟到的“生日快乐”。但是过了一会儿，他把红包退了回来。他不是来讨红包讨礼物的，他只是希望能得到我们平等的重视。可是这个道理我后来才明白。</p>
+<h2 id="知根知底的熟识"><a href="#知根知底的熟识" class="headerlink" title="知根知底的熟识"></a>知根知底的熟识</h2><p><em>如果说软创那段时光让我们成为了好朋友，那在英特尔实习那节经历则让我们成为了亲人。</em></p>
+<p>软创拿了特等奖，我们几个都有去英特尔实习的机会。虽说是可以直接去实习，其实就相当于有个内推，进不进还是得像招实习生一样面试。一博大概3月份就过去了，他想早早去接触底层的内容。我跟组长是7月底到的上海，其实还没有确定能进英特尔，但是我俩就是这么义无反顾地各自从家里拖着行李箱踏上了去上海的火车。</p>
+<p>到了上海的前几天，因为还没确定工作，不敢租房子，所以组长住一博那儿，我住酒店里。但是第一天，我们仨在一个特别不正宗的桑拿麻将房里睡了一夜，那绝对是我这辈子睡得最不安心的一觉。具体情况就不说了，但是那次之后我就发誓再也不睡这种地方了，整晚提心吊胆，简直没法睡觉。感动的是，他俩陪着我在那个破地方睡了一夜，这是唯一让我觉得安心的部分了。</p>
+<p>在外面住了几天后，我们的工作确定下来了，可以开始租房子了。那几天，我们白天就在公司餐厅坐着，没那么炎热的时候就出去看房子，基本上都是组长在网上找房源并联系，我也就是跟着他去看看房子。最后很快就定下来住塘泾南苑了，他住9楼，我住6楼。事后闺蜜们说我真有勇气，一切都未知的情况下拖着箱子就走了。说实话，活那么大我都没有出过远门，虽然从小自立自强，但是多年来不是在家就是在学校，并没有独自在陌生城市生活的经历。更别说在毫无准备的情况下就只身跑上海租房实习。但是很幸运，有这几个小伙伴在身边，尤其是我那超级靠谱的组长，带领我找到工作确定住所过上了钱不多但滋润的小日子~</p>
+<p>实习期间，我俩每天中午一块儿吃饭，下班一块儿回家，每天谈天说地，连对方七大姑八大姨家里的情况都了如指掌。</p>
+<h3 id="片段5：杭州游"><a href="#片段5：杭州游" class="headerlink" title="片段5：杭州游"></a>片段5：杭州游</h3><p>9月初组里两个墨西哥同事过来出差，想去杭州游玩，组里同事周六都忙，所以带他们逛杭州的任务就光荣地交到我们身上了。</p>
+<p>周六我们四点半就起床，收拾收拾就搭上去酒店的公交。我们要去酒店接那两位国际友人一块儿去高铁站，但是我们又没钱打车，只能赶早坐一个半小时的公交过去。</p>
+<p>那是我们第一次进五星级酒店，服务员都非常礼貌，且都会说英语，我们心里暗暗想，连服务员英语都比我们好啊。</p>
+<p>到了杭州后林璞学长担任了我们的导游。我们口语都不怎么样，我可能稍微好点，但是不太敢说，而林学长虽然英语口语不怎样，胆子却是很大，一路上跟两位国际友人聊得甚欢。只是讲的非常Chiglish，很多我都听不下去那两位友人竟然一直点头表示听懂了，我也是笑了一路啊~</p>
+<p>在参观雷锋塔时，我用蹩脚的英语给他们大致讲了白蛇传的传说，第二天他们跟经理吃饭时说到法海，经理他们表示很惊讶，我们连法海都给他们讲了哈哈哈哈哈。</p>
+<h3 id="片段6：你怎么这么瘦成这个样子了"><a href="#片段6：你怎么这么瘦成这个样子了" class="headerlink" title="片段6：你怎么这么瘦成这个样子了"></a>片段6：你怎么这么瘦成这个样子了</h3><p>组长到了上海后就开始减肥，每天跟着斗鱼健身直播做1小时的健身运动，每天的吃食也是减肥餐，在公司食堂吃饭时，吃的比我还少！</p>
+<p>3个月后，我换了个手机，午后散步时，我拿着新手机到处拍，无意间将他拍进了画面。看到照片中的他，我突然发现，他怎么偷偷地瘦了这么多！由于我们每天都呆一块，他一点点掉肉我也没发现，待我发现时他已经减掉30斤肉肉了！</p>
+<p>然后我跟了上去，惊叹一句：“你怎么瘦成这个样子了！”</p>
+<p>8月刚到上海时还是个有小肚子的小胖子，突然就成了个有腹肌的小瘦子，3个月减30斤，也难怪那个健身主播邀请他去北京参加年会！</p>
+<h3 id="片段7：我都等了你一辈子了"><a href="#片段7：我都等了你一辈子了" class="headerlink" title="片段7：我都等了你一辈子了"></a>片段7：我都等了你一辈子了</h3><p>下午吃午饭前，我们都会去上个厕所。</p>
+<p>女生嘛，上厕所总会比男生慢很多，刚好那天人又挺多，让他等了好久。</p>
+<p>我一出来，他就冲我说了句：“你怎么这么慢啊，我都等了你一辈子了！”</p>
+<p>简直要笑死我了，不知道的还以为这是在求婚呢！</p>
+<h3 id="片段8：我要晕了"><a href="#片段8：我要晕了" class="headerlink" title="片段8：我要晕了"></a>片段8：我要晕了</h3><p>某天上班时肚子不舒服，疼痛难忍。待舒服一些后，我拿上水杯去外面走廊接水。</p>
+<p>刚接了水，就感觉视线模糊，耳鸣，浑身无力，我意识到自己可能是犯低血糖要晕了。然后我赶紧将水杯放在饮水机旁边的垃圾桶上，摇摇晃晃地进了实验室。 </p>
+<p>进了实验室后，我拍了他一下，说了句“等会儿我晕了你帮我下去拿点糖”，然后就躺尸在椅子上了。</p>
+<p>他还以为我在开玩笑，还问我是不是傻！</p>
+<p>但是我后面真的晕了，醒来后组长给我拿来了水杯和糖，还表示你刚刚真的晕了啊，太可怕了！</p>
+<p>哈哈哈哈哈，笑死我了，感觉把组长吓得不轻啊。</p>
+<h2 id="各奔东西"><a href="#各奔东西" class="headerlink" title="各奔东西"></a>各奔东西</h2><p><em>大学毕业后，我去了浙大，组长去了中科院，我们各奔东西。</em></p>
+<p>我们联系的不多，本身我就是不太爱与人联系的性格。偶尔联系也不会装模作样地嘘寒问暖而是直接切入正题，很久不联系也不会觉得生疏，依旧能扯天扯地。</p>
+<p>研究生期间偶尔通个电话聊聊最近的生活和学习，组长会跟我聊最近正在追求的女孩，聊室友的奇葩女友，我会跟组长说追我的男孩，实验室的趣事。</p>
+<p>刚实习时由于租完房子资金紧缺，二话不说就转账过来，还让我不急着还，生活还是要过好。由于刚到上海时我和组长都是租了房子就穷成狗，又倔强地不向家里求助，过了一个月苦日子。可能是怕我在杭州也像初到上海时那么两两算计着，所以会时不时在网上给我订零食，新鲜水果啥的，所以当时小日子还是挺富余的哈哈哈哈哈。</p>
+<p>有天晚上组长给我打了个电话，那时我们已经很久很久没有通过电话了，只是偶尔微信联系。接到电话后就只听到听筒里传来的啜泣声，慢慢变成了嚎啕大哭，又渐渐平息。整个过程持续了好几分钟，我们一句话都没说，我不知道发生了什么，所以不敢乱说话。那几分钟内我想了好多种可能，能让一个男生哭得这么伤心怕不是家里出事了吧，我还在想如果真是这样我又要怎么安慰呢，毕竟我可能也帮不到什么。然后组长开始说话了，虽然吐字模糊且语无伦次，但我大概听出来并不是出了什么事。而是同学聚餐，组长喝了点酒，加上那段时间压力比较大，觉得周围的同学都那么牛逼，自己学起来有点吃力，又有点迷茫看不到未来的样子，所以很难受。可是组长啊，那可是中科院啊，能跟那些大牛们做同学本身就很牛逼了啊！</p>
+<p>那一次我意识到，组长是真的很信任我吧，像亲人那样信任。</p>
+<h3 id="片段9：你就没有33聪明"><a href="#片段9：你就没有33聪明" class="headerlink" title="片段9：你就没有33聪明"></a>片段9：你就没有33聪明</h3><p>英特尔的小宝哥知道组长打算去中科院，我打算去浙大的时候，就说了句：“<em>*</em>你真是没有珊珊聪明啊！”</p>
+<p>我们俩都一脸懵逼，没听懂啥意思。</p>
+<p>小宝哥接着说：“浙江多么好的地方，好山好水又养人，人家去浙江待一年长寿两年，你去北京待一年折寿两年，划不来啊！”</p>
+<p>哈哈哈哈哈哈哈，简直要笑死我了。</p>
+<h2 id="讲不清的亲人关系"><a href="#讲不清的亲人关系" class="headerlink" title="讲不清的亲人关系"></a>讲不清的亲人关系</h2><p><em>在我心里，我组长就是我的亲人，但是既不像哥哥更不像弟弟，而是一种讲不清的亲人关系。</em></p>
+<p>在杭州实习了半年后我就去了北京，开启了另一段实习生活。虽然我跟组长同在北京，但是基本上没见过几次面，一开始是因为我刚入职想尽管进入状态所以比较忙，组长约了我好几次我不是在加班就是有团建活动。而后生日时跟闺蜜去近郊玩去了，又放了组长一次鸽子。估计组长肯定很生气吧哈哈哈哈哈。</p>
+<p>年前终于约成功了，吃完饭后我又扔下组长去找我室友浪去了。就是这一次之后，估计组长对我失望到不行了，然后咱俩就不怎么联系了。</p>
+<p>再一次联系是差不多半年后，我生了重病住院治疗，组长看到了我在知乎上的回答，然后约上了一博和小易一起来探望我。刚好藜爷也说要回来看我，然后他们就天南地北地从各地赶回来在我狭小的病房里挤着，对了，还有蠢蠢的潇潇。组长从北京来，一博从上海来，潇潇从杭州来，小易和藜爷从深圳来，而我在长沙。</p>
+<p>其实大家都很忙，找实习的，准备论文的，工作的，但是都抽出了宝贵的时间来探病，甚至还想瞒着我给我惊喜，小易还因为没赶上高铁挥泪买了张商务座，票价比回程的机票都贵，我听着都心疼钞票啊~</p>
+<p>那天是我治疗期间最开心的一天之一，虽然我说不了话，但是听着他们侃天侃地相爱相杀也是很幸福的哈哈哈哈。</p>
+<p>虽然我们几个日常联系不多，但是一定是关键时候会挺身而出两肋插刀的那种交情！</p>
+<h3 id="片段10：靶神"><a href="#片段10：靶神" class="headerlink" title="片段10：靶神"></a>片段10：靶神</h3><p>探病那天，组长就是我们名副其实的靶神，谈到什么都能向他开一枪。</p>
+<p>小易和一博一来，我就发现他俩胖了，一博甚至都有小肚子了，但是组长可是苗条的很，曾经三个人中最胖的他如今成了最瘦的。然后我们说，毕竟是没有女朋友的人，这么瘦有女朋友是撑不住的，哈哈哈哈哈开了一波车。</p>
+<p>以前的组长不说白白净净，至少也不是黑煤炭，可是他跟一博小易站在一块儿真的是乌漆嘛黑的，小易就说这或许就说他单身的原因了哈哈哈哈又黑了一波。</p>
+<p>我们聊到一个产品使用问题时，组长对一个特别弱智的问题表示不解，我说他果然是搞算法的，对产品一无所知哈哈哈哈哈。</p>
+<p>###片段11：组长脱单了</p>
+<p>那一次的探病，倒是成就了一段姻缘。我家藜爷跟组长谈恋爱啦！</p>
+<p>听到消息的我下巴都要惊掉了，怎么都没想到他俩成了，两个都是我很熟悉的人，毕竟大学期间，白天在实验室跟组长呆一块儿，晚上回寝室跟藜爷呆一块儿，他俩在一起这件事让我激动了好久大晚上还精神抖擞到不行呢！</p>
+<p>知道消息的当天晚上，藜爷和组长就轮流来跟我语音，两个人都是略微羞涩又急于知道对方的一切。我很开心藜爷能找到自己喜欢的人，也很开心组长能拥有藜爷这么体贴懂事的女朋友。</p>
+<p>只是，组长和藜爷的恋情没有维持太久，原因是不合适。</p>
+<p>分手后他俩也是跟我说了大致情况，作为一个旁观者，我确实觉得这段感情两人都没错，不过合不合适确实是要相处过后才能知道。</p>
+<p>我问过藜爷喜欢组长什么，藜爷说觉得他很厉害，这点我也承认，而且藜爷比较容易对厉害的男生有好感这我也是知道的。</p>
+<p>之后组长跟我说，他不是藜爷喜欢的类型，藜爷喜欢成熟温柔厉害的，他只占了最后一条。</p>
+<p>我当时就懵逼了，在我看来，组长确实不够成熟，更加不是温柔的类型，还凶哭过我呢，但是这两点藜爷未曾跟我谈起。只是一开始藜爷觉得组长是成熟温柔的，因为他们来探望我前，组长特意抽时间去了趟商场，直播逛街，给我买想要的小礼物，这让藜爷觉得组长是非常靠谱值得托付的。只是相处后，两个人都觉得对方不够懂自己，对对方的认知也有一定的偏差，这才彼此放开。</p>
+<p>我最亲近的两位朋友，希望你们都能找到真正属于自己的幸福。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>其实这篇文章在两年前就开始写了，当时刚搭好博客，我承诺组长要写一篇关于他的文章。后面却因为各种事情（其实可能就是懒）中途搁置了，最近将博客重新修整起来，看到了这篇文章，决定要立马将它完成。毕竟我的组长就快要从中科院毕业了，至少要对得起文章的标题吧！</p>
+<p>以后要是跟别人谈到我的组长，就不能骄傲地说我的组长在中科院了，而是要自豪地说，我的组长在微软！</p>
 
       
     </div>
@@ -541,12 +611,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2017/09/13/《高性能JavaScript》- 加载并执行/">《高性能JavaScript》- 加载并执行</a></p>
+  <p><span>本文标题:</span><a href="/2017/02/23/我的组长在中科院/">我的组长在中科院</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 不说八道的小胡 的个人博客">不说八道的小胡</a></p>
-  <p><span>发布时间:</span>2017年09月13日 - 19:09</p>
-  <p><span>最后更新:</span>2019年01月13日 - 16:01</p>
-  <p><span>原始链接:</span><a href="/2017/09/13/《高性能JavaScript》- 加载并执行/" title="《高性能JavaScript》- 加载并执行">http://hu33.tech/2017/09/13/《高性能JavaScript》- 加载并执行/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://hu33.tech/2017/09/13/《高性能JavaScript》- 加载并执行/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2017年02月23日 - 09:02</p>
+  <p><span>最后更新:</span>2019年01月30日 - 22:01</p>
+  <p><span>原始链接:</span><a href="/2017/02/23/我的组长在中科院/" title="我的组长在中科院">http://hu33.tech/2017/02/23/我的组长在中科院/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://hu33.tech/2017/02/23/我的组长在中科院/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -571,13 +641,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
-          
-            <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
-          
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          
-            <a href="/tags/性能/" rel="tag"><i class="fa fa-tag"></i> 性能</a>
+            <a href="/tags/人物/" rel="tag"><i class="fa fa-tag"></i> 人物</a>
           
         </div>
       
@@ -590,8 +654,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/31/网易秋招面试/" rel="next" title="网易秋招面试">
-                <i class="fa fa-chevron-left"></i> 网易秋招面试
+              <a href="/2017/02/22/你是一个循规蹈矩的女孩/" rel="next" title="你是一个循规蹈矩的女孩">
+                <i class="fa fa-chevron-left"></i> 你是一个循规蹈矩的女孩
               </a>
             
           </div>
@@ -600,8 +664,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/14/《高性能JavaScript》- 数据存取/" rel="prev" title="《高性能JavaScript》- 数据存取">
-                《高性能JavaScript》- 数据存取 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/07/跨域/" rel="prev" title="跨域">
+                跨域 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -789,7 +853,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#优化点1：将脚本放在底部"><span class="nav-number">1.</span> <span class="nav-text">优化点1：将脚本放在底部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化点2：合并脚本"><span class="nav-number">2.</span> <span class="nav-text">优化点2：合并脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化点3：无阻塞脚本"><span class="nav-number">3.</span> <span class="nav-text">优化点3：无阻塞脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#延迟的脚本"><span class="nav-number">3.1.</span> <span class="nav-text">延迟的脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态脚本元素"><span class="nav-number">3.2.</span> <span class="nav-text">动态脚本元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMLHttpRequest脚本注入"><span class="nav-number">3.3.</span> <span class="nav-text">XMLHttpRequest脚本注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#推荐的无阻塞模式"><span class="nav-number">3.4.</span> <span class="nav-text">推荐的无阻塞模式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#不愉快的初识"><span class="nav-number">1.</span> <span class="nav-text">不愉快的初识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小片段1：你怎么都不理我"><span class="nav-number">1.1.</span> <span class="nav-text">小片段1：你怎么都不理我</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#互损的相识"><span class="nav-number">2.</span> <span class="nav-text">互损的相识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小片段2：R和L不分"><span class="nav-number">2.1.</span> <span class="nav-text">小片段2：R和L不分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小片段3：我不吃猪肉"><span class="nav-number">2.2.</span> <span class="nav-text">小片段3：我不吃猪肉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小片段4：生日快乐"><span class="nav-number">2.3.</span> <span class="nav-text">小片段4：生日快乐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知根知底的熟识"><span class="nav-number">3.</span> <span class="nav-text">知根知底的熟识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#片段5：杭州游"><span class="nav-number">3.1.</span> <span class="nav-text">片段5：杭州游</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#片段6：你怎么这么瘦成这个样子了"><span class="nav-number">3.2.</span> <span class="nav-text">片段6：你怎么这么瘦成这个样子了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#片段7：我都等了你一辈子了"><span class="nav-number">3.3.</span> <span class="nav-text">片段7：我都等了你一辈子了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#片段8：我要晕了"><span class="nav-number">3.4.</span> <span class="nav-text">片段8：我要晕了</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各奔东西"><span class="nav-number">4.</span> <span class="nav-text">各奔东西</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#片段9：你就没有33聪明"><span class="nav-number">4.1.</span> <span class="nav-text">片段9：你就没有33聪明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#讲不清的亲人关系"><span class="nav-number">5.</span> <span class="nav-text">讲不清的亲人关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#片段10：靶神"><span class="nav-number">5.1.</span> <span class="nav-text">片段10：靶神</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
 
           </div>
