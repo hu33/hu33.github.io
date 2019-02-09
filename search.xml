@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[div元素监听键盘事件]]></title>
+    <url>%2F2019%2F02%2F09%2Fdiv%E5%85%83%E7%B4%A0%E7%9B%91%E5%90%AC%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[最近做表情联想时，踩了几个键盘监听事件的坑，总结一下~ 坑一：如何让div元素监听键盘不知道你们试没试过，直接给div绑定如keypress、keyup、keydown这种键盘事件是不管用的， 要想让某个div元素监听键盘事件，首先得让它获得焦点吧？不然人家都没有玉玺，哪来的皇权？ 1div.focus(); //div指的是那个想监听键盘事件的div~ 巴特，你以为div元素像input元素一样直接focus就能聚焦了？too young too naive~~像form中input、button、textarea这种可输入的元素和a这种链接元素是默认可获得焦点的，但是span、div这种元素可不行哇。因为他们缺少一个重要的属性：tabindex，给他们添加了tabindex属性后，就能指定他们可触焦了。 所以要想让div监听键盘事件，应该酱紫写： 123//需要给这个元素添加tabindex属性div.setAttribute('tabindex', '0');div.focus(); 给它绑定键盘事件，在合适的时候让它获得焦点，然后就能监听到键盘事件啦~~ 关于tabindextabindex属性用于管理键盘焦点，决定元素能否被选中，且指定了按下tab键时元素被选中的顺序。 像form表单元素及链接元素是默认可获得焦点的，所以即使不显式地设置其tabindex，按下tab键时，也能获得焦点，直接触发onfocus事件，而span这种元素就不行了，哪怕你点击这个span也木有用。试一试~ 如果想让span也能获取焦点，可以为这个span设置个tabindex，这样它也具有自动聚焦的能力啦~试一试~ tabindex可以设置为0、负值、正值： tabindex=0：表示在自然tab键顺序中插入一个元素，可以通过调用其focus方法聚焦该元素，也能通过tab键聚焦该元素。BTW，tab顺序就是你按tab键时元素获得焦点的顺序，默认就是在DOM中的位置顺序。 tabindex=负值：表示在自然tab键顺序中移除该元素，哟呵，移除了就不能通过tab键使其聚焦啦，不过还是可以调用focus方法聚焦的啦。这里的负值基本上就是-1啦，虽然你想设-5，-6，-7也没问题，但是没意义哇，就好像数组的indexof，若无匹配就返回-1，也不返回-2对吧？试一试~ tabindex=正值：显式地指定该元素在tab键顺序中的位置。其实tabindex就是tab+index嘛，index不就表示索引咯，咱对index的理解不就是越小越靠前嘛，tabindex也是哇(不包括0)。试一试~ 关于tabindex更多使用场景，请移步这里~ 坑二：Mac和win的快捷键不一致在Mac中，cmd+a默认是全选的快捷键，在Windows中，全选的快捷键是ctrl+a。我想做的交互是，表情联想面板出现时，不管焦点是否在表情联想面板上，全选的时候都选中输入框中的内容，如下图所示： 但是实际上，当div获取焦点后，cmd+a时是酱紫的： 诶？这不是我想要的效果哇，我应该要监听一下cmd+a的键盘事件，然后实现我想要的效果~但是cmd+a是Mac的全选快捷键，而在Windows上，对应的快捷键是ctrl+a，所以需要先判断一下操作系统，再重写对应的全选键盘事件。 window的navigator对象中，有个platform字段，声明了运行浏览器的操作系统和（或）硬件平台，咱可以用它来判断当前浏览器运行在哪个操作系统中： 12var isWin = (navigator.platform == "Win32") || (navigator.platform == "Windows");var isMac = (navigator.platform == "Mac68K") || (navigator.platform == "MacPPC") || (navigator.platform == "Macintosh") || (navigator.platform == "MacIntel"); 所以核心代码可以这样写： 1234567switch (true) &#123; case e.keyCode === KEY_A: //KEY_A = 65 if ((isMac &amp;&amp; e.metaKey) || (isWin &amp;&amp; e.ctrlKey)) &#123; //your code &#125; break;&#125; 完整的keycode在此~]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>问题记录</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[CSS制作半像素边框]]></title>
     <url>%2F2019%2F02%2F09%2FCSS%E5%88%B6%E4%BD%9C%E5%8D%8A%E5%83%8F%E7%B4%A0%E8%BE%B9%E6%A1%86%2F</url>
     <content type="text"><![CDATA[问题描述如果想给某个元素设置个0.5px的边框，你会怎么做？是直接设置border-width为0.5？ 1border-width: 0.5px; 可是这样浏览器真的能给你显示成0.5px的边框吗？哈哈哒，想多啦~ border-width只能为自然数，其他类似的属性也是一样样的，小于1px的线浏览器都直接显示成1px（当然，0px就没有了哈）。效果 所以，常规方式是不行哒，但是咱可以用伪元素+缩放来巧妙地实现~~ 实现方式大概思路就是用伪元素给该元素做个1px的框，这个框的大小是该元素的两倍，然后再缩小0.5倍，这样0.5px像素的框就出来啦~~具体步骤如下： 给目标元素设个定位参考，然后伪元素才能根据这个定位进行绝对定位 123span &#123; position: relative; /* 只要不是默认值static就好了，原因我想你们应该知道 */&#125; 给目标加个伪元素，并设置绝对定位 12345span:after &#123; position: absolute; top: 0; left: 0;&#125; 给伪元素加个1px的边框，并把高宽设为目标元素的两倍 123border: 1px solid #000;width: 200%;height: 200%; 然后缩小0.5倍，缩到目标元素的大小 12transform-origin: 0 0;transform: scale(0.5); 然后就差不多啦~~ 完整代码如下： 1234567891011121314span &#123; position: relative;&#125;span:after &#123; content: ''; position: absolute; top: 0; left: 0; border: 1px solid #000; width: 200%; height: 200%; transform-origin: 0 0; transform: scale(0.5);&#125; 具体效果看这里~~]]></content>

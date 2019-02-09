@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hu33.tech/"/>
-  <updated>2019-02-09T09:26:08.954Z</updated>
+  <updated>2019-02-09T09:42:43.649Z</updated>
   <id>http://hu33.tech/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>div元素监听键盘事件</title>
+    <link href="http://hu33.tech/2019/02/09/div%E5%85%83%E7%B4%A0%E7%9B%91%E5%90%AC%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6/"/>
+    <id>http://hu33.tech/2019/02/09/div元素监听键盘事件/</id>
+    <published>2019-02-09T09:34:17.262Z</published>
+    <updated>2019-02-09T09:42:43.649Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近做表情联想时，踩了几个键盘监听事件的坑，总结一下~</p><h3 id="坑一：如何让div元素监听键盘"><a href="#坑一：如何让div元素监听键盘" class="headerlink" title="坑一：如何让div元素监听键盘"></a>坑一：如何让div元素监听键盘</h3><p>不知道你们试没试过，直接给<code>div</code>绑定如<code>keypress</code>、<code>keyup</code>、<code>keydown</code>这种键盘事件是不管用的，</p><p>要想让某个<code>div</code>元素监听键盘事件，首先得让它获得焦点吧？不然人家都没有玉玺，哪来的皇权？</p><a id="more"></a><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">div.focus();    <span class="comment">//div指的是那个想监听键盘事件的div~</span></div></pre></td></tr></table></figure><p>巴特，你以为<code>div</code>元素像<code>input</code>元素一样直接<code>focus</code>就能聚焦了？too young too naive~~像<code>form</code>中<code>input</code>、<code>button</code>、<code>textarea</code>这种可输入的元素和a这种链接元素是默认可获得焦点的，但是<code>span</code>、<code>div</code>这种元素可不行哇。因为他们缺少一个重要的属性：<code>tabindex</code>，给他们添加了<code>tabindex</code>属性后，就能指定他们可触焦了。</p><p>所以要想让<code>div</code>监听键盘事件，应该酱紫写：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//需要给这个元素添加tabindex属性</span></div><div class="line">div.setAttribute(<span class="string">'tabindex'</span>, <span class="string">'0'</span>);</div><div class="line">div.focus();</div></pre></td></tr></table></figure><p>给它绑定键盘事件，在合适的时候让它获得焦点，然后就能监听到键盘事件啦~~</p><h4 id="关于tabindex"><a href="#关于tabindex" class="headerlink" title="关于tabindex"></a>关于tabindex</h4><p><code>tabindex</code>属性用于管理键盘焦点，决定元素能否被选中，且指定了按下tab键时元素被选中的顺序。</p><p>像<code>form</code>表单元素及链接元素是默认可获得焦点的，所以即使不显式地设置其<code>tabindex</code>，按下<code>tab</code>键时，也能获得焦点，直接触发<code>onfocus</code>事件，而<code>span</code>这种元素就不行了，哪怕你点击这个<code>span</code>也木有用。<a href="http://jsbin.com/husuxid/2/edit?html,output" target="_blank" rel="external">试一试~</a></p><p>如果想让<code>span</code>也能获取焦点，可以为这个<code>span</code>设置个<code>tabindex</code>，这样它也具有自动聚焦的能力啦~<a href="http://jsbin.com/husuxid/4/edit?html,output" target="_blank" rel="external">试一试~</a></p><p><code>tabindex</code>可以设置为0、负值、正值：</p><ul><li><code>tabindex=0</code>：表示在自然<code>tab</code>键顺序中插入一个元素，可以通过调用其<code>focus</code>方法聚焦该元素，也能通过tab键聚焦该元素。BTW，<code>tab</code>顺序就是你按tab键时元素获得焦点的顺序，默认就是在DOM中的位置顺序。</li><li><code>tabindex=负值</code>：表示在自然<code>tab</code>键顺序中移除该元素，哟呵，移除了就不能通过<code>tab</code>键使其聚焦啦，不过还是可以调用<code>focus</code>方法聚焦的啦。这里的负值基本上就是-1啦，虽然你想设-5，-6，-7也没问题，但是没意义哇，就好像数组的<code>indexof</code>，若无匹配就返回-1，也不返回-2对吧？<a href="http://jsbin.com/husuxid/5/edit?html,output" target="_blank" rel="external">试一试~</a></li><li><code>tabindex=正值</code>：显式地指定该元素在<code>tab</code>键顺序中的位置。其实<code>tabindex</code>就是<code>tab</code>+<code>index</code>嘛，<code>index</code>不就表示索引咯，咱对<code>index</code>的理解不就是越小越靠前嘛，<code>tabindex</code>也是哇(不包括0)。<a href="http://jsbin.com/kayaciz/1/edit?html,css,output" target="_blank" rel="external">试一试~</a></li></ul><p>关于<code>tabindex</code>更多使用场景，请移步<a href="https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex?hl=zh-cn" target="_blank" rel="external">这里</a>~</p><h3 id="坑二：Mac和win的快捷键不一致"><a href="#坑二：Mac和win的快捷键不一致" class="headerlink" title="坑二：Mac和win的快捷键不一致"></a>坑二：Mac和win的快捷键不一致</h3><p>在<code>Mac</code>中，<code>cmd+a</code>默认是全选的快捷键，在<code>Windows</code>中，全选的快捷键是<code>ctrl+a</code>。我想做的交互是，表情联想面板出现时，不管焦点是否在表情联想面板上，全选的时候都选中输入框中的内容，如下图所示：</p><p><img src="http://ow7p6xhhi.bkt.clouddn.com/div%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC2.gif" alt="div键盘事件监听2"></p><p>但是实际上，当<code>div</code>获取焦点后，<code>cmd+a</code>时是酱紫的：</p><p><img src="http://ow7p6xhhi.bkt.clouddn.com/div%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC1.png" alt="div键盘事件监听1"></p><p>诶？这不是我想要的效果哇，我应该要监听一下<code>cmd+a</code>的键盘事件，然后实现我想要的效果~但是<code>cmd+a</code>是<code>Mac</code>的全选快捷键，而在<code>Windows</code>上，对应的快捷键是<code>ctrl+a</code>，所以需要先判断一下操作系统，再重写对应的全选键盘事件。</p><p><code>window</code>的<code>navigator</code>对象中，有个<code>platform</code>字段，声明了运行浏览器的操作系统和（或）硬件平台，咱可以用它来判断当前浏览器运行在哪个操作系统中：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> isWin = (navigator.platform == <span class="string">"Win32"</span>) || (navigator.platform == <span class="string">"Windows"</span>);</div><div class="line"><span class="keyword">var</span> isMac = (navigator.platform == <span class="string">"Mac68K"</span>) || (navigator.platform == <span class="string">"MacPPC"</span>) || (navigator.platform == <span class="string">"Macintosh"</span>) || (navigator.platform == <span class="string">"MacIntel"</span>);</div></pre></td></tr></table></figure><p>所以核心代码可以这样写：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span> (<span class="literal">true</span>) &#123;</div><div class="line">    <span class="keyword">case</span> e.keyCode === KEY_A:    <span class="comment">//KEY_A = 65</span></div><div class="line">        <span class="keyword">if</span> ((isMac &amp;&amp; e.metaKey) || (isWin &amp;&amp; e.ctrlKey)) &#123;</div><div class="line">            <span class="comment">//your code</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>完整的keycode<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/keyCode" target="_blank" rel="external">在此</a>~</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近做表情联想时，踩了几个键盘监听事件的坑，总结一下~&lt;/p&gt;
+&lt;h3 id=&quot;坑一：如何让div元素监听键盘&quot;&gt;&lt;a href=&quot;#坑一：如何让div元素监听键盘&quot; class=&quot;headerlink&quot; title=&quot;坑一：如何让div元素监听键盘&quot;&gt;&lt;/a&gt;坑一：如何让div元素监听键盘&lt;/h3&gt;&lt;p&gt;不知道你们试没试过，直接给&lt;code&gt;div&lt;/code&gt;绑定如&lt;code&gt;keypress&lt;/code&gt;、&lt;code&gt;keyup&lt;/code&gt;、&lt;code&gt;keydown&lt;/code&gt;这种键盘事件是不管用的，&lt;/p&gt;
+&lt;p&gt;要想让某个&lt;code&gt;div&lt;/code&gt;元素监听键盘事件，首先得让它获得焦点吧？不然人家都没有玉玺，哪来的皇权？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://hu33.tech/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="问题记录" scheme="http://hu33.tech/tags/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+    
+      <category term="前端" scheme="http://hu33.tech/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>CSS制作半像素边框</title>
@@ -527,30 +553,6 @@
       <category term="JavaScript" scheme="http://hu33.tech/tags/JavaScript/"/>
     
       <category term="DOM" scheme="http://hu33.tech/tags/DOM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>来自M小姐的毒药</title>
-    <link href="http://hu33.tech/2017/08/02/%E6%9D%A5%E8%87%AAM%E5%B0%8F%E5%A7%90%E7%9A%84%E6%AF%92%E8%8D%AF/"/>
-    <id>http://hu33.tech/2017/08/02/来自M小姐的毒药/</id>
-    <published>2017-08-02T15:35:16.084Z</published>
-    <updated>2019-01-10T14:17:28.739Z</updated>
-    
-    <content type="html"><![CDATA[<p>M小姐是我上研究生认识的，是我的硕士同班同学兼实验室伙伴兼项目战友兼寝室室友兼实习同事兼实习室友兼我的亲人。</p><p>在见到她之前，听另一个室友说，她比我还瘦。我感到无比惊讶，比那时候的我还瘦得瘦成什么样。</p><p>第一眼见到她时，是在二舍寝室，她面向着门背对着窗，明明无比逆光，我却清楚地看到了她脸上洋溢的微笑，热情而亲切。而逆光下的她的身形一览无遗，当时我就在想，真是个小巧玲珑的妹子。</p><a id="more"></a><p><strong>M小姐是个特别善良的妹子。</strong></p><p>某个周六我们赖在寝室不想出门吃饭，M回来后看到我们一副懒虫样，提出可以帮我们带饭。我们也不是那么无理的人啊，怎么好意思让人家专门跑一趟给带饭呢，就拒绝了。结果M小姐特别执着地说，没关系的，我刚好想出去走走，就顺便帮你们带吧，不然你们下午会饿的，硬生生地说服了我们接受了她的帮助。回来时可开心了，还怕我们过意不去一个劲儿地给我们洗脑说是她自己想出去走走的，当时我就在想，真是个善良可爱的妹子。</p><p>知乎上有句话我特别同意，一个人最大的善良就是在别人休息时轻手关门轻声讲话。我曾经觉得我就属于这类人，但是认识了M小姐后，我才发现M小姐才是高手啊。在学校时，M小姐早上都醒得很早，还没7点就醒了，而我们寝室的水龙头声音特别大，开关门的声音也特别大，M小姐怕这么早会影响我们休息，就在床上躺到7点半才起床。实际上，M小姐啥时候起床啥时候走的我们也不知道，因为她动作特别轻。M小姐没有准备台灯，但是早上起来既不开灯也不拉开点窗帘，每早都是举着手机收拾完自己。有次无意间发现，M小姐为了不让光透进寝室照醒我们，她竟然是从窗帘缝里钻出寝室去的阳台，这个妹子，实在是太为人着想了。</p><p><strong>M小姐是个特别细心的妹子。</strong></p><p>我是出了名的健忘，自从跟M小姐混在一起后，我就更健忘了。因为细心的M小姐什么都会帮我记住，什么时候要去哪里，出门要带什么东西，去超市要买什么，欠了谁的钱谁欠了我的钱都给我记着了。M小姐有时候在认真看电视，突然来一句，你上次说的那件事办了吗？我：……额，差点忘了……有了细心的M小姐，我根本没理由逼自己记住这一切啊。</p><p>以前出去玩手机电量一定不能低于90%，因为要查路线查导航，但是跟M小姐出去手机关机都不怕～毕竟M小姐是我公认的活地图，去过一次的地方就记住地点了，走过一遍的路就记住路线了。所以跟M小姐出门，只管带上自己就好了。</p><p><strong>M小姐是个特别认真的妹子。</strong></p><p>309实验室是个特别不正经的场所，但是里面出了个特别认真的M小姐。起初这对M小姐可不是什么好事，认真的M小姐在我们这群老司机段子手中间总是略显格格不入。可这也不是什么坏事，正经的M小姐不知不觉中就被带偏了，现在是个开车稳段子冷的正经妹子了。不过尽管那群老司机们带偏了M小姐，M小姐仍然是个非常认真的人。有句话怎么说的来着，狗改不了吃屎？（原谅我没文化……）</p><p>不管你跟M小姐讲什么，她都会非常认真地帮你分析。虽然你的有些观点她未必赞同，但她会认真地站在你的角度去理解，然后一本正经地告诉你应该怎样，不敷衍。</p><p><strong>M小姐是个特别有活力的妹子。</strong></p><p>在跟M小姐同居之前，我们一直都觉得M小姐是个永动机，从来都不知累为何物。每次我们出去浪，临近回来时我就开始叫累不迭，连回去的力气都没了。可是M小姐还是精力不减，还能又蹦又跳，继续奋战。但是有一点M小姐比不上我，那就是…吃！M小姐有时候很想多尝试些美食，无奈胃容量有限，只能安慰自己下次再来了。</p><p><strong>M小姐给我下毒了。</strong></p><p>上面夸了M小姐那么多，那都是可忽略的，接下来这点才重要，她对我下毒这件事才重要。</p><p>曾经，我生活独立精神独立，可以一个人背着书包去自习室，一个人带着饭卡去食堂，一个人拿着球拍去球馆，一个人拉着行李去实习，不需要朋友的关心不需要倾诉的对象不需要所谓的精神寄托，很会掩饰自己的感情不轻易表现自己的情绪。用高中闺蜜们的话来说，就是太坚强，让人有距离感。</p><p>可是M小姐竟然给我下了慢性毒药。我有什么决定会愿意告诉M小姐，M小姐会先帮我分析一波然后表示支持我的决定；我有什么开心的事情会乐于跟M小姐分享，M小姐会特别开心地为我的开心而开心；我有什么难过伤感的情绪会在M小姐面前流露，M小姐都会想办法帮我排解忧愁；更可怕的是，有些事情我以为可以藏在心里一辈子，但会不经意间跟M小姐说起。想到这，真是觉得可怕，M小姐都知道我所有的秘密了。</p><p>在学校的时候，我们都亲切地称M小姐为“天使”，但是这个天使都快把我毒害成孩子了，那个坚强独立的人设已经被毒没了。毕竟，健忘的时候有人帮你记着事情，出门的时候有人帮你导航路线，犯懒的时候有人帮你做好早餐，难过的时候有人切好水果放你面前，开心有人跟你分享，伤心有人陪你聊天，委屈有人替你心疼。还要啥坚强！要啥独立！</p><p>我在想啊，要是我以后找不到男朋友，M小姐是要背一半锅的。</p><p><strong>这才是重点。</strong></p><p>恩，上面其实都不是重点，重点是，这么好这么优秀的一个妹子，是单身哦~现附上背影一张~</p><p><img src="https://hu33.github.io/images/来自M小姐的毒药/1.jpg" alt=""></p><p>心动不如行动，汉子们，燥起来吧^O^ </p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;M小姐是我上研究生认识的，是我的硕士同班同学兼实验室伙伴兼项目战友兼寝室室友兼实习同事兼实习室友兼我的亲人。&lt;/p&gt;
-&lt;p&gt;在见到她之前，听另一个室友说，她比我还瘦。我感到无比惊讶，比那时候的我还瘦得瘦成什么样。&lt;/p&gt;
-&lt;p&gt;第一眼见到她时，是在二舍寝室，她面向着门背对着窗，明明无比逆光，我却清楚地看到了她脸上洋溢的微笑，热情而亲切。而逆光下的她的身形一览无遗，当时我就在想，真是个小巧玲珑的妹子。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="随笔" scheme="http://hu33.tech/categories/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-      <category term="人物" scheme="http://hu33.tech/tags/%E4%BA%BA%E7%89%A9/"/>
     
   </entry>
   
