@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hu33.tech/"/>
-  <updated>2019-01-31T04:15:49.951Z</updated>
+  <updated>2019-02-09T09:26:08.954Z</updated>
   <id>http://hu33.tech/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CSS制作半像素边框</title>
+    <link href="http://hu33.tech/2019/02/09/CSS%E5%88%B6%E4%BD%9C%E5%8D%8A%E5%83%8F%E7%B4%A0%E8%BE%B9%E6%A1%86/"/>
+    <id>http://hu33.tech/2019/02/09/CSS制作半像素边框/</id>
+    <published>2019-02-09T09:22:05.400Z</published>
+    <updated>2019-02-09T09:26:08.954Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>如果想给某个元素设置个<code>0.5px</code>的边框，你会怎么做？是直接设置<code>border-width</code>为0.5？</p><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">border-width</span>: 0<span class="selector-class">.5px</span>;</div></pre></td></tr></table></figure><p>可是这样浏览器真的能给你显示成<code>0.5px</code>的边框吗？哈哈哒，想多啦~</p><a id="more"></a><p><code>border-width</code>只能为自然数，其他类似的属性也是一样样的，小于<code>1px</code>的线浏览器都直接显示成<code>1px</code>（当然，<code>0px</code>就没有了哈）。<a href="http://jsbin.com/geqefik/edit?html,css,output" target="_blank" rel="external">效果</a></p><p>所以，常规方式是不行哒，但是咱可以用伪元素+缩放来巧妙地实现~~</p><h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><p>大概思路就是用伪元素给该元素做个<code>1px</code>的框，这个框的大小是该元素的两倍，然后再缩小0.5倍，这样<code>0.5px</code>像素的框就出来啦~~具体步骤如下：</p><ol><li><p>给目标元素设个定位参考，然后伪元素才能根据这个定位进行绝对定位</p><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">span</span> &#123;</div><div class="line">  <span class="attribute">position</span>: relative;  <span class="comment">/* 只要不是默认值static就好了，原因我想你们应该知道 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>给目标加个伪元素，并设置绝对定位</p><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">span</span><span class="selector-pseudo">:after</span> &#123;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>给伪元素加个<code>1px</code>的边框，并把高宽设为目标元素的两倍</p><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#000</span>;</div><div class="line"><span class="selector-tag">width</span>: 200%;</div><div class="line"><span class="selector-tag">height</span>: 200%;</div></pre></td></tr></table></figure></li><li><p>然后缩小0.5倍，缩到目标元素的大小</p><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">transform-origin</span>: 0 0;</div><div class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">scale</span>(0<span class="selector-class">.5</span>);</div></pre></td></tr></table></figure></li></ol><p>然后就差不多啦~~</p><p>完整代码如下：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">span</span> &#123;</div><div class="line">  <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-tag">span</span><span class="selector-pseudo">:after</span> &#123;</div><div class="line">  <span class="attribute">content</span>: <span class="string">''</span>;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</div><div class="line">  <span class="attribute">width</span>: <span class="number">200%</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">200%</span>;</div><div class="line">  <span class="attribute">transform-origin</span>: <span class="number">0</span> <span class="number">0</span>;</div><div class="line">  <span class="attribute">transform</span>: <span class="built_in">scale</span>(0.5);</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>具体效果看<a href="http://jsbin.com/geqefik/edit?html,css,output" target="_blank" rel="external">这里</a>~~</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h3&gt;&lt;p&gt;如果想给某个元素设置个&lt;code&gt;0.5px&lt;/code&gt;的边框，你会怎么做？是直接设置&lt;code&gt;border-width&lt;/code&gt;为0.5？&lt;/p&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;border-width&lt;/span&gt;: 0&lt;span class=&quot;selector-class&quot;&gt;.5px&lt;/span&gt;;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可是这样浏览器真的能给你显示成&lt;code&gt;0.5px&lt;/code&gt;的边框吗？哈哈哒，想多啦~&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://hu33.tech/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="问题记录" scheme="http://hu33.tech/tags/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+    
+      <category term="前端" scheme="http://hu33.tech/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>我的组长在中科院</title>
@@ -525,50 +551,6 @@
     
     
       <category term="人物" scheme="http://hu33.tech/tags/%E4%BA%BA%E7%89%A9/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React相关面试题</title>
-    <link href="http://hu33.tech/2017/07/31/React%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    <id>http://hu33.tech/2017/07/31/React相关面试题/</id>
-    <published>2017-07-31T14:32:07.756Z</published>
-    <updated>2019-01-10T14:00:09.317Z</updated>
-    
-    <content type="html"><![CDATA[<ol><li>React解决了什么问题</li><li>如何设计一个好的组件</li><li>组件的render函数在何时被调用</li><li>调用render时DOM就一定会被更新吗</li><li>组件的生命周期</li><li>进行远程数据加载时，应该在哪个周期中完成</li><li>在哪些生命周期中可以修改组件的state</li><li>不同父节点的组件需要对彼此的状态进行改变时应该怎么实现</li><li>state里应该有什么</li><li>如何对组件进行优化</li><li>组件中的key属性有什么用</li><li>Component与Element和Instance的区别</li><li>调用setState时，发生了什么事</li><li>什么时候使用类组件（Class Component）而非功能组件（Functional Component）</li><li>什么是React的refs，为什么它们很重要</li><li>受控组件（controlled component）和不受控组件（uncontrolled component）有什么区别</li><li>描述事件在React中的处理方式</li></ol><a id="more"></a><h3 id="React解决了什么问题？"><a href="#React解决了什么问题？" class="headerlink" title="React解决了什么问题？"></a>React解决了什么问题？</h3><p><strong>a. React实现了Virtual DOM</strong></p><p>在一定程度上提升了性能，尤其是在进行小量数据更新时。因为DOM操作是很耗性能的，而Virtual DOM是在内存中进行操作的，当数据发生变化时，通过diff算法比较两棵树之间的变化，再进行必要的DOM更新，省去了不必要的高消耗的DOM操作。当然，这种性能优化主要体现在有小量数据更新的情况下。因为React的基本思维模式是每次有变动就重新渲染整个应用，简单想来就是直接重置innerHTML，比如说在一个大型列表所有数据都变动的情况下，重置innerHTML还比较合理，但若是只有一行数据变了，它也需要重置整个innerHTML，就会造成大量的浪费。而Virtual DOM虽然进行了JS层面的计算，但是比起DOM操作来说，简直不要太便宜。</p><blockquote><p><a href="https://www.zhihu.com/question/31809713" target="_blank" rel="external">为什么操作真实DOM比React更快？</a></p></blockquote><p><strong>b. React的一个核心思想是声明式编程。</strong></p><p>命令式编程是解决做什么的问题，就像是下命令一样，关注于怎么做，而声明式编程关注于得到什么结果，在React中，我们只需要关注“目前的状态是什么”，而不是“我需要做什么让页面变成目前的状态”。React就是不断声明，然后在特定的参数下渲染UI界面。这种编程方式可以让我们的代码更容易被理解，从而易于维护。</p><p><strong>c. 组件化</strong></p><p>React天生组件化，我们可以将一个大的应用分割成很多小组件，这样有好几个优势。首先组件化的代码像一棵树一样清楚干净，比起传统的面条式代码可读性更高；其次前端人员在开发过程中可以并行开发组件而不影响，大大提高了开发效率；最重要的是，组件化使得复用性大大提高，团队可以沉淀一些公共组件或工具库。</p><p><strong>d. 单向数据流</strong></p><p>在React中数据流是单向的，由父节点流向子节点，如果父节点的props发生了变化，那么React会递归遍历整个组件树，重新渲染所有使用该属性的子组件。这种单向的数据流一方面比较清晰不容易混乱，另一方面是比较好维护，出了问题也比较好定位。</p><h3 id="如何设计一个好组件"><a href="#如何设计一个好组件" class="headerlink" title="如何设计一个好组件"></a>如何设计一个好组件</h3><p>组件的主要目的是为了更好的复用，所以在设计组件的时候需要遵循高内聚低耦合的原则。</p><ul><li>可以通过遵循几种设计模式原则来达到高复用的目的，比如单一职责原则：React推崇的是“组合”而非“继承”，所以在设计时尽量不设计大的组件，而是开发若干个单一功能的组件，重点就是每个组件只做一件事；开放/封闭原则，就是常说的对修改封闭，对扩展开放。在React中我们可以用高阶组件来实现。</li><li>使用高阶组件来实现组件的复用。高阶组件就是一个包装了另一个React组件的React组件，它包括属性代理（高阶组件操控着传递给被包裹组件的属性）和反向继承（实际上高阶组件继承被包裹组件）。我们可以用高阶组件实现代码复用，逻辑抽象。</li><li>使用容器组件来处理逻辑，展示组件来展示数据（也就是逻辑处理与数据展示分离）。比如可以在容器组件中进行数据的请求与处理，然后将处理后的数据传递给展示组件，展示组件只负责展示，这样容器组件和展示组件就可以更好地复用了。</li><li>编写组件代码时要符合规范，总之就是要可读性强、复用性高、可维护性好。</li></ul><h3 id="组件的render函数何时被调用"><a href="#组件的render函数何时被调用" class="headerlink" title="组件的render函数何时被调用"></a>组件的render函数何时被调用</h3><ul><li>组件state发生改变时会调用render函数，比如通过setState函数改变组件自身的state值</li><li>继承的props属性发生改变时也会调用render函数，即使改变的前后值一样</li><li>React生命周期中有个componentShouldUpdate函数，默认返回true，即允许render被调用，我们也可以重写这个函数，判断是否应该调用render函数</li></ul><h3 id="调用render时DOM就一定会被更新吗"><a href="#调用render时DOM就一定会被更新吗" class="headerlink" title="调用render时DOM就一定会被更新吗"></a>调用render时DOM就一定会被更新吗</h3><p>不一定更新。</p><p>React组件中存在两类DOM，render函数被调用后， React会根据props或者state重新创建一棵virtual DOM树，虽然每一次调用都重新创建，但因为创建是发生在内存中，所以很快不影响性能。而 virtual dom的更新并不意味着真实DOM的更新，React采用diff算法将virtual DOM和真实DOM进行比较，找出需要更新的最小的部分，这时Real DOM才可能发生修改。</p><p>所以每次state的更改都会使得render函数被调用，但是页面DOM不一定发生修改。</p><h3 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h3><p>组件生命周期有三种阶段：初始化阶段（Mounting）、更新阶段（Updating）、析构阶段（Unmouting）。</p><p><strong>初始化阶段：</strong></p><ul><li>constructor()：初始化state、绑定事件</li><li>componentWillMount()：在render()之前执行，除了同构，跟constructor没啥差别</li><li>render()：用于渲染DOM。如果有操作DOM或和浏览器打交道的操作，最好在下一个步骤执行。</li><li>componentDidMount()：在render()之后立即执行，可以在这个函数中对DOM就进行操作，可以加载服务器数据，可以使用setState()方法触发重新渲染</li></ul><p><strong>组件更新阶段：</strong></p><ul><li>componentWillReceiveProps(nextProps)：在已挂载的组件接收到新props时触发，传进来的props没有变化也可能触发该函数，若需要实现props变化才执行操作的话需要自己手动判断</li><li>componentShouldUpdate(nextProps，nextState)：默认返回true，我们可以手动判断需不需要触发render，若返回false，就不触发下一步骤</li><li>componentWillUpdate()：componentShouldUpdate返回true时触发，在render之前，可以在里面进行操作DOM</li><li>render()：重渲染</li><li>componentDidUpdate()：render之后立即触发</li></ul><p>组件卸载阶段：</p><ul><li>componentWillUnmount()：在组件销毁之前触发，可以处理一些清理操作，如无效的timers等</li><li>componentDidMount()：卸载后立即触发</li></ul><h3 id="进行远程数据加载时，应该在哪个周期中完成"><a href="#进行远程数据加载时，应该在哪个周期中完成" class="headerlink" title="进行远程数据加载时，应该在哪个周期中完成"></a>进行远程数据加载时，应该在哪个周期中完成</h3><ul><li><p>最好是在<code>componentDidMount</code>中进行异步请求。如果我们将ajax请求放在生命周期其他函数中，如<code>constructor</code>或<code>componentWIllMount</code>中，我们并不能保证请求仅在组件挂载完毕后才响应。如果我们的数据请求在组件挂载前就完成，并调用<code>setState</code>函数将数据添加到组件状态中，对于未挂载的组件会报错。而在<code>componentDidMount</code>中进行ajax请求能有效避免这个问题。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component.</div></pre></td></tr></table></figure></li><li><p>React 下一代调和算法 Fiber 会通过开始或停止渲染的方式优化应用性能，其会影响到 <code>componentWillMount</code> 的触发次数。对于 <code>componentWillMount</code> 这个生命周期函数的调用次数会变得不确定，React 可能会多次频繁调用 <code>componentWillMount</code>。如果我们将 AJAX 请求放到 <code>componentWillMount</code> 函数中，那么显而易见其会被触发多次，自然也就不是好的选择。[没深入]</p></li></ul><p>顺便说说<code>componentWillMount</code>函数，这个方法是在<code>render</code>前立刻执行的，也是服务器渲染中唯一调用的钩子，其实除了同构的需求，通常情况下可以用<code>constructor()</code>方法代替。</p><h3 id="在哪些生命周期中可以修改组件的state"><a href="#在哪些生命周期中可以修改组件的state" class="headerlink" title="在哪些生命周期中可以修改组件的state"></a>在哪些生命周期中可以修改组件的state</h3><ul><li>componentDidMount和componentDidUpdate</li><li>constructor、componentWillMount中setState会发生错误：setState只能在mounted或mounting组件中执行</li><li>componentWillUpdate中setState会导致死循环</li></ul><h3 id="不同父节点的组件需要对彼此的状态进行改变时应该怎么实现"><a href="#不同父节点的组件需要对彼此的状态进行改变时应该怎么实现" class="headerlink" title="不同父节点的组件需要对彼此的状态进行改变时应该怎么实现"></a>不同父节点的组件需要对彼此的状态进行改变时应该怎么实现</h3><ul><li>在没有Flux之前，Facebook推荐使用事件机制，但是一旦应用中这种需求增多，事件和回调会满天飞</li><li>传递接口，就是需要root传递两个接口给A和B，当A想改变B的状态时，A调用root传递给它的接口，然后这个接口再调用root传给B的接口（这个方法也很不科学）</li><li>用Flux管理状态</li></ul><h3 id="state里应该有什么"><a href="#state里应该有什么" class="headerlink" title="state里应该有什么"></a>state里应该有什么</h3><p>应该有啥：</p><ul><li>事件函数可能进行修改的会导致UI进行渲染的数据</li></ul><p>不应该有啥：</p><ul><li>计算得出的值</li><li>React组件</li><li>props复制来的数据</li></ul><h3 id="如何对组件进行优化"><a href="#如何对组件进行优化" class="headerlink" title="如何对组件进行优化"></a>如何对组件进行优化</h3><ul><li>使用上线构建（Production Build）：会移除脚本中不必要的报错和警告，减少文件体积</li><li>避免重绘：重写shouldComponentUpdate函数，手动控制是否应该调用render函数进行重绘</li><li>尽可能使用Immutable Data：尽可能不修改数据，而是重新赋值数据。这样在检测数据对象是否发生修改方面会非常快，因为只需要检测对象引用即可，不需要挨个检测对象属性的更改</li><li>在渲染组件时尽可能添加key，这样virtual DOM在对比的时候就更容易知道哪里是修改元素，哪里是新插入的元素</li></ul><h3 id="组件中的key属性有什么用"><a href="#组件中的key属性有什么用" class="headerlink" title="组件中的key属性有什么用"></a>组件中的key属性有什么用</h3><p>React中的key是一个特殊的属性，它的出现不是给开发者用的，而是给React自己用的（给一个组件设置了key属性，并不能获取这个组件的key props）</p><p>React使用key来识别组件，它是一种身份标识，每一个key对应一个组件，react认为相同的key是同一个组件，这样后续相同的key就不会被创建</p><p>有了key属性后，就可以与组件建立一种对应关系，react根据key来决定是销毁重新创建组件还是更新组件：</p><ul><li>key相同：若组件属性有变化，react只更新对应的属性；没有变化则不更新</li><li>key值不同：react会先销毁该组件，然后重新创建该组件</li></ul><h3 id="Component与Element和Instance的区别"><a href="#Component与Element和Instance的区别" class="headerlink" title="Component与Element和Instance的区别"></a>Component与Element和Instance的区别</h3><ul><li>Element其实是一个纯粹的Object对象，用于描述在屏幕上看到的DOM节点，这个对象包括type、props、key和ref属性，但不包括DOM方法（React.createElement()）</li><li>Component是组件级别的类：接收参数并返回React元素的函数或类</li><li>Instance：当使用ReactDOM.render()将一个组件渲染到一个具体的DOM元素中，返回的值就为一个实例</li></ul><h3 id="调用setState时，发生了什么事"><a href="#调用setState时，发生了什么事" class="headerlink" title="调用setState时，发生了什么事"></a>调用setState时，发生了什么事</h3><p>调用setState时，react会做的第一件事就是将传递给setState的对象合并到组件的当前状态，然后会触发调和过程。经过调和过程，React会以相对高效的方式根据新的状态构建React元素树，并准备重新渲染整个UI界面。在React得到元素树后，React会通过diff算法算出新的树与老树之间的节点差异，然后根据差异对界面进行最小化重渲染。在diff算法中，React能够相对精确地算出哪些位置发生了改变以及应该如何改变，这就保证了按需更新，而不是全部重新渲染。</p><h3 id="什么时候使用类组件（Class-Component）而非功能组件（Functional-Component）"><a href="#什么时候使用类组件（Class-Component）而非功能组件（Functional-Component）" class="headerlink" title="什么时候使用类组件（Class Component）而非功能组件（Functional Component）"></a>什么时候使用类组件（Class Component）而非功能组件（Functional Component）</h3><p>若组件需要有state或需要使用生命周期，就用类组件，否则就用功能组件</p><h3 id="什么是React的refs，为什么它们很重要"><a href="#什么是React的refs，为什么它们很重要" class="headerlink" title="什么是React的refs，为什么它们很重要"></a>什么是React的refs，为什么它们很重要</h3><p>我们用render方法得到了组价的实例，然后就可以对它进行相关操作，但是在组件内，JSX是不会返回一个组件的实例，它只是一个ReactElement，只是告诉React被挂载的组件应该是长什么样。</p><p>refs是组件的一个很特殊的prop，可以附加到任何一个组件上，refs就是reference，组件被调用时会新建一个该组件的实例，refs就会指向这个实例</p><p>我们把refs放到原生的DOM组件input中，就可以通过refs得到DOM结点；如果把refs放到React组件中，就可以获得组件的实例，可以调用该组件的实例方法</p><h3 id="受控组件（controlled-component）和不受控组件（uncontrolled-component）有什么区别"><a href="#受控组件（controlled-component）和不受控组件（uncontrolled-component）有什么区别" class="headerlink" title="受控组件（controlled component）和不受控组件（uncontrolled component）有什么区别"></a>受控组件（controlled component）和不受控组件（uncontrolled component）有什么区别</h3><p>受控组件：在HTML中，标签\<input>、\<select>等值的改变通常是根据用户输入进行更新，在React中，可变状态通常保存在组件的状态属性中，并且只能用setState()更新，而呈现表单的React组件也控制着在后续用户输入时该表单发生的情况，以这种由React控制输入表单元素而改变其值的方式，就称为“受控组件”</select></p><p>不受控组件：表单数据不受setState控制，而是由DOM本身处理，与传统HTML表单输入相似，input输入值即显示最新值（使用ref从DOM获取表单值）</p><h3 id="描述事件在React中的处理方式"><a href="#描述事件在React中的处理方式" class="headerlink" title="描述事件在React中的处理方式"></a>描述事件在React中的处理方式</h3><p>React在virtual DOM的基础上实现了一个SyntheticEvent（合成事件）层，所有事件都绑定到最外层上。</p><p>在React底层，主要对合成事件做了两件事：事件委托和自动绑定。</p><p>事件委托：React的事件代理机制不会把事件处理函数直接绑定到真实的结点上，而是把所有事件绑定到结构的最外层，使用统一的事件监听器，这个事件监听器上维持了一个映射来保存所有组件内部的事件监听和处理函数。当事件发生时，首先被这个统一的事件监听器处理，然后在映射里找到真正的事件处理函数并调用。</p><p>自动绑定：在React组件中，每个方法的上下文都会指向该组件的实例，即自动绑定this为当前组件。在使用ES6 classes和纯函数时，这种自动绑定就不存在了，需要我们手动绑定this：bind方法、双冒号语法、构造器内声明、箭头函数。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ol&gt;
-&lt;li&gt;React解决了什么问题&lt;/li&gt;
-&lt;li&gt;如何设计一个好的组件&lt;/li&gt;
-&lt;li&gt;组件的render函数在何时被调用&lt;/li&gt;
-&lt;li&gt;调用render时DOM就一定会被更新吗&lt;/li&gt;
-&lt;li&gt;组件的生命周期&lt;/li&gt;
-&lt;li&gt;进行远程数据加载时，应该在哪个周期中完成&lt;/li&gt;
-&lt;li&gt;在哪些生命周期中可以修改组件的state&lt;/li&gt;
-&lt;li&gt;不同父节点的组件需要对彼此的状态进行改变时应该怎么实现&lt;/li&gt;
-&lt;li&gt;state里应该有什么&lt;/li&gt;
-&lt;li&gt;如何对组件进行优化&lt;/li&gt;
-&lt;li&gt;组件中的key属性有什么用&lt;/li&gt;
-&lt;li&gt;Component与Element和Instance的区别&lt;/li&gt;
-&lt;li&gt;调用setState时，发生了什么事&lt;/li&gt;
-&lt;li&gt;什么时候使用类组件（Class Component）而非功能组件（Functional Component）&lt;/li&gt;
-&lt;li&gt;什么是React的refs，为什么它们很重要&lt;/li&gt;
-&lt;li&gt;受控组件（controlled component）和不受控组件（uncontrolled component）有什么区别&lt;/li&gt;
-&lt;li&gt;描述事件在React中的处理方式&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="http://hu33.tech/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="前端" scheme="http://hu33.tech/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="笔记" scheme="http://hu33.tech/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="React" scheme="http://hu33.tech/tags/React/"/>
     
   </entry>
   
