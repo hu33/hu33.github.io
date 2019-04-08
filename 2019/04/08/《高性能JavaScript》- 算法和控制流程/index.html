@@ -98,7 +98,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="前端,JavaScript," />
+  <meta name="keywords" content="前端,笔记,JavaScript,性能," />
 
 
 
@@ -116,19 +116,19 @@
 
 
 
-<meta name="description" content="深拷贝这个坑我一定要来填上了，毕竟绊了我好几次。。。
-先交代一下这次填坑的背景，简单说来就是使用Object.assign来拷贝对象，结果这玩意儿有陷阱啊~害得我项目中setState没有被触发，子组件死活不更新，不render，找了半天问题才发现原来坑在这个地方。">
+<meta name="description" content="算法和数据结构对程序性能的重要性就不用说了，直接入正题~！这章主要从循环、条件语句和递归三个方面阐述优化点。
+循环JS提供了四种循环（ES5之前），for、while、do-while、for-in，其中只有for-in比其他几种明显要慢，其余三种性能都差不多，所以循环类型的选择应该是基于需求而不是性能。要考虑循环性能的话，得从每次迭代处理的事务和迭代的次数两个方面去考虑。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js中的深拷贝">
-<meta property="og:url" content="http://hu33.tech/2017/08/26/js中的深拷贝/index.html">
+<meta property="og:title" content="《高性能JavaScript》- 算法和流程控制">
+<meta property="og:url" content="http://hu33.tech/2019/04/08/《高性能JavaScript》- 算法和控制流程/index.html">
 <meta property="og:site_name" content="小胡不说八道">
-<meta property="og:description" content="深拷贝这个坑我一定要来填上了，毕竟绊了我好几次。。。
-先交代一下这次填坑的背景，简单说来就是使用Object.assign来拷贝对象，结果这玩意儿有陷阱啊~害得我项目中setState没有被触发，子组件死活不更新，不render，找了半天问题才发现原来坑在这个地方。">
-<meta property="og:updated_time" content="2019-01-13T13:19:00.775Z">
+<meta property="og:description" content="算法和数据结构对程序性能的重要性就不用说了，直接入正题~！这章主要从循环、条件语句和递归三个方面阐述优化点。
+循环JS提供了四种循环（ES5之前），for、while、do-while、for-in，其中只有for-in比其他几种明显要慢，其余三种性能都差不多，所以循环类型的选择应该是基于需求而不是性能。要考虑循环性能的话，得从每次迭代处理的事务和迭代的次数两个方面去考虑。">
+<meta property="og:updated_time" content="2019-04-08T04:02:21.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js中的深拷贝">
-<meta name="twitter:description" content="深拷贝这个坑我一定要来填上了，毕竟绊了我好几次。。。
-先交代一下这次填坑的背景，简单说来就是使用Object.assign来拷贝对象，结果这玩意儿有陷阱啊~害得我项目中setState没有被触发，子组件死活不更新，不render，找了半天问题才发现原来坑在这个地方。">
+<meta name="twitter:title" content="《高性能JavaScript》- 算法和流程控制">
+<meta name="twitter:description" content="算法和数据结构对程序性能的重要性就不用说了，直接入正题~！这章主要从循环、条件语句和递归三个方面阐述优化点。
+循环JS提供了四种循环（ES5之前），for、while、do-while、for-in，其中只有for-in比其他几种明显要慢，其余三种性能都差不多，所以循环类型的选择应该是基于需求而不是性能。要考虑循环性能的话，得从每次迭代处理的事务和迭代的次数两个方面去考虑。">
 
 
 
@@ -156,13 +156,13 @@
 
 
 
-  <link rel="canonical" href="http://hu33.tech/2017/08/26/js中的深拷贝/"/>
+  <link rel="canonical" href="http://hu33.tech/2019/04/08/《高性能JavaScript》- 算法和控制流程/"/>
 
 
 
 
 
-  <title>js中的深拷贝 | 小胡不说八道</title>
+  <title>《高性能JavaScript》- 算法和流程控制 | 小胡不说八道</title>
   
 
 
@@ -349,7 +349,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://hu33.tech/2017/08/26/js中的深拷贝/">
+    <link itemprop="mainEntityOfPage" href="http://hu33.tech/2019/04/08/《高性能JavaScript》- 算法和控制流程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不说八道的小胡">
@@ -366,7 +366,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">js中的深拷贝</h1>
+          <h1 class="post-title" itemprop="name headline">《高性能JavaScript》- 算法和流程控制</h1>
         
 
         <div class="post-meta">
@@ -378,8 +378,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-26T18:24:43+08:00">
-                2017-08-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-08T11:58:55+08:00">
+                2019-04-08
               </time>
             
 
@@ -419,7 +419,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/08/26/js中的深拷贝/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2019/04/08/《高性能JavaScript》- 算法和控制流程/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -428,7 +428,7 @@
 
           
           
-             <span id="/2017/08/26/js中的深拷贝/" class="leancloud_visitors" data-flag-title="js中的深拷贝">
+             <span id="/2019/04/08/《高性能JavaScript》- 算法和控制流程/" class="leancloud_visitors" data-flag-title="《高性能JavaScript》- 算法和流程控制">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -457,37 +457,58 @@
       
 
       
-        <p>深拷贝这个坑我一定要来填上了，毕竟绊了我好几次。。。</p>
-<p>先交代一下这次填坑的背景，简单说来就是使用<code>Object.assign</code>来拷贝对象，结果这玩意儿有陷阱啊~害得我项目中<code>setState</code>没有被触发，子组件死活不更新，不<code>render</code>，找了半天问题才发现原来坑在这个地方。</p>
+        <p>算法和数据结构对程序性能的重要性就不用说了，直接入正题~！这章主要从循环、条件语句和递归三个方面阐述优化点。</p>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>JS提供了四种循环（ES5之前），<code>for</code>、<code>while</code>、<code>do-while</code>、<code>for-in</code>，其中只有<code>for-in</code>比其他几种明显要慢，其余三种性能都差不多，所以循环类型的选择应该是基于需求而不是性能。要考虑循环性能的话，得从每次迭代处理的事务和迭代的次数两个方面去考虑。</p>
 <a id="more"></a>
-<h3 id="Object-assign-的陷阱"><a href="#Object-assign-的陷阱" class="headerlink" title="Object.assign()的陷阱"></a>Object.assign()的陷阱</h3><p>平常我们写React处理<code>state</code>时，希望数据是immutable，这样处理起来更容易更方便。一般我们喜欢用<code>Object.assign()</code>来复制对象，我一直以为<code>Object.assign()</code>是深复制，会连子节点一起复制。今天项目中的bug让我认识到，我真是错看了它啊~</p>
-<p><code>Object.assign()</code>其实是浅层拷贝，只会对非嵌套的对象进行拷贝，但是如果对象中有嵌套的话，它就只会对被嵌套的对象做引用拷贝了。</p>
-<p>可以看一下Polyfill对<code>Object.assign</code>的实现源码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Object</span>.assign != <span class="string">'function'</span>) &#123;</div><div class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">Object</span>.assign = <span class="function"><span class="keyword">function</span> (<span class="params">target</span>) </span>&#123;</div><div class="line"><span class="meta">	  'use strict'</span>;</div><div class="line">	   <span class="keyword">if</span> (target === <span class="literal">undefined</span> || target === <span class="literal">null</span>) &#123;</div><div class="line">	     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Cannot convert undefined or null to object'</span>);</div><div class="line">	   &#125;</div><div class="line">	</div><div class="line">	   <span class="keyword">var</span> output = <span class="built_in">Object</span>(target);</div><div class="line">	   <span class="keyword">for</span> (<span class="keyword">var</span> index = <span class="number">1</span>; index &lt; <span class="built_in">arguments</span>.length; index++) &#123;</div><div class="line">	     <span class="keyword">var</span> source = <span class="built_in">arguments</span>[index];</div><div class="line">	     <span class="keyword">if</span> (source !== <span class="literal">undefined</span> &amp;&amp; source !== <span class="literal">null</span>) &#123;</div><div class="line">	       <span class="keyword">for</span> (<span class="keyword">var</span> nextKey <span class="keyword">in</span> source) &#123;</div><div class="line">	         <span class="keyword">if</span> (source.hasOwnProperty(nextKey)) &#123;</div><div class="line">	           output[nextKey] = source[nextKey];</div><div class="line">	         &#125;</div><div class="line">	       &#125;</div><div class="line">	     &#125;</div><div class="line">	   &#125;</div><div class="line">	   <span class="keyword">return</span> output;</div><div class="line">	  &#125;;</div><div class="line">  &#125;)();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>好的吧，其实<code>Object.assign</code>只是这样设计的，并不能说是它的陷阱，当一回标题党。。。</p>
-<h3 id="js中的深拷贝"><a href="#js中的深拷贝" class="headerlink" title="js中的深拷贝"></a>js中的深拷贝</h3><p>虽然有些时候用<code>Object.assign()</code>也够了，但是一旦对象嵌套，用<code>Object.assign()</code>就很可能出现问题，那就要实现深拷贝了。</p>
-<p>js深拷贝有两种方式：</p>
-<ol>
-<li><p>一种是用JSON对象，简单粗暴</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个方法好处就是简单，粗暴，但是存在两个问题：</p>
+<h4 id="优化点1-减少迭代的工作量"><a href="#优化点1-减少迭代的工作量" class="headerlink" title="优化点1  减少迭代的工作量"></a>优化点1  减少迭代的工作量</h4><p>灰常明显，如果一次循环迭代花的时间少了，那么多次循环花的时间就更少了，所以最好限制循环中耗时操作的数量：</p>
 <ul>
-<li>一个是会破坏原型链，深拷贝之后，不管这个对象原来的构造函数是什么，深拷贝之后都会变成<code>Object</code></li>
-<li>另一个是它只能处理<code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Array</code>、扁平对象，即能够被json直接表示的数据结构，无法拷贝属性为<code>Function</code>以及<code>RegExp</code>这类的属性</li>
-<li>但是如果只是想单纯拷贝一个嵌套对象，用它还是可以的。</li>
+<li><p>减少对象成员及数组项的查找次数，比如下例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i; i &lt; arr.length; i++) &#123;&#125;   <span class="comment">//每次循环都要查找一次arr.length</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i, len = arr.length; i &lt; len; i++) &#123;&#125;    <span class="comment">//整个迭代只需要查找一次arr.length</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>颠倒数组的顺序，比如下例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i, len = arr.length; i &lt; len; i++) &#123;&#125;  <span class="comment">//这里的控制条件其实比较了两次，迭代数是否少于总数，它是否为true</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = arr.length; i--; ) &#123;&#125; <span class="comment">//将减法放到了控制条件中，每个控制条件只是简单地与0进行比较</span></div></pre></td></tr></table></figure>
+</li>
 </ul>
+<h4 id="优化点2-减少迭代次数"><a href="#优化点2-减少迭代次数" class="headerlink" title="优化点2  减少迭代次数"></a>优化点2  减少迭代次数</h4><p>最广为人知的一个方式就是“达夫设备”了，它的基本理念是：每次循环最多可调用8次循环体，那么循环迭代次数就为总数除以8。当然，这个方式是当迭代次数很大的时候才看得到效果啦。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> i = arr.length % <span class="number">8</span>;</div><div class="line"><span class="keyword">while</span>(i) &#123;</div><div class="line">  process(arr[i--]);</div><div class="line">&#125;</div><div class="line">i = <span class="built_in">Math</span>.floor(arr.length / <span class="number">8</span>);</div><div class="line"><span class="keyword">while</span>(i) &#123;</div><div class="line">  process(arr[i--]);</div><div class="line">  process(arr[i--]);</div><div class="line">  process(arr[i--]);</div><div class="line">  process(arr[i--]);</div><div class="line">  process(arr[i--]);</div><div class="line">  process(arr[i--]);</div><div class="line">  process(arr[i--]);</div><div class="line">  process(arr[i--]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="优化点3-能用基于循环的迭代就不要用基于函数的迭代了"><a href="#优化点3-能用基于循环的迭代就不要用基于函数的迭代了" class="headerlink" title="优化点3  能用基于循环的迭代就不要用基于函数的迭代了"></a>优化点3  能用基于循环的迭代就不要用基于函数的迭代了</h4><p><code>forEach()</code>这种方法可以遍历数组所有成员，并在每个成员上执行一个函数，这个方法用起来是比较便利，但是它比较慢，毕竟每个数组项要调用外部方法，这是要产生开销的。</p>
+<h3 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h3><p>条件语句主要有<code>if-else</code>和<code>switch</code>，通常来讲，<code>if-else</code>适用于判断两个离散值或几个不同的值域，<code>switch</code>适用于判断多于两个离散值的情况。从性能上讲，大多数情况下，<code>switch</code>是要比<code>if-else</code>快的，一个是因为很多语言对<code>switch</code>做了分支表索引的优化，另一方面是因为JS中<code>switch</code>语句比较值时使用全等进行判断，避免了类型转换时的损耗。</p>
+<p><code>if-else</code>和<code>switch</code>性能比较请看<a href="https://www.2cto.com/os/201404/291376.html" target="_blank" rel="external">这里</a>~~反正我是没看懂 ╮(╯﹏╰）╭</p>
+<h4 id="优化点4-优化if-else时，最小化到达正确分支前所需判断的条件数量"><a href="#优化点4-优化if-else时，最小化到达正确分支前所需判断的条件数量" class="headerlink" title="优化点4  优化if-else时，最小化到达正确分支前所需判断的条件数量"></a>优化点4  优化if-else时，最小化到达正确分支前所需判断的条件数量</h4><ul>
+<li><p><code>if-else</code>中的条件语句应该总是按照从最大概率到最小概率的顺序排列</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (value &lt; <span class="number">5</span>) &#123;</div><div class="line">  process();</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value &gt; <span class="number">5</span> &amp;&amp; value &lt; <span class="number">10</span>) &#123;</div><div class="line">  process();</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">  process();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的代码只有在<code>value</code>值经常小于5时效率最高，如果<code>value</code>值大于10的概率最大，那么经常要经过两个条件判断才能到正确分支。</p>
 </li>
-<li><p>另一种实现方式就是递归拷贝：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (obj === <span class="literal">null</span> || <span class="keyword">typeof</span> obj !== <span class="string">'object'</span> &amp;&amp; !isFunction(obj)) &#123;</div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">if</span> (isFunction(obj)) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"return"</span> + obj.toString())();</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">var</span> name,value;</div><div class="line">    <span class="keyword">var</span> target = isArray(obj) ? [] : &#123;&#125;;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> (name <span class="keyword">in</span> obj) &#123;</div><div class="line">      value = obj[name];</div><div class="line">      <span class="comment">//判断有没有循环引用</span></div><div class="line">      <span class="keyword">if</span> (value === obj) &#123;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      <span class="keyword">if</span> (isArray(obj) || isObject(value)) &#123;</div><div class="line">        target[name] = deepClone(obj[name]);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        target[name] = value;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> target;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个方法考虑了obj是否为数组、函数以及是否有循环引用的问题，算是比较全面了，但是要实现<code>isArray</code>、<code>isFunction</code>、<code>isObject</code>的方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $ = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">    'use strict'</span>;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> types = <span class="string">'Array Object String Date RegExp Function Boolean Number Null Undefined'</span>.split(<span class="string">' '</span>);</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">type</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	   <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">this</span>).slice(<span class="number">8</span>, <span class="number">-1</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = types.length; i--;) &#123;</div><div class="line">	    $[<span class="string">'is'</span> + types[i]] = (<span class="function"><span class="keyword">function</span> (<span class="params">self</span>) </span>&#123;</div><div class="line">	        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">elem</span>) </span>&#123;</div><div class="line">	           <span class="keyword">return</span> type.call(elem) === self;</div><div class="line">	        &#125;;</div><div class="line">	    &#125;)(types[i]);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> $;</div><div class="line">&#125;)();<span class="comment">//类型判断</span></div></pre></td></tr></table></figure>
+<li><p>将<code>if-else</code>组织成一系列嵌套的<code>if-else</code>语句，比如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (value === <span class="number">0</span>) &#123;</div><div class="line">  <span class="keyword">return</span> result0;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">1</span>) &#123;</div><div class="line">  <span class="keyword">return</span> result1;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">2</span>) &#123;</div><div class="line">  <span class="keyword">return</span> result2;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">3</span>) &#123;</div><div class="line">  <span class="keyword">return</span> result3;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">4</span>) &#123;</div><div class="line">  <span class="keyword">return</span> result4;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">5</span>) &#123;</div><div class="line">  <span class="keyword">return</span> result5;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">6</span>) &#123;</div><div class="line">  <span class="keyword">return</span> result6;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">7</span>) &#123;</div><div class="line">  <span class="keyword">return</span> result7;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">8</span>) &#123;</div><div class="line">  <span class="keyword">return</span> result8;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">9</span>) &#123;</div><div class="line">  <span class="keyword">return</span> result9;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个例子中，如果<code>value</code>值为10，那么得判断10次，假设<code>value</code>的值在0-10之间均匀分布，这就会增加平均运行时间。但是咱可以使用嵌套判断的方法，减少判断次数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (value &lt; <span class="number">6</span>) &#123;</div><div class="line">  <span class="keyword">if</span> (value &lt; <span class="number">3</span>) &#123;</div><div class="line">    <span class="keyword">if</span> (value === <span class="number">0</span>) &#123;</div><div class="line">      <span class="keyword">return</span> result0;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value ===<span class="number">1</span>) &#123;</div><div class="line">      <span class="keyword">return</span> result1;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">return</span> result2;</div><div class="line">    &#125;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">if</span> (value === <span class="number">3</span>) &#123;</div><div class="line">      <span class="keyword">return</span> result3; </div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">4</span>) &#123;</div><div class="line">      <span class="keyword">return</span> result4; </div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">return</span> result5;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">  <span class="keyword">if</span> (value &lt; <span class="number">8</span>) &#123;</div><div class="line">    <span class="keyword">if</span> (value === <span class="number">6</span>) &#123;</div><div class="line">      <span class="keyword">return</span> result6;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">return</span> result7;</div><div class="line">    &#125;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">if</span> (value === <span class="number">8</span>) &#123;</div><div class="line">      <span class="keyword">return</span> result8;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">return</span> result9;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个方法用了二分的思想，把值域分成了一系列的区间，然后逐步缩小范围。恩…确实是减少了平均运行时间，这个方法比较适用于有多个值域需要测试的情况，如果是离散值，那么<code>switch</code>比较合适，当然下面那种查找表的方式可能更合适~</p>
 </li>
-<li><p>可以直接使用那些类库的<code>deepClone</code>方法，比如<code>lodash</code>的<code>cloneDeep</code>、<code>jQuery.extend</code>等</p>
+</ul>
+<h4 id="优化点5-当有大量离散值需要测试时，可以使用数组和普通对象来构建查找表"><a href="#优化点5-当有大量离散值需要测试时，可以使用数组和普通对象来构建查找表" class="headerlink" title="优化点5  当有大量离散值需要测试时，可以使用数组和普通对象来构建查找表"></a>优化点5  当有大量离散值需要测试时，可以使用数组和普通对象来构建查找表</h4><p>当有大量离散值需要测试时，<code>if-else</code>和<code>switch</code>比使用查找表会慢很多，而且条件语句数量很大的时候，代码的可读性也会很差。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span> (value) &#123;</div><div class="line">  <span class="keyword">case</span> <span class="number">0</span>:</div><div class="line">    <span class="keyword">return</span> result0;</div><div class="line">  <span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">    <span class="keyword">return</span> result1;</div><div class="line">  <span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">    <span class="keyword">return</span> result2;</div><div class="line">  <span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">    <span class="keyword">return</span> result3;</div><div class="line">  <span class="keyword">case</span> <span class="number">4</span>:</div><div class="line">    <span class="keyword">return</span> result4;</div><div class="line">  <span class="keyword">case</span> <span class="number">5</span>:</div><div class="line">    <span class="keyword">return</span> result5;</div><div class="line">  <span class="keyword">case</span> <span class="number">6</span>:</div><div class="line">    <span class="keyword">return</span> result6;</div><div class="line">  <span class="keyword">case</span> <span class="number">7</span>:</div><div class="line">    <span class="keyword">return</span> result7;</div><div class="line">  <span class="keyword">case</span> <span class="number">8</span>:</div><div class="line">    <span class="keyword">return</span> result8;</div><div class="line">  <span class="keyword">case</span> <span class="number">9</span>:</div><div class="line">    <span class="keyword">return</span> result9;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>switch</code>这段代码所占的空间可能与它的重要性不成比例，这还只是10个离散数，如果有100个，那代码就有200行了，然而这200行代码既耗性能又占空间。用查找表改写后：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> results = [result0, result1, result2, result3, result4, result5, result6, result7, result8, result9];</div><div class="line"><span class="keyword">return</span> results[value];</div></pre></td></tr></table></figure>
+<p>查找表的一个主要的优点就是，不用书写任何条件判断语句，即使候选值数量增加，也几乎不会产生额外的性能开销。但是它比较适合于单个键和单个值之间存在逻辑映射，如果每个键都需要对应一个独特的动作或一系列动作，那还是<code>switch</code>比较适合。</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>使用递归可以把复杂的算法简单化，但是它存在潜在问题：终止条件不明确或缺少终止条件会导致函数长时间运行，使得用户界面处于假死状态；可能会遇到浏览器的“调用栈大小限制”。</p>
+<h4 id="优化点6-将递归改用迭代实现可避免栈溢出错误"><a href="#优化点6-将递归改用迭代实现可避免栈溢出错误" class="headerlink" title="优化点6  将递归改用迭代实现可避免栈溢出错误"></a>优化点6  将递归改用迭代实现可避免栈溢出错误</h4><p>递归每调用一次，就需要在栈上开辟一块空间，当调用次数很大时，就可能超过浏览器栈最大调用栈。基本上能用递归实现的算法也能用迭代实现，虽然迭代很可能比递归慢，但它不会像递归一样手调用栈的影响。</p>
+<p>比如我们要算<code>1+2+3+...+n</code>，用递归和用迭代代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//递归</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">n</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">return</span> n + sum(n - <span class="number">1</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//迭代</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">n</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = n; i--; ) &#123;</div><div class="line">    sum += i;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>它们的计算过程是这样子的：</p>
+<ul>
+<li><p>递归：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">sum(<span class="number">5</span>)</div><div class="line"><span class="number">5</span>+sum(<span class="number">4</span>)</div><div class="line"><span class="number">5</span>+<span class="number">4</span>+sum(<span class="number">3</span>)</div><div class="line"><span class="number">5</span>+<span class="number">4</span>+<span class="number">3</span>+sum(<span class="number">2</span>)</div><div class="line"><span class="number">5</span>+<span class="number">4</span>+<span class="number">3</span>+<span class="number">2</span>+sum(<span class="number">1</span>)</div><div class="line"><span class="number">5</span>+<span class="number">4</span>+<span class="number">3</span>+<span class="number">2</span>+<span class="number">1</span>+sum(<span class="number">0</span>)</div><div class="line"><span class="number">5</span>+<span class="number">4</span>+<span class="number">3</span>+<span class="number">2</span>+<span class="number">1</span>+<span class="number">0</span></div><div class="line"><span class="number">5</span>+<span class="number">4</span>+<span class="number">3</span>+<span class="number">2</span>+<span class="number">1</span></div><div class="line"><span class="number">5</span>+<span class="number">4</span>+<span class="number">3</span>+<span class="number">3</span></div><div class="line"><span class="number">5</span>+<span class="number">4</span>+<span class="number">6</span></div><div class="line"><span class="number">5</span>+<span class="number">10</span></div><div class="line"><span class="number">15</span></div></pre></td></tr></table></figure>
 </li>
-</ol>
-<h3 id="Immutable"><a href="#Immutable" class="headerlink" title="Immutable"></a>Immutable</h3><p>JS中的对象一般是可变的，因为是使用了引用赋值，新的随心简单的引用了原始对象，这样可以节约内存，但是应用复杂后，会造成很大的隐患。要解决这个问题的话一般就是用浅拷贝或深拷贝来避免被修改了，但是这样会造成CPU和内存的浪费，就是很耗性能啦。</p>
-<p>结合React来看，我们经常在对React应用进行性能优化时会用到<code>shouldComponentUpdate</code>，在这个函数中对state或props进行比较来判断要不要render，但是<code>deepClone</code>和<code>deepCompare</code>都非常消耗性能。但是用Immutable只需要使用<code>===</code>和<code>is</code>比较就能知道是否要执行<code>render()</code>了，所以性能提升是很大的。</p>
-<p>不过具体要不要用，当然得看项目中对这个需求大不大了。。。</p>
+<li><p>迭代：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">0</span>+<span class="number">1</span>=<span class="number">1</span></div><div class="line"><span class="number">1</span>+<span class="number">2</span>=<span class="number">3</span></div><div class="line"><span class="number">3</span>+<span class="number">3</span>=<span class="number">6</span></div><div class="line"><span class="number">6</span>+<span class="number">4</span>=<span class="number">10</span></div><div class="line"><span class="number">10</span>+<span class="number">5</span>=<span class="number">15</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="优化点7-使用Memoization减少递归操作的工作量"><a href="#优化点7-使用Memoization减少递归操作的工作量" class="headerlink" title="优化点7  使用Memoization减少递归操作的工作量"></a>优化点7  使用Memoization减少递归操作的工作量</h4><p>在进行递归操作的时候，通常会做很多重复工作，而Memoization的思想是缓存前一个计算结果供后续计算使用，这样就避免了重复工作。比如上面的<code>sum()</code>函数，考虑如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> sum6 = sum(<span class="number">6</span>);</div><div class="line"><span class="keyword">var</span> sum5 = sum(<span class="number">5</span>);</div><div class="line"><span class="keyword">var</span> sum4 = sum(<span class="number">4</span>);</div></pre></td></tr></table></figure>
+<p>这里面，<code>sum()</code>函数一共被调用了18次，而在计算<code>sum(6)</code>的时候就计算过<code>sum(5)</code>和<code>sum(4)</code>了，然而第二行代码<code>sum(5)</code>又计算了一次，相当于计算了2次，而<code>sum(4)</code>一共计算了3次。其实可以把已经计算好了的结果缓存起来，这样后面在计算的过程中可以不用重复计算了。用Memoization技术重写一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">memSum</span>(<span class="params">n</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span>(!memSum.cache) &#123;</div><div class="line">    memSum.cache = &#123;</div><div class="line">      <span class="string">"0"</span>: <span class="number">0</span>,</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (!memSum.cache.hasOwnProperty(n)) &#123;</div><div class="line">    memSum.cache[n] = n + memSum(n - <span class="number">1</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> memSum.cache[n];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用<code>memSum</code>去算<code>memSum(6)</code>，<code>memSum(5)</code>，<code>memSum(4)</code>就只调用8次了，<code>memSum(5)</code>和<code>memSum(4)</code>没有发生递归运算，因为<code>memSum(6)</code>把要计算的都算完了，且把结果缓存下来了。</p>
 
       
     </div>
@@ -526,35 +547,6 @@
 	<div>
       
         
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-  
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2017/08/26/js中的深拷贝/">js中的深拷贝</a></p>
-  <p><span>文章作者:</span><a href="/" title="访问 不说八道的小胡 的个人博客">不说八道的小胡</a></p>
-  <p><span>发布时间:</span>2017年08月26日 - 18:08</p>
-  <p><span>最后更新:</span>2019年01月13日 - 21:01</p>
-  <p><span>原始链接:</span><a href="/2017/08/26/js中的深拷贝/" title="js中的深拷贝">http://hu33.tech/2017/08/26/js中的深拷贝/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://hu33.tech/2017/08/26/js中的深拷贝/"  aria-label="复制成功！"></i></span>
-  </p>
-  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
-</div>
-<script> 
-    var clipboard = new Clipboard('.fa-clipboard');
-	  $(".fa-clipboard").click(function(){
-      clipboard.on('success', function(){
-        swal({   
-          title: "",   
-          text: '复制成功',
-          icon: "success", 
-          showConfirmButton: true
-          });
-	    });
-    });  
-</script>
-
       
     </div>
 
@@ -564,7 +556,11 @@
           
             <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
           
+            <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/性能/" rel="tag"><i class="fa fa-tag"></i> 性能</a>
           
         </div>
       
@@ -577,8 +573,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/21/JavaScript常见编程题（上）/" rel="next" title="JavaScript常见编程题（上）">
-                <i class="fa fa-chevron-left"></i> JavaScript常见编程题（上）
+              <a href="/2019/03/28/饺子皮筋饼/" rel="next" title="不用揉面擀面也能做的东北筋饼~">
+                <i class="fa fa-chevron-left"></i> 不用揉面擀面也能做的东北筋饼~
               </a>
             
           </div>
@@ -586,10 +582,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/26/JavaScript常见编程题（中）/" rel="prev" title="JavaScript常见编程题（中）">
-                JavaScript常见编程题（中） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -767,7 +759,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-assign-的陷阱"><span class="nav-number">1.</span> <span class="nav-text">Object.assign()的陷阱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js中的深拷贝"><span class="nav-number">2.</span> <span class="nav-text">js中的深拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Immutable"><span class="nav-number">3.</span> <span class="nav-text">Immutable</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-number">1.</span> <span class="nav-text">循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优化点1-减少迭代的工作量"><span class="nav-number">1.1.</span> <span class="nav-text">优化点1  减少迭代的工作量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化点2-减少迭代次数"><span class="nav-number">1.2.</span> <span class="nav-text">优化点2  减少迭代次数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化点3-能用基于循环的迭代就不要用基于函数的迭代了"><span class="nav-number">1.3.</span> <span class="nav-text">优化点3  能用基于循环的迭代就不要用基于函数的迭代了</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件语句"><span class="nav-number">2.</span> <span class="nav-text">条件语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优化点4-优化if-else时，最小化到达正确分支前所需判断的条件数量"><span class="nav-number">2.1.</span> <span class="nav-text">优化点4  优化if-else时，最小化到达正确分支前所需判断的条件数量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化点5-当有大量离散值需要测试时，可以使用数组和普通对象来构建查找表"><span class="nav-number">2.2.</span> <span class="nav-text">优化点5  当有大量离散值需要测试时，可以使用数组和普通对象来构建查找表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">3.</span> <span class="nav-text">递归</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优化点6-将递归改用迭代实现可避免栈溢出错误"><span class="nav-number">3.1.</span> <span class="nav-text">优化点6  将递归改用迭代实现可避免栈溢出错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化点7-使用Memoization减少递归操作的工作量"><span class="nav-number">3.2.</span> <span class="nav-text">优化点7  使用Memoization减少递归操作的工作量</span></a></li></ol></li></ol></div>
             
 
           </div>

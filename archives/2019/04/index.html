@@ -98,7 +98,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="前端,JavaScript," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -116,19 +116,12 @@
 
 
 
-<meta name="description" content="深拷贝这个坑我一定要来填上了，毕竟绊了我好几次。。。
-先交代一下这次填坑的背景，简单说来就是使用Object.assign来拷贝对象，结果这玩意儿有陷阱啊~害得我项目中setState没有被触发，子组件死活不更新，不render，找了半天问题才发现原来坑在这个地方。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="js中的深拷贝">
-<meta property="og:url" content="http://hu33.tech/2017/08/26/js中的深拷贝/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="小胡不说八道">
+<meta property="og:url" content="http://hu33.tech/archives/2019/04/index.html">
 <meta property="og:site_name" content="小胡不说八道">
-<meta property="og:description" content="深拷贝这个坑我一定要来填上了，毕竟绊了我好几次。。。
-先交代一下这次填坑的背景，简单说来就是使用Object.assign来拷贝对象，结果这玩意儿有陷阱啊~害得我项目中setState没有被触发，子组件死活不更新，不render，找了半天问题才发现原来坑在这个地方。">
-<meta property="og:updated_time" content="2019-01-13T13:19:00.775Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js中的深拷贝">
-<meta name="twitter:description" content="深拷贝这个坑我一定要来填上了，毕竟绊了我好几次。。。
-先交代一下这次填坑的背景，简单说来就是使用Object.assign来拷贝对象，结果这玩意儿有陷阱啊~害得我项目中setState没有被触发，子组件死活不更新，不render，找了半天问题才发现原来坑在这个地方。">
+<meta name="twitter:title" content="小胡不说八道">
 
 
 
@@ -156,13 +149,13 @@
 
 
 
-  <link rel="canonical" href="http://hu33.tech/2017/08/26/js中的深拷贝/"/>
+  <link rel="canonical" href="http://hu33.tech/archives/2019/04/"/>
 
 
 
 
 
-  <title>js中的深拷贝 | 小胡不说八道</title>
+  <title>归档 | 小胡不说八道</title>
   
 
 
@@ -200,7 +193,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left  page-archive  ">
     <div class="headband"></div>
 	<a href="https://github.com/hu33" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -339,273 +332,65 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://hu33.tech/2017/08/26/js中的深拷贝/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="不说八道的小胡">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小胡不说八道">
+    <span class="archive-page-counter">
+      
+      
+       
+      
+      OK! 目前共计 50 篇日志。 继续努力。
     </span>
 
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">js中的深拷贝</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-26T18:24:43+08:00">
-                2017-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a class="cloud-tie-join-count" href="/2017/08/26/js中的深拷贝/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/08/26/js中的深拷贝/" class="leancloud_visitors" data-flag-title="js中的深拷贝">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">热度 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-				 <span>℃</span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
 
       
       
-
       
-        <p>深拷贝这个坑我一定要来填上了，毕竟绊了我好几次。。。</p>
-<p>先交代一下这次填坑的背景，简单说来就是使用<code>Object.assign</code>来拷贝对象，结果这玩意儿有陷阱啊~害得我项目中<code>setState</code>没有被触发，子组件死活不更新，不<code>render</code>，找了半天问题才发现原来坑在这个地方。</p>
-<a id="more"></a>
-<h3 id="Object-assign-的陷阱"><a href="#Object-assign-的陷阱" class="headerlink" title="Object.assign()的陷阱"></a>Object.assign()的陷阱</h3><p>平常我们写React处理<code>state</code>时，希望数据是immutable，这样处理起来更容易更方便。一般我们喜欢用<code>Object.assign()</code>来复制对象，我一直以为<code>Object.assign()</code>是深复制，会连子节点一起复制。今天项目中的bug让我认识到，我真是错看了它啊~</p>
-<p><code>Object.assign()</code>其实是浅层拷贝，只会对非嵌套的对象进行拷贝，但是如果对象中有嵌套的话，它就只会对被嵌套的对象做引用拷贝了。</p>
-<p>可以看一下Polyfill对<code>Object.assign</code>的实现源码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Object</span>.assign != <span class="string">'function'</span>) &#123;</div><div class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">Object</span>.assign = <span class="function"><span class="keyword">function</span> (<span class="params">target</span>) </span>&#123;</div><div class="line"><span class="meta">	  'use strict'</span>;</div><div class="line">	   <span class="keyword">if</span> (target === <span class="literal">undefined</span> || target === <span class="literal">null</span>) &#123;</div><div class="line">	     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Cannot convert undefined or null to object'</span>);</div><div class="line">	   &#125;</div><div class="line">	</div><div class="line">	   <span class="keyword">var</span> output = <span class="built_in">Object</span>(target);</div><div class="line">	   <span class="keyword">for</span> (<span class="keyword">var</span> index = <span class="number">1</span>; index &lt; <span class="built_in">arguments</span>.length; index++) &#123;</div><div class="line">	     <span class="keyword">var</span> source = <span class="built_in">arguments</span>[index];</div><div class="line">	     <span class="keyword">if</span> (source !== <span class="literal">undefined</span> &amp;&amp; source !== <span class="literal">null</span>) &#123;</div><div class="line">	       <span class="keyword">for</span> (<span class="keyword">var</span> nextKey <span class="keyword">in</span> source) &#123;</div><div class="line">	         <span class="keyword">if</span> (source.hasOwnProperty(nextKey)) &#123;</div><div class="line">	           output[nextKey] = source[nextKey];</div><div class="line">	         &#125;</div><div class="line">	       &#125;</div><div class="line">	     &#125;</div><div class="line">	   &#125;</div><div class="line">	   <span class="keyword">return</span> output;</div><div class="line">	  &#125;;</div><div class="line">  &#125;)();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>好的吧，其实<code>Object.assign</code>只是这样设计的，并不能说是它的陷阱，当一回标题党。。。</p>
-<h3 id="js中的深拷贝"><a href="#js中的深拷贝" class="headerlink" title="js中的深拷贝"></a>js中的深拷贝</h3><p>虽然有些时候用<code>Object.assign()</code>也够了，但是一旦对象嵌套，用<code>Object.assign()</code>就很可能出现问题，那就要实现深拷贝了。</p>
-<p>js深拷贝有两种方式：</p>
-<ol>
-<li><p>一种是用JSON对象，简单粗暴</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个方法好处就是简单，粗暴，但是存在两个问题：</p>
-<ul>
-<li>一个是会破坏原型链，深拷贝之后，不管这个对象原来的构造函数是什么，深拷贝之后都会变成<code>Object</code></li>
-<li>另一个是它只能处理<code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Array</code>、扁平对象，即能够被json直接表示的数据结构，无法拷贝属性为<code>Function</code>以及<code>RegExp</code>这类的属性</li>
-<li>但是如果只是想单纯拷贝一个嵌套对象，用它还是可以的。</li>
-</ul>
-</li>
-<li><p>另一种实现方式就是递归拷贝：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (obj === <span class="literal">null</span> || <span class="keyword">typeof</span> obj !== <span class="string">'object'</span> &amp;&amp; !isFunction(obj)) &#123;</div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">if</span> (isFunction(obj)) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"return"</span> + obj.toString())();</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">var</span> name,value;</div><div class="line">    <span class="keyword">var</span> target = isArray(obj) ? [] : &#123;&#125;;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> (name <span class="keyword">in</span> obj) &#123;</div><div class="line">      value = obj[name];</div><div class="line">      <span class="comment">//判断有没有循环引用</span></div><div class="line">      <span class="keyword">if</span> (value === obj) &#123;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      <span class="keyword">if</span> (isArray(obj) || isObject(value)) &#123;</div><div class="line">        target[name] = deepClone(obj[name]);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        target[name] = value;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> target;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个方法考虑了obj是否为数组、函数以及是否有循环引用的问题，算是比较全面了，但是要实现<code>isArray</code>、<code>isFunction</code>、<code>isObject</code>的方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $ = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">    'use strict'</span>;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> types = <span class="string">'Array Object String Date RegExp Function Boolean Number Null Undefined'</span>.split(<span class="string">' '</span>);</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">type</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	   <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">this</span>).slice(<span class="number">8</span>, <span class="number">-1</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = types.length; i--;) &#123;</div><div class="line">	    $[<span class="string">'is'</span> + types[i]] = (<span class="function"><span class="keyword">function</span> (<span class="params">self</span>) </span>&#123;</div><div class="line">	        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">elem</span>) </span>&#123;</div><div class="line">	           <span class="keyword">return</span> type.call(elem) === self;</div><div class="line">	        &#125;;</div><div class="line">	    &#125;)(types[i]);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> $;</div><div class="line">&#125;)();<span class="comment">//类型判断</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>可以直接使用那些类库的<code>deepClone</code>方法，比如<code>lodash</code>的<code>cloneDeep</code>、<code>jQuery.extend</code>等</p>
-</li>
-</ol>
-<h3 id="Immutable"><a href="#Immutable" class="headerlink" title="Immutable"></a>Immutable</h3><p>JS中的对象一般是可变的，因为是使用了引用赋值，新的随心简单的引用了原始对象，这样可以节约内存，但是应用复杂后，会造成很大的隐患。要解决这个问题的话一般就是用浅拷贝或深拷贝来避免被修改了，但是这样会造成CPU和内存的浪费，就是很耗性能啦。</p>
-<p>结合React来看，我们经常在对React应用进行性能优化时会用到<code>shouldComponentUpdate</code>，在这个函数中对state或props进行比较来判断要不要render，但是<code>deepClone</code>和<code>deepCompare</code>都非常消耗性能。但是用Immutable只需要使用<code>===</code>和<code>is</code>比较就能知道是否要执行<code>render()</code>了，所以性能提升是很大的。</p>
-<p>不过具体要不要用，当然得看项目中对这个需求大不大了。。。</p>
 
-      
-    </div>
-	
-    <div>
       
         
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-	<div>
-      
-        <div>
-
-    <div style="text-align:center;color: #ccc;font-size:14px;">------------- THE END <i class="fa fa-paw"></i> THANKS FOR READING -------------</div>
-
-</div>
-      
-    </div>
-	
-	<div>
-      
-        
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-  
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2017/08/26/js中的深拷贝/">js中的深拷贝</a></p>
-  <p><span>文章作者:</span><a href="/" title="访问 不说八道的小胡 的个人博客">不说八道的小胡</a></p>
-  <p><span>发布时间:</span>2017年08月26日 - 18:08</p>
-  <p><span>最后更新:</span>2019年01月13日 - 21:01</p>
-  <p><span>原始链接:</span><a href="/2017/08/26/js中的深拷贝/" title="js中的深拷贝">http://hu33.tech/2017/08/26/js中的深拷贝/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://hu33.tech/2017/08/26/js中的深拷贝/"  aria-label="复制成功！"></i></span>
-  </p>
-  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
-</div>
-<script> 
-    var clipboard = new Clipboard('.fa-clipboard');
-	  $(".fa-clipboard").click(function(){
-      clipboard.on('success', function(){
-        swal({   
-          title: "",   
-          text: '复制成功',
-          icon: "success", 
-          showConfirmButton: true
-          });
-	    });
-    });  
-</script>
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
-          
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2019">2019</h2>
         </div>
       
-
-      
-      
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/08/21/JavaScript常见编程题（上）/" rel="next" title="JavaScript常见编程题（上）">
-                <i class="fa fa-chevron-left"></i> JavaScript常见编程题（上）
-              </a>
-            
-          </div>
 
-          <span class="post-nav-divider"></span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/26/JavaScript常见编程题（中）/" rel="prev" title="JavaScript常见编程题（中）">
-                JavaScript常见编程题（中） <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2019/04/08/《高性能JavaScript》- 算法和控制流程/" itemprop="url">
+              
+                <span itemprop="name">《高性能JavaScript》- 算法和流程控制</span>
+              
+            </a>
+        
+      </h2>
 
-      
-      
-    </footer>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2019-04-08T11:58:55+08:00"
+              content="2019-04-08" >
+          04-08
+        </time>
+      </div>
+
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+    
+
+  </section>
+
+  
+
 
 
           </div>
@@ -613,22 +398,6 @@
 
 
           
- <div class="comments" id="comments"></div>
- 
- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
- <script src='/js/src/Valine.min.js'></script>
- <script>
- new Valine({
- av: AV,
- el: '.comments' ,
- verify: true,
- app_id: '',
- app_key: '',
- placeholder: 'say something~'
- });
- </script>
- 
-
         </div>
         
           
@@ -647,17 +416,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -757,22 +517,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-assign-的陷阱"><span class="nav-number">1.</span> <span class="nav-text">Object.assign()的陷阱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js中的深拷贝"><span class="nav-number">2.</span> <span class="nav-text">js中的深拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Immutable"><span class="nav-number">3.</span> <span class="nav-text">Immutable</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -895,9 +639,11 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
 
 
   
